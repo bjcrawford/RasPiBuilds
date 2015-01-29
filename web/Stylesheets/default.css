@@ -1,0 +1,170 @@
+/*
+ Author: Brett Crawford <brett.crawford@temple.edu>
+ File:   default.css
+ Date:   Jan 28, 2015
+ Desc:
+*/
+
+/*
+ RasPi Logo Colors
+ Magenta:       bd1143
+ Light Magenta: bd7b8e
+ Green:         76a928
+*/
+
+a {
+    -webkit-text-stroke: 0.25px black;
+}
+
+a:link {
+    color: #bd1143;
+}
+
+a:visited {
+    color: #bd7b8e;
+}
+
+a:hover {
+    color: #76a928;
+}
+
+body {
+    font-family: "Bitter", "Lucida Console";
+    background-image: url(../images/circuit-board.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 85%;  
+    margin: auto;
+    font-size: 15px;
+    min-width: 750px;
+}
+
+.title-container {
+    color: black;
+    font-size: 19px;
+    padding: 30px;
+    width: 500px;
+    border: 5px solid black;
+    border-radius: 25px;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.title-img {
+    float: left;
+    margin-right: 5px;
+}
+
+.title {
+    margin-left: 85px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.title-desc {
+    margin-left: 85px;
+    text-align: center;
+}
+
+.nav {
+    padding-left: 20px;
+}
+
+.tab {
+    float: left;
+    position: relative;
+    padding: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 10%;
+    min-width: 60px; 
+    color: #bd1143;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background: -webkit-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
+    background: -o-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
+    background: -moz-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
+    background: linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
+}
+
+.tab:hover { 
+    background: -webkit-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
+    background: -o-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
+    background: -moz-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
+    background: linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
+}
+
+.tab-link {
+  position: absolute; 
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.tab-bottom-unselected {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+}
+
+.newLine {
+    clear: both;
+}
+
+.raspberrypi-img {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 30px;
+    opacity: 1;
+}
+
+.content {
+    padding: 10px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border-radius: 20px;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.content-text {
+    color: black;
+}
+
+.indented-para {
+    padding-left: 20px;
+}
+
+.footer {
+    height: 18px;
+    margin-top: 5px;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgb(127, 127, 127);
+    background-color: rgba(127, 127, 127, 0.8);
+}
+
+.deadspace {
+    height: 70px;
+}
