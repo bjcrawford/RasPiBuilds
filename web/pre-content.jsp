@@ -9,7 +9,7 @@
         <div class="container">
             <div class="title-container">
                 <div class="title-img">
-                    <img src="images/raspilogo.png" alt="Raspberry Pi Logo">
+                    <img src="img/raspilogo.png" alt="Raspberry Pi Logo">
                 </div>
                 <div class="title">RasPi Builds</div>
                 <div class="title-desc">

@@ -30,7 +30,9 @@ a:hover {
 
 body {
     font-family: "Bitter", "Lucida Console";
-    background-image: url(../images/circuit-board.png);
+    letter-spacing: 1px;
+    line-height: 150%;
+    background-image: url(../img/circuit-board.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-color: black;
@@ -66,7 +68,6 @@ body {
     margin-bottom: 15px;
     font-weight: bold;
     font-size: 40px;
-    letter-spacing: 1px;
     text-align: center;
 }
 
@@ -132,8 +133,9 @@ body {
 
 .raspberrypi-img {
     float: left;
-    margin-bottom: 20px;
+    margin-top: 5px;
     margin-right: 30px;
+    margin-bottom: 20px;
     opacity: 1;
 }
 
