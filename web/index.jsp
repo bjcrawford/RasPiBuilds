@@ -40,6 +40,19 @@
             submissions from users. Users are encouraged to be as detailed
             as they want with regards the the build submissions. 
         </p>
+        <p>
+            Project Proposal Document:
+            <a href="doc/Crawford,Brett-ProjectProposal.doc">
+                Crawford,Brett-ProjectProposal.doc
+            </a>
+            <br>
+            Project Data Model:
+            <a href="img/Crawford,Brett-DataModel.png">
+                Crawford,Brett-DataModel.png
+            </a>
+            <br>
+        </p>
+        <div class="newLine"></div>
     </div>
 </div>
 <jsp:include page="body-to-html.jsp"></jsp:include>
