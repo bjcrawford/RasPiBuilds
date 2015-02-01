@@ -11,8 +11,9 @@
 <div class="content">
     <div class="content-text">
         <p> 
-            <img class="raspberrypi-img" src="img/raspberrypi.jpg" 
-                 alt="Raspberry Pi Computer">
+            <a href="img/raspberrypi(full).png"><img class="raspberrypi-img" 
+            src="img/raspberrypi.png" alt="Raspberry Pi Computer"></a>
+            
             The <a href="http://www.raspberrypi.org" target="_blank">
             Raspberry Pi</a> is a relatively cheap, wallet-sized computer 
             that makes a great base for all kinds of DIY and maker type 
@@ -29,6 +30,10 @@
             these components.
         </p>
         <p> 
+            <a href="img/raspberrypidiagram(full).png">
+            <img class="raspberrypidiagram-img" src="img/raspberrypidiagram.png"
+            alt="Raspberry Pi Diagram"></a>
+            
             This site aims to host a collection of Raspberry Pi inspired
             project ideas. Additionally, we would like users to submit 
             their own personal project <a href="assoc.jsp">builds</a> to 
@@ -40,6 +45,8 @@
             submissions from users. Users are encouraged to be as detailed
             as they want with regards the the build submissions. 
         </p>
+        <div class="newLine"></div>
+        <hr>
         <p>
             Project Proposal Document:
             <a href="doc/Crawford,Brett-ProjectProposal.doc">
@@ -52,7 +59,6 @@
             </a>
             <br>
         </p>
-        <div class="newLine"></div>
     </div>
 </div>
 <jsp:include page="body-to-html.jsp"></jsp:include>
