@@ -46,19 +46,5 @@
             as they want with regards the the build submissions. 
         </p>
         <div class="newLine"></div>
-        <hr>
-        <p>
-            Project Proposal Document:
-            <a href="doc/Crawford,Brett-ProjectProposal.doc">
-                Crawford,Brett-ProjectProposal.doc
-            </a>
-            <br>
-            Project Data Model:
-            <a href="img/Crawford,Brett-DataModel.png">
-                Crawford,Brett-DataModel.png
-            </a>
-            <br>
-        </p>
     </div>
-</div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="content-to-html.jsp"></jsp:include>

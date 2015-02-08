@@ -49,6 +49,5 @@
         <h2>Lab 10 Update Ajax</h2>
         <h2>My Challenge</h2>
     </div>
-</div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="content-to-html.jsp"></jsp:include>
             
