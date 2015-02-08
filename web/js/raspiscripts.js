@@ -5,7 +5,11 @@
  *  Desc:
  */
 
-window.displayButtons = function() {
+/**
+ * Enables/disables the user type radio buttons on the contact
+ * page depending on the status of the registered user check box.
+ */
+function displayButtons() {
     if (document.getElementById("registereduser").checked) {
         document.getElementById("usertype1").disabled = false;
         document.getElementById("usertype2").disabled = false;
@@ -18,14 +22,54 @@ window.displayButtons = function() {
     }
 };
 
-function changeStylesheet(newHref) {
-    document.getElementById("styleID").href = newHref;
+/**
+ * Checks the cookie for a theme preference. If found, sets
+ * the theme.
+ */
+function checkAndSetTheme() {
+    var href = readCookie("RaspiBuilds_Theme");
+    if(href !== null) {
+        document.getElementById("styleID").href = href;
+        var index = 1;
+        if (href === "css/inversion.css") {
+            index = 2;
+        }
+        else if (href === "css/minimal.css") {
+            index = 3;
+        }
+        document.getElementById("theme-select").selectedIndex = index;        
+    }
 }
 
-// NOTE: USE FIREFOX.  DOES NOT WORK IN CHROME.
+/**
+ * Changes the stylesheet and creates a cookie to store
+ * the theme preference. If the parameter matches the 
+ * string "clear", the theme preference is cleared
+ * from the cookie.
+ * 
+ * @param {string} newHref the path to the new stylesheet
+ */
+function changeStylesheet(newHref) {
+    
+    if(newHref === "clear") {
+        eraseCookie("RaspiBuilds_Theme");
+    }
+    else {
+        document.getElementById("styleID").href = newHref;
+
+        // Write to cookie, should overwrite any existing key/value
+        createCookie("RaspiBuilds_Theme", newHref, 1000);
+    }
+}
+
+/**
+ * Creates a cookie with the given parameters.
+ * 
+ * @param {string} name
+ * @param {string} value
+ * @param {int} days
+ */
 function createCookie(name, value, days) {
-    alert ("Creating a cookie with name " + name + " and value " + value + 
-           " that will last " + days + " days");
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -37,6 +81,13 @@ function createCookie(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
+/**
+ * Returns the value stored in the cookie for the given 
+ * name(key). Returns null if no matching name is found.
+ * 
+ * @param {string} name
+ * @returns {string}
+ */
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -52,9 +103,16 @@ function readCookie(name) {
     return null;
 }
 
+/**
+ * Erases the value stored in the cookie that is associated
+ * with the given name(key).
+ * 
+ * @param {string} name
+ */
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
+
 
 function showCookie(name) {
     var cookieVal = readCookie(name);
@@ -64,3 +122,13 @@ function showCookie(name) {
         alert ("The cookie named " + name + " has value " + cookieVal);
     }
 }
+
+/**
+ * Calls the neccessary functions for page initialization. Called
+ * from the close of every page.
+ * @returns {undefined}
+ */
+function initPage() {
+    checkAndSetTheme();
+}
+
