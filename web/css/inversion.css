@@ -1,7 +1,7 @@
 /*
  Author: Brett Crawford <brett.crawford@temple.edu>
- File:   default.css
- Date:   Jan 28, 2015
+ File:   inversion.css
+ Date:   Feb 6, 2015
  Desc:
 */
 
@@ -18,15 +18,15 @@ a {
 }
 
 a:link {
-    color: #bd1143;
+    color: #76a928;
 }
 
 a:visited {
-    color: #bd7b8e;
+    color: #98a97f;
 }
 
 a:hover {
-    color: #76a928;
+    color: #bd1143;
 }
 
 body {
@@ -34,10 +34,10 @@ body {
     font-size: 16px;
     letter-spacing: 1px;
     line-height: 180%;
-    background-image: url(../img/circuit-board.png);
+    background-image: url(../img/circuit-board-inverted.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
+    background-color: white;
     background-attachment: fixed;
 }
 
@@ -48,14 +48,14 @@ body {
 }
 
 .title-container {
-    color: black;
+    color: white;
     font-size: 19px;
     padding: 30px;
     width: 500px;
-    border: 5px solid black;
+    border: 5px solid white;
     border-radius: 25px;
-    background-color: white;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 20px;
 }
 
@@ -90,23 +90,23 @@ body {
     margin-right: 2px;
     width: 10%;
     min-width: 60px; 
-    color: #bd1143;
+    color: #76a928;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-    background: -webkit-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
-    background: -o-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
-    background: -moz-linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
-    background: linear-gradient(rgba(127, 127, 127, 0.8), rgba(255, 255, 255, 0.8));
+    background: -webkit-linear-gradient(rgba(127, 127, 127, 0.8), rgba(0, 0, 0, 0.8));
+    background: -o-linear-gradient(rgba(127, 127, 127, 0.8), rgba(0, 0, 0, 0.8));
+    background: -moz-linear-gradient(rgba(127, 127, 127, 0.8), rgba(0, 0, 0, 0.8));
+    background: linear-gradient(rgba(127, 127, 127, 0.8), rgba(0, 0, 0, 0.8));
 }
 
 .tab:hover { 
-    background: -webkit-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
-    background: -o-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
-    background: -moz-linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
-    background: linear-gradient(rgba(118, 169, 40, 0.8), rgba(255, 255, 255, 0.8));
+    background: -webkit-linear-gradient(rgba(118, 169, 40, 0.8), rgba(0, 0, 0, 0.8));
+    background: -o-linear-gradient(rgba(118, 169, 40, 0.8), rgba(0, 0, 0, 0.8));
+    background: -moz-linear-gradient(rgba(118, 169, 40, 0.8), rgba(0, 0, 0, 0.8));
+    background: linear-gradient(rgba(118, 169, 40, 0.8), rgba(0, 0, 0, 0.8));
 }
 
 .tab-link {
@@ -124,8 +124,8 @@ body {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: black;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: 2;
 }
 
@@ -154,12 +154,12 @@ body {
     padding-left: 35px;
     padding-right: 35px;
     border-radius: 20px;
-    background-color: white;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .content-text {
-    color: black;
+    color: white;
 }
 
 .indented-para {
@@ -167,7 +167,7 @@ body {
 }
 
 .theme-chooser {
-    color: black;
+    color: white;
     font-size: 12px;
 }
 
@@ -183,8 +183,7 @@ body {
 }
 
 .footer-text {
-    color: white;
-    margin: 0px auto;
+    color: black;
 }
 
 .deadspace {
