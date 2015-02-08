@@ -10,5 +10,5 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="css/default.css">
-        <script src="myscript.js"  type="text/javascript"></script>
+        <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
+        <script src="js/raspiscripts.js"  type="text/javascript"></script>
