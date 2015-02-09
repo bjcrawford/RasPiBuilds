@@ -47,6 +47,11 @@
                                 Contact Us
                             </a>
                             <br>
+                            Theme Chooser: Any page, bottom-left
+                            <br>
+                            jQuery Slide Toggle: 
+                            <a href="index.jsp">
+                                My Homepage</a>, click headings
                         </p>
                     </div>
                     <h2>Lab 05 Display Data</h2>
