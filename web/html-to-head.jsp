@@ -14,3 +14,4 @@
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
         <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
         <script src="js/raspiscripts.js"  type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

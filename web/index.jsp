@@ -9,10 +9,10 @@
 <jsp:include page="head-to-body.jsp"></jsp:include>
             <div class="content">
                 <div class="content-text">
-                    <p> 
-                        <a href="img/raspberrypi(full).png"><img class="raspberrypi-img" 
-                        src="img/raspberrypi.png" alt="Raspberry Pi Computer"></a>
-
+                    <a href="img/raspberrypi(full).png"><img class="raspberrypi-img" 
+                       src="img/raspberrypi.png" alt="Raspberry Pi Computer"></a>
+                    <h3 id="whatis-raspberrypi-heading">What is the Raspberry Pi?</h3>
+                    <p id="whatis-raspberrypi-para"> 
                         The <a href="http://www.raspberrypi.org" target="_blank">
                         Raspberry Pi</a> is a relatively cheap, wallet-sized computer 
                         that makes a great base for all kinds of DIY and maker type 
@@ -28,11 +28,13 @@
                         libraries</a> exist to allow communication between the Pi and 
                         these components.
                     </p>
-                    <p> 
-                        <a href="img/raspberrypidiagram(full).png">
-                        <img class="raspberrypidiagram-img" src="img/raspberrypidiagram.png"
-                        alt="Raspberry Pi Diagram"></a>
-
+                    <div class="newLine"></div>
+                        
+                    <a href="img/raspberrypidiagram(full).png">
+                    <img class="raspberrypidiagram-img" src="img/raspberrypidiagram.png"
+                         alt="Raspberry Pi Diagram"></a>
+                    <h3 id="whatis-raspibuilds-heading">What is RasPi Builds?</h3>
+                    <p id="whatis-raspibuilds-para"> 
                         This site aims to host a collection of Raspberry Pi inspired
                         project ideas. Additionally, we would like users to submit 
                         their own personal project <a href="assoc.jsp">builds</a> to 

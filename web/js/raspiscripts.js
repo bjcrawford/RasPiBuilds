@@ -142,6 +142,7 @@ function setSelectedTab() {
     
     if (document.title.indexOf("Home ") > -1) {
         document.getElementById("home-tab-connector").className = "";
+        initSlideToggleParagraphs();
     }
     else if (document.title.indexOf("Builds ") > -1) {
         document.getElementById("builds-tab-connector").className = "";
@@ -161,5 +162,18 @@ function setSelectedTab() {
     else if (document.title.indexOf("Labs ") > -1) {
         document.getElementById("labs-tab-connector").className = "";
     }
+}
+
+function initSlideToggleParagraphs() {
+    $(document).ready(function(){
+        $("#whatis-raspberrypi-heading").click(function(){
+            $("#whatis-raspberrypi-para").slideToggle();
+        });
+    });
+    $(document).ready(function(){
+        $("#whatis-raspibuilds-heading").click(function(){
+            $("#whatis-raspibuilds-para").slideToggle();
+        });
+    });
 }
 
