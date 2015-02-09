@@ -130,5 +130,35 @@ function showCookie(name) {
  */
 function initPage() {
     checkAndSetTheme();
+    setSelectedTab();
+}
+
+/**
+ * Determines the current page and sets the appropriate style for 
+ * the page's selected tab.
+ */
+function setSelectedTab() {
+    
+    if (document.title.indexOf("Home ") > -1) {
+        document.getElementById("home-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Builds ") > -1) {
+        document.getElementById("builds-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Projects ") > -1) {
+        document.getElementById("projects-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Users ") > -1) {
+        document.getElementById("users-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Search ") > -1) {
+        document.getElementById("search-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Contact ") > -1) {
+        document.getElementById("contact-tab-connector").className = "";
+    }
+    else if (document.title.indexOf("Labs ") > -1) {
+        document.getElementById("labs-tab-connector").className = "";
+    }
 }
 

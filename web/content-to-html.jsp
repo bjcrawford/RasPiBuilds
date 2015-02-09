@@ -23,8 +23,6 @@
             </div>
             <div class="deadspace"></div>
         </div> <!-- Container div close -->
+        <script>initPage();</script>
     </body>
-    <script>
-        initPage();
-    </script>
 </html>
