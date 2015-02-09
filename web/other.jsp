@@ -11,5 +11,5 @@
                 <div class="content-text">
                     <h2>Under Construction</h2>
                 </div>
-<jsp:include page="content-to-html.jsp"></jsp:include>
+<jsp:include page="body-to-html.jsp"></jsp:include>
             

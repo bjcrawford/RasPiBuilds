@@ -2,7 +2,9 @@
  Author: Brett Crawford <brett.crawford@temple.edu>
  File:   post-content.jsp
  Date:   Jan 28, 2015
- Desc:
+ Desc:   This file contains boiler plate html code for the web
+         app pages. This file begins inside the content div and
+         finishes with an html close tag.
 --%>
 
                 <hr>

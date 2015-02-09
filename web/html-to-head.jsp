@@ -2,7 +2,9 @@
  Author: Brett Crawford <brett.crawford@temple.edu>
  File:   pre-content.jsp
  Date:   Jan 31, 2015
- Desc:
+ Desc:   This file contains the boiler plate html code for the
+         web app pages. This file begins with an html open tag
+         and finishes inside an opened head tag.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

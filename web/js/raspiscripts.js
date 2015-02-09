@@ -2,7 +2,8 @@
  *  Author: Brett Crawford <brett.crawford@temple.edu>
  *  File:   raspiscripts.js
  *  Date:   Feb 4, 2015
- *  Desc:
+ *  Desc:   This file contains javascript that is used for various
+ *          purposes within the web app.
  */
 
 /**
