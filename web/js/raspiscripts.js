@@ -10,13 +10,15 @@
  * Enables/disables the user type radio buttons on the contact
  * page depending on the status of the registered user check box.
  */
-function displayButtons() {
+function displayUserTypeButtons() {
     if (document.getElementById("registereduser").checked) {
+        document.getElementById("divUserType").hidden = false;
         document.getElementById("usertype1").disabled = false;
         document.getElementById("usertype2").disabled = false;
         document.getElementById("usertype3").disabled = false;
     }
     else {
+        document.getElementById("divUserType").hidden = true;
         document.getElementById("usertype1").disabled = true;
         document.getElementById("usertype2").disabled = true;
         document.getElementById("usertype3").disabled = true;
@@ -131,18 +133,19 @@ function showCookie(name) {
  */
 function initPage() {
     checkAndSetTheme();
-    setSelectedTab();
+    initSelectedPage();
 }
 
 /**
- * Determines the current page and sets the appropriate style for 
- * the page's selected tab.
+ * Determines the current page and takes the appropriate actions
+ * for that page's initialization.
  */
-function setSelectedTab() {
+function initSelectedPage() {
     
     if (document.title.indexOf("Home ") > -1) {
         document.getElementById("home-tab-connector").className = "";
         initSlideToggleParagraphs();
+        initHomePopups();
     }
     else if (document.title.indexOf("Builds ") > -1) {
         document.getElementById("builds-tab-connector").className = "";
@@ -161,6 +164,7 @@ function setSelectedTab() {
     }
     else if (document.title.indexOf("Labs ") > -1) {
         document.getElementById("labs-tab-connector").className = "";
+        initLabsPopups();
     }
 }
 
@@ -174,6 +178,27 @@ function initSlideToggleParagraphs() {
         $("#whatis-raspibuilds-heading").click(function(){
             $("#whatis-raspibuilds-para").slideToggle();
         });
+    });
+}
+
+function initHomePopups() {
+    
+    $(document).ready(function() {
+
+        $('#rp-img1-popup').popup();
+
+        $('#rp-img2-popup').popup();
+    });
+}
+
+
+
+function initLabsPopups() {
+    
+    $(document).ready(function() {
+
+        $('#datamodel-img-popup').popup();
+
     });
 }
 

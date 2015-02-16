@@ -12,6 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
         <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
         <script src="js/raspiscripts.js"  type="text/javascript"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
