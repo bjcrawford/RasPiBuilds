@@ -4,10 +4,9 @@
  Date:   Jan 28, 2015
  Desc:
 -->
-<jsp:include page="html-to-head.jsp"></jsp:include>
-        <title>Contact | RasPi Builds</title>
-<jsp:include page="head-to-body.jsp"></jsp:include>  
+<jsp:include page="pre-content.jsp"></jsp:include>
             <div class="content">
+                <div id="page" class="contact" display="none"></div>
                 <div class="content-text">
                     <h2>Contact Us</h2>
                     <p>
@@ -52,5 +51,5 @@
                         <input type="submit" class="btn btn-default" value="Submit">
                     </form>
                 </div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="post-content.jsp"></jsp:include>
             

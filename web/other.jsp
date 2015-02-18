@@ -8,10 +8,9 @@
 <%@page language="java" import="SQL.DbConn" %>
 <%@page language="java" import="view.ProjectView" %>
 
-<jsp:include page="html-to-head.jsp"></jsp:include>
-        <title>Projects | RasPi Builds</title>
-<jsp:include page="head-to-body.jsp"></jsp:include>  
+<jsp:include page="pre-content.jsp"></jsp:include> 
             <div class="content">
+                <div id="page" class="projects" display="none"></div>
                 <div class="content-text">
                     <br/>
                     <p>
@@ -31,5 +30,5 @@
                         %>
                     </div>
                 </div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="post-content.jsp"></jsp:include>
             

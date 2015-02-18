@@ -4,10 +4,9 @@
  Date:   Jan 27, 2015
  Desc:
 -->
-<jsp:include page="html-to-head.jsp"></jsp:include>
-        <title>Home | RasPi Builds</title>
-<jsp:include page="head-to-body.jsp"></jsp:include>
+<jsp:include page="pre-content.jsp"></jsp:include>
             <div class="content">
+                <div id="page" class="home" display="none"></div>
                 <div class="content-text">
                     <a href="#rp-img1-popup" class="rp-img1-popup_open">
                         <img class="raspberrypi-img" src="img/raspberrypi.png" 
@@ -50,7 +49,7 @@
                         as they want with regards the the build submissions. 
                     </p>
                     <div class="newLine"></div>
-                    
+                
                 <!-- Hidden popups -->
                   
                     <div id="rp-img1-popup" class="well raspi-popup">
@@ -68,4 +67,4 @@
                     </div>
                     
                 </div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="post-content.jsp"></jsp:include>

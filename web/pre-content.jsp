@@ -1,12 +1,23 @@
 <%--
  Author: Brett Crawford <brett.crawford@temple.edu>
  File:   pre-content.jsp
- Date:   Jan 28, 2015
- Desc:   This file contains boiler plate html code for the web
-         app pages. This file begins with a head close tag and
-         finishes inside an opened body tag and inside an 
-         opened container div tag.
+ Date:   Jan 31, 2015
+ Desc:   This file contains the boiler plate html code for the
+         web app pages. This file begins with an html open tag
+         and finishes inside an opened head tag.
 --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+        <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
+        <script src="js/raspiscripts.js"  type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
+        <title></title>
     </head>   
     <body>
         <br/>
@@ -61,6 +72,22 @@
                     <a href="labs.jsp"><span class="tab-link"></span></a>
                     Labs
                     <span id="labs-tab-connector" class="tab-connector-unselected"></span>
+                    
+                    <!--
+                    <div class="tab-menu-item">
+                        <a href="labs.jsp#lab01"><span class="tab-menu-item-link"></span></a>
+                        Lab 01
+                    </div>
+                    <div class="tab-menu-item">
+                        <a href="labs.jsp#lab02"><span class="tab-menu-item-link"></span></a>
+                        Lab 02
+                    </div>
+                    <div class="tab-menu-item">
+                        <a href="labs.jsp#lab03"><span class="tab-menu-item-link"></span></a>
+                        Lab 03
+                    </div>
+                    -->
+                    
                 </div>
                 <div class="newLine"></div>
             </div>

@@ -4,10 +4,9 @@
  Date:   Jan 28, 2015
  Desc:
 -->
-<jsp:include page="html-to-head.jsp"></jsp:include>
-        <title>Labs | RasPi Builds</title>
-<jsp:include page="head-to-body.jsp"></jsp:include>  
+<jsp:include page="pre-content.jsp"></jsp:include>
             <div class="content">
+                <div id="page" class="labs" display="none"></div>
                 <div class="content-text">
                     <h2>Lab 01 Project Proposal</h2>
                     <div class="indented-para">
@@ -90,5 +89,5 @@
                     </div>
                     
                 </div>
-<jsp:include page="body-to-html.jsp"></jsp:include>
+<jsp:include page="post-content.jsp"></jsp:include>
             

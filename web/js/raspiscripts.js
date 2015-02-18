@@ -142,27 +142,34 @@ function initPage() {
  */
 function initSelectedPage() {
     
-    if (document.title.indexOf("Home ") > -1) {
+    if (document.getElementById("page").className.indexOf("home") > -1) {
+        document.title = "Home | RasPi Builds";
         document.getElementById("home-tab-connector").className = "";
         initSlideToggleParagraphs();
         initHomePopups();
     }
-    else if (document.title.indexOf("Builds ") > -1) {
+    else if (document.getElementById("page").className.indexOf("builds") > -1) {
+        document.title = "Builds | RasPi Builds";
         document.getElementById("builds-tab-connector").className = "";
     }
-    else if (document.title.indexOf("Projects ") > -1) {
+    else if (document.getElementById("page").className.indexOf("projects") > -1) {
+        document.title = "Projects | RasPi Builds";
         document.getElementById("projects-tab-connector").className = "";
     }
-    else if (document.title.indexOf("Users ") > -1) {
+    else if (document.getElementById("page").className.indexOf("users") > -1) {
+        document.title = "Users | RasPi Builds";
         document.getElementById("users-tab-connector").className = "";
     }
-    else if (document.title.indexOf("Search ") > -1) {
+    else if (document.getElementById("page").className.indexOf("search") > -1) {
+        document.title = "Search | RasPi Builds";
         document.getElementById("search-tab-connector").className = "";
     }
-    else if (document.title.indexOf("Contact ") > -1) {
+    else if (document.getElementById("page").className.indexOf("contact") > -1) {
+        document.title = "Contact | RasPi Builds";
         document.getElementById("contact-tab-connector").className = "";
     }
-    else if (document.title.indexOf("Labs ") > -1) {
+    else if (document.getElementById("page").className.indexOf("labs") > -1) {
+        document.title = "Labs | RasPi Builds";
         document.getElementById("labs-tab-connector").className = "";
         initLabsPopups();
     }
