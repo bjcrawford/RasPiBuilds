@@ -68,26 +68,57 @@
                     <span id="contact-tab-connector" class="tab-connector-unselected"></span>
                     <span class="tab-divider"></span>
                 </div>
-                <div id="labs" class="tab">
+                <div id="labs" class="tab tab-with-dropdown">
+                    
                     <a href="labs.jsp"><span class="tab-link"></span></a>
                     Labs
                     <span id="labs-tab-connector" class="tab-connector-unselected"></span>
-                    
-                    <!--
-                    <div class="tab-menu-item">
-                        <a href="labs.jsp#lab01"><span class="tab-menu-item-link"></span></a>
-                        Lab 01
+                    <div class="tab-dropdown-menu">
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab01"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 01
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab02"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 02
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab03"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 03
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab04"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 04
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab05"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 05
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab06"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 06
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab07"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 07
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab08"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 08
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab09"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 09
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#lab10"><span class="tab-dropdown-item-link"></span></a>
+                            Lab 10
+                        </div>
+                        <div class="tab-dropdown-item">
+                            <a href="labs.jsp#challenge"><span class="tab-dropdown-item-link"></span></a>
+                            Challenge
+                        </div>
                     </div>
-                    <div class="tab-menu-item">
-                        <a href="labs.jsp#lab02"><span class="tab-menu-item-link"></span></a>
-                        Lab 02
-                    </div>
-                    <div class="tab-menu-item">
-                        <a href="labs.jsp#lab03"><span class="tab-menu-item-link"></span></a>
-                        Lab 03
-                    </div>
-                    -->
-                    
                 </div>
                 <div class="newLine"></div>
             </div>

@@ -8,7 +8,7 @@
             <div class="content">
                 <div id="page" class="labs" display="none"></div>
                 <div class="content-text">
-                    <h2>Lab 01 Project Proposal</h2>
+                    <h2>Lab 01 Project Proposal<a id="lab01"></a></h2>
                     <div class="indented-para">
                         <p>
                             Proposal Document:
@@ -18,7 +18,7 @@
                             <br/>
                         </p>
                     </div>
-                    <h2>Lab 02 Data Model</h2>
+                    <h2>Lab 02 Data Model<a id="lab02"></a></h2>
                     <div class="indented-para">
                         <p>
                             Data Model:
@@ -28,7 +28,7 @@
                             <br/>
                         </p>
                     </div>
-                    <h2>Lab 03 Home Page</h2>
+                    <h2>Lab 03 Home Page<a id="lab03"></a></h2>
                     <div class="indented-para">
                         <p>
                             Home Page:
@@ -38,7 +38,7 @@
                             <br/>
                         </p>
                     </div>
-                    <h2>Lab 04 Forms Javascript Cookies</h2>
+                    <h2>Lab 04 Forms Javascript Cookies<a id="lab04"></a></h2>
                     <div class="indented-para">
                         <p>
                             Contact Page:
@@ -46,14 +46,14 @@
                                 Contact Us
                             </a>
                             <br/>
-                            Theme Chooser: Any page, bottom-left
+                            Theme Chooser: Any page, bottom-left in content, theme dropdown
                             <br/>
                             jQuery Slide Toggle: 
                             <a href="index.jsp">
                                 My Homepage</a>, click headings
                         </p>
                     </div>
-                    <h2>Lab 05 Display Data</h2>
+                    <h2>Lab 05 Display Data<a id="lab05"></a></h2>
                     <div class="indented-para">
                         <p>
                             Associative Page:
@@ -72,12 +72,18 @@
                             </a>
                         </p>
                     </div>
-                    <h2>Lab 06 Delete</h2>
-                    <h2>Lab 07 Insert</h2>
-                    <h2>Lab 08 Log On</h2>
-                    <h2>Lab 09 Insert Associative</h2>
-                    <h2>Lab 10 Update Ajax</h2>
-                    <h2>My Challenge</h2>
+                    <h2>Lab 06 Delete<a id="lab06"></a></h2>
+                    <h2>Lab 07 Insert<a id="lab07"></a></h2>
+                    <h2>Lab 08 Log On<a id="lab08"></a></h2>
+                    <h2>Lab 09 Insert Associative<a id="lab09"></a></h2>
+                    <h2>Lab 10 Update Ajax<a id="lab10"></a></h2>
+                    <h2>Challenge<a id="challenge"></a></h2>
+                    <div class="indented-para">
+                        <p>
+                            CSS Navigation Tab Dropdown: Any page, hover over labs navigation tab
+                            <br/>
+                        </p>
+                    </div>
                     
                     <!-- Hidden popups -->
                   
