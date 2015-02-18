@@ -16,7 +16,7 @@
                             <a href="doc/Crawford,Brett-ProjectProposal.doc">
                                 Crawford,Brett-ProjectProposal.doc
                             </a>
-                            <br>
+                            <br/>
                         </p>
                     </div>
                     <h2>Lab 02 Data Model</h2>
@@ -26,7 +26,7 @@
                             <a href="#datamodel-img-popup" class="datamodel-img-popup_open">
                                 Crawford,Brett-DataModel.png
                             </a>
-                            <br>
+                            <br/>
                         </p>
                     </div>
                     <h2>Lab 03 Home Page</h2>
@@ -36,7 +36,7 @@
                             <a href="index.jsp">
                                 My Homepage
                             </a>
-                            <br>
+                            <br/>
                         </p>
                     </div>
                     <h2>Lab 04 Forms Javascript Cookies</h2>
@@ -46,9 +46,9 @@
                             <a href="contact.jsp">
                                 Contact Us
                             </a>
-                            <br>
+                            <br/>
                             Theme Chooser: Any page, bottom-left
-                            <br>
+                            <br/>
                             jQuery Slide Toggle: 
                             <a href="index.jsp">
                                 My Homepage</a>, click headings
@@ -61,12 +61,12 @@
                             <a href="assoc.jsp">
                                 Builds
                             </a>
-                            </br>
+                            <br/>
                             Other Page:
                             <a href="other.jsp">
                                 Projects
                             </a>
-                            </br>
+                            <br/>
                             Web User Page:
                             <a href="users.jsp">
                                 Users

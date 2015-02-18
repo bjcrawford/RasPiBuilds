@@ -6,8 +6,7 @@
          app pages. This file begins inside the content div and
          finishes with an html close tag.
 --%>
-
-                <hr>
+                <hr/>
                 <span class="theme-chooser">
                     Theme: 
                     <select name="theme-select" id="theme-select" 
@@ -19,12 +18,12 @@
                         <option value="clear">Clear stored theme</option>
                     </select>
                 </span>
-            </div> <!-- Content div close -->
+            </div>
             <div class="footer">
                 <span class="footer-text">Web Site Design by Brett Crawford</span>
             </div>
             <div class="deadspace"></div>
-        </div> <!-- Container div close -->
+        </div>
         <script>initPage();</script>
     </body>
 </html>

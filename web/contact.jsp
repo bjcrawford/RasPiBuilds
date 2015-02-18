@@ -14,7 +14,6 @@
                         Please use the form below to contact us with any suggestions, 
                         questions, comments, or concerns.
                     </p>
-
                     <form name="contact" method="post" action="http://www.temple.edu/cgi-bin/mail?tuf00901@temple.edu">
                         <div class="form-group">
                             <label for="inputName">Your name:</label>
@@ -28,13 +27,13 @@
                             <label for="registereduser">Registered user:</label>
                             <input id="registereduser" type="checkbox" 
                                    name="registereduser" onclick="displayUserTypeButtons()" /> 
-                        
-                        <div class="form-group indented-para" id="divUserType" hidden="true">
-                            <label>User type:</label>
-                            &nbsp;&nbsp;&nbsp;<input id="usertype1" type="radio" name="usertype" value="P" disabled="true" />&nbsp;&nbsp;Project Admin
-                            &nbsp;&nbsp;&nbsp;<input id="usertype2" type="radio" name="usertype" value="B" disabled="true" />&nbsp;&nbsp;Builder
-                            &nbsp;&nbsp;&nbsp;<input id="usertype3" type="radio" name="usertype" value="V" disabled="true" />&nbsp;&nbsp;View Only
-                        </div></div>
+                            <div class="form-group indented-para" id="divUserType" hidden="true">
+                                <label>User type:</label>
+                                &nbsp;&nbsp;&nbsp;<input id="usertype1" type="radio" name="usertype" value="P" disabled="true" />&nbsp;&nbsp;Project Admin
+                                &nbsp;&nbsp;&nbsp;<input id="usertype2" type="radio" name="usertype" value="B" disabled="true" />&nbsp;&nbsp;Builder
+                                &nbsp;&nbsp;&nbsp;<input id="usertype3" type="radio" name="usertype" value="V" disabled="true" />&nbsp;&nbsp;View Only
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="inputSubject">Subject:</label>
                             <select class="form-control" name="subject" id="inputSubject">
@@ -51,7 +50,6 @@
                             <textarea class="form-control" name="message" rows="5" placeholder="Enter message"></textarea>
                         </div>
                         <input type="submit" class="btn btn-default" value="Submit">
-                        
                     </form>
                 </div>
 <jsp:include page="body-to-html.jsp"></jsp:include>
