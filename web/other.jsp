@@ -7,6 +7,15 @@
 
 <%@page language="java" import="SQL.DbConn" %>
 <%@page language="java" import="view.ProjectView" %>
+<%
+    DbConn dbc = new DbConn();
+    String projectTableOrError = dbc.getErr();
+    if (projectTableOrError.length() == 0) {
+        String classes = "project-table table table-striped table-bordered";
+        projectTableOrError = ProjectView.makeTableFromAllProjects(classes, dbc);
+    }
+    dbc.close();
+%>
 
 <jsp:include page="pre-content.jsp"></jsp:include> 
             <div class="content">
@@ -18,16 +27,7 @@
                     </p>
                     <br/>
                     <div class="table-responsive">
-                        <%
-                            DbConn dbc = new DbConn();
-                            String dbErrorOrData = dbc.getErr();
-                            if (dbErrorOrData.length() == 0) {
-                                String classes = "project-table table table-striped table-bordered";
-                                dbErrorOrData = ProjectView.listAllProjects(classes, dbc);
-                                dbc.close();
-                            }
-                            out.print(dbErrorOrData);
-                        %>
+                        <%=projectTableOrError%>
                     </div>
                 </div>
 <jsp:include page="post-content.jsp"></jsp:include>

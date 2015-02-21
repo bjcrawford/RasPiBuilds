@@ -27,7 +27,7 @@ public class BuildView {
      * @param dbc an open database connection.
      * @return a string containing the HTML table
      */
-    public static String listAllBuilds(String cssClassName, DbConn dbc) {
+    public static String makeTableFromAllBuilds(String cssClassName, DbConn dbc) {
         String htmlTable = "";
         PreparedStatement stmt = null;
         ResultSet results = null;

@@ -7,6 +7,15 @@
 
 <%@page language="java" import="SQL.DbConn" %>
 <%@page language="java" import="view.WebUserView" %>
+<%
+    DbConn dbc = new DbConn();
+    String userTableOrError = dbc.getErr();
+    if (userTableOrError.length() == 0) { 
+        String classes = "user-table table table-striped table-bordered";
+        userTableOrError = WebUserView.makeTableFromAllUsers(classes, dbc);
+    }
+    dbc.close();
+%>
 
 <jsp:include page="pre-content.jsp"></jsp:include> 
             <div class="content">
@@ -18,16 +27,7 @@
                     </p>
                     <br/>
                     <div class="table-responsive">
-                        <%
-                            DbConn dbc = new DbConn();
-                            String dbErrorOrData = dbc.getErr();
-                            if (dbErrorOrData.length() == 0) { 
-                                String classes = "user-table table table-striped table-bordered";
-                                dbErrorOrData = WebUserView.listAllUsers(classes, dbc);
-                                dbc.close();
-                            }
-                            out.print(dbErrorOrData);
-                        %>
+                        <%=userTableOrError%>
                     </div>
                 </div>
 <jsp:include page="post-content.jsp"></jsp:include>

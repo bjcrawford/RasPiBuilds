@@ -27,7 +27,7 @@ public class ProjectView {
      * @param dbc an open database connection.
      * @return a string containing the HTML table
      */
-    public static String listAllProjects(String cssClassName, DbConn dbc) {
+    public static String makeTableFromAllProjects(String cssClassName, DbConn dbc) {
         String htmlTable = "";
         PreparedStatement stmt = null;
         ResultSet results = null;

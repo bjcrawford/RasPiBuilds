@@ -23,7 +23,7 @@ public class WebUserView {
      * @param dbc an open database connection.
      * @return a string containing the HTML table
      */
-    public static String listAllUsers(String cssClassName, DbConn dbc) {
+    public static String makeTableFromAllUsers(String cssClassName, DbConn dbc) {
         String htmlTable = "";
         PreparedStatement stmt = null;
         ResultSet results = null;
