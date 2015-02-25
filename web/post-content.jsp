@@ -20,7 +20,7 @@
                 </span>
             </div>
             <div class="footer">
-                <span class="footer-text">Web Site Design by Brett Crawford</span>
+                <span class="footer-text">Web Site Design by <a href="http://www.brettjcrawford.com">Brett Crawford</a></span>
             </div>
             <div class="deadspace"></div>
         </div>

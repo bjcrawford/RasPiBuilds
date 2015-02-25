@@ -9,28 +9,30 @@
 <%@page language="java" import="view.SearchView" %>
 <%
     DbConn dbc = new DbConn();
-    String userSelectOrError = dbc.getErr();
+    String userSelectOrError = "";
     String projectSelectOrError = "";
     String resultsTableOrError = "";
     String keyword = "";
     int userId = -1;
     int projectId = -1;
     int minPrice = -1;
-    String minPriceValue = "";
+    String minPriceStr = "";
     int maxPrice = -1;
-    String maxPriceValue = "";
+    String maxPriceStr = "";
     String priceErrorClass = "";
-    if (userSelectOrError.length() == 0) {
+    
+    if (dbc.getErr().length() == 0) { // If we have a database connection
         
-        if (request.getParameter("inputKeyword") != null) {
+        if (request.getParameter("inputKeyword") != null) { // If we have postback data
+            
             keyword = request.getParameter("inputKeyword");
             userId = Integer.decode(request.getParameter("selectUser"));
             projectId = Integer.decode(request.getParameter("selectProject"));
             
-            minPriceValue = request.getParameter("inputMinPrice");
-            if (!minPriceValue.equals("")) {
+            minPriceStr = request.getParameter("inputMinPrice");
+            if (!minPriceStr.equals("")) {
                 try {
-                    minPrice = Integer.decode(minPriceValue);
+                    minPrice = Integer.decode(minPriceStr);
                 }
                 catch (NumberFormatException e) {
                     minPrice = -1;
@@ -38,10 +40,10 @@
                 }
             }
             
-            maxPriceValue = request.getParameter("inputMaxPrice");
-            if (!maxPriceValue.equals("")) {
+            maxPriceStr = request.getParameter("inputMaxPrice");
+            if (!maxPriceStr.equals("")) {
                 try {
-                    maxPrice = Integer.decode(maxPriceValue);
+                    maxPrice = Integer.decode(maxPriceStr);
                 }
                 catch (NumberFormatException e) {
                     maxPrice = -1;
@@ -52,8 +54,8 @@
         
         userSelectOrError = SearchView.makeSelectFromUserNames("form-control", dbc, userId);
         projectSelectOrError = SearchView.makeSelectFromProjectNames("form-control", dbc, projectId);
-        String tableClasses = "build-table table table-striped table-bordered table-responsive";
-        resultsTableOrError = SearchView.makeTableFromSearchCriteria(tableClasses, 
+        resultsTableOrError = SearchView.makeTableFromSearchCriteria(
+                "build-table table table-striped table-bordered table-responsive", 
                 dbc, keyword, userId, projectId, minPrice, maxPrice);
     }
     dbc.close();
@@ -90,14 +92,14 @@
                                     <div class="input-group-addon">$</div>
                                     <input type="text" class="form-control" id="inputMinPrice" 
                                            name="inputMinPrice" placeholder="Enter minimum price"
-                                           value="<%=minPriceValue%>">
+                                           value="<%=minPriceStr%>">
                                     <div class="input-group-addon">.00</div>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">$</div>
                                     <input type="text" class="form-control" id="inputMaxPrice" 
                                            name="inputMaxPrice" placeholder="Enter maximum price"
-                                           value="<%=maxPriceValue%>">
+                                           value="<%=maxPriceStr%>">
                                     <div class="input-group-addon">.00</div>
                                 </div>
                             </div>

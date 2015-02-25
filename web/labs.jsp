@@ -72,7 +72,16 @@
                             </a>
                         </p>
                     </div>
-                    <h2>Lab 06 Delete<a id="lab06"></a></h2>
+                    <h2>Lab 06 Search<a id="lab06"></a></h2>
+                    <div class="indented-para">
+                        <p>
+                            Search Page:
+                            <a href="search.jsp">
+                                Search
+                            </a>
+                            <br/>
+                        </p>
+                    </div>
                     <h2>Lab 07 Insert<a id="lab07"></a></h2>
                     <h2>Lab 08 Log On<a id="lab08"></a></h2>
                     <h2>Lab 09 Insert Associative<a id="lab09"></a></h2>
