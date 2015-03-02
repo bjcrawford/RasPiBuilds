@@ -14,17 +14,22 @@
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
         <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
-        <script src="js/raspiscripts.js"  type="text/javascript"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
+        <script src="js/raspiscripts.js"  type="text/javascript"></script>
+        <script src="js/pacman.js"  type="text/javascript"></script>
+        <script src="js/raspberry.js"  type="text/javascript"></script>
+        <script src="js/pacmanAnimation.js"  type="text/javascript"></script>
         <title></title>
     </head>   
-    <body>
+    <body onLoad="initializeCanvas();">
+        <canvas id="pacman-canvas"></canvas>
+        <button id="pacman-exit-button">Exit</button>
         <br/>
         <div class="container">
             <div class="title-container">
-                <div class="title-img">
-                    <img src="img/raspilogo.png" alt="Raspberry Pi Logo">
+                <div id="raspilogo" class="title-img">
+                    <img id="raspberry" src="img/raspilogo.png" alt="Raspberry Pi Logo">
                 </div>
                 <div class="title">RasPi Builds</div>
                 <div class="title-desc">

@@ -91,6 +91,8 @@
                         <p>
                             CSS Navigation Tab Dropdown: Any page, hover over labs navigation tab
                             <br/>
+                            HTML5 Canvas Animation: Any page, click the raspberry image next to the title to begin
+                            <br/>
                         </p>
                     </div>
                     
