@@ -5,7 +5,7 @@
  Desc:
 -->
 
-<%@page language="java" import="SQL.DbConn" %>
+<%@page language="java" import="sql.DbConn" %>
 <%@page language="java" import="view.WebUserView" %>
 <%
     DbConn dbc = new DbConn();
@@ -22,6 +22,7 @@
                 <div id="page" class="users" display="none"></div>
                 <div class="content-text">
                     <br/>
+                    <h3><a href="insertUser.jsp">Add a user</a></h3>
                     <p>
                         This table contains a list of all of the users in the database.
                     </p>

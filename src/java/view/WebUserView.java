@@ -8,7 +8,7 @@ package view;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import SQL.DbConn;
+import sql.DbConn;
 import utils.FormatUtils;
 
 public class WebUserView {

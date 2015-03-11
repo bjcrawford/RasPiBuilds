@@ -4,7 +4,7 @@
  *  Date:   Feb 11, 2015
  *  Desc:
  */
-package SQL;
+package sql;
 
 import java.sql.DriverManager;
 import java.sql.Connection;

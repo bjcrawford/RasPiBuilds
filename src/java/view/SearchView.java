@@ -6,7 +6,7 @@
  */
 package view;
 
-import SQL.DbConn;
+import sql.DbConn;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import utils.FormatUtils;

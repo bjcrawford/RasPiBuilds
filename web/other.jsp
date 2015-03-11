@@ -5,7 +5,7 @@
  Desc:
 -->
 
-<%@page language="java" import="SQL.DbConn" %>
+<%@page language="java" import="sql.DbConn" %>
 <%@page language="java" import="view.ProjectView" %>
 <%
     DbConn dbc = new DbConn();
