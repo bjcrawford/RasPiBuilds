@@ -101,17 +101,17 @@
                     <form name="insertUser" method="post" action="insertUser.jsp">
                         <div class="form-group <%=userEmailErrorClass%>">
                             <label class="control-label" for="userEmail">Your email:</label>
-                            <input class="form-control" type="text" id="inputName" name="userEmail" placeholder="Enter email" value="<%= wuStringData.userEmail%>"/>
+                            <input class="form-control" type="text" id="inputUserEmail" name="userEmail" placeholder="Enter email" value="<%= wuStringData.userEmail%>"/>
                             <span class="control-label"><%=wuValidate.getUserEmailMsg()%></span>
                         </div>
                         <div class="form-group <%=userPwErrorClass%>">
                             <label class="control-label" for="userPw">Your password:</label>
-                            <input class="form-control" type="password" id="inputPw" name="userPw" placeholder="Enter password" value="<%= wuStringData.userPw%>"/>
+                            <input class="form-control" type="password" id="inputUserPw" name="userPw" placeholder="Enter password" value="<%= wuStringData.userPw%>"/>
                             <span class="control-label"><%=wuValidate.getUserPwMsg()%></span>
                         </div>
                         <div class="form-group <%=userPw2ErrorClass%>">
                             <label class="control-label" for="userPw2">Re-enter password:</label>
-                            <input class="form-control" type="password" id="inputPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuStringData.userPw2%>"/>
+                            <input class="form-control" type="password" id="inputUserPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuStringData.userPw2%>"/>
                             <span class="control-label"><%=wuValidate.getUserPw2Msg()%></span>
                         </div>
                         <div class="form-group <%=userNameErrorClass%>">
