@@ -22,6 +22,7 @@
                 <div id="page" class="projects" display="none"></div>
                 <div class="content-text">
                     <br/>
+                    <h3><a href="insertOther.jsp">Submit a project</a></h3>
                     <p>
                         This table contains a list of all of the projects in the database.
                     </p>
