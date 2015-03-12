@@ -1,4 +1,4 @@
-package model.other;
+package model.project;
 
 import sql.PrepStatement;
 import sql.DbConn;

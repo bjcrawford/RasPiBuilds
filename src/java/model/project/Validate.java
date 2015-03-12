@@ -1,4 +1,4 @@
-package model.other;
+package model.project;
 
 import utils.*;  
 
@@ -82,6 +82,10 @@ public class Validate {
 
     public String getProjectNameMsg() {
         return this.projectNameMsg;
+    }
+    
+    public void setProjectNameMsg(String projectNameMsg) {
+        this.projectNameMsg = projectNameMsg;
     }
 
     public String getProjectDescMsg() {

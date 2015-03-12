@@ -96,15 +96,15 @@ public class WebUserView {
                     + "class=\"" + cssClassName + "\">\n";
             while (rs.next()) {
                 int userRoleId = rs.getInt("user_role_id");
-                htmlSelect += "<option value=\"" + userRoleId + "\" ";
+                htmlSelect += "\t\t\t\t\t\t\t\t<option value=\"" + userRoleId + "\"";
                     if (userRoleId == selectedId) {
-                        htmlSelect += "selected ";
+                        htmlSelect += " selected ";
                     }
                 htmlSelect += ">"
                         + FormatUtils.formatString(rs.getObject("role_name"))
                         + "</option>\n";
             }
-            htmlSelect += "</select>\n";
+            htmlSelect += "\t\t\t\t\t\t\t</select>";
             ps.close();
             rs.close();
 

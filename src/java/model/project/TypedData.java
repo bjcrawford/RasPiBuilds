@@ -1,4 +1,4 @@
-package model.other;
+package model.project;
 
 /* This class just bundles together all the pre-validated String values that a 
  * user might enter as part of a Web_User record. 

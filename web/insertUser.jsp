@@ -5,9 +5,10 @@
  Desc:
 -->
 
-<%@page language="java" import="model.web_user.*" %>
-<%@page language="java" import="utils.*" %>
-<%@page language="java" import="sql.*" %>
+<%@page language="java" import="model.web_user.StringData" %>
+<%@page language="java" import="model.web_user.Validate" %>
+<%@page language="java" import="model.web_user.WebUserMods" %>
+<%@page language="java" import="sql.DbConn" %>
 <%@page language="java" import="view.WebUserView" %>
 <%
     // Constructor sets all fields of WebUser.StringData to "" (empty string) - good for 1st rendering
@@ -16,9 +17,13 @@
     // Default constructor sets all error messages to "" - good for 1st rendering
     Validate wuValidate = new Validate();
 
+    // Message for confirmation of state of the insertion
     String msg = "";
     
+    // The default user role to display in the dropdown
     int roleId = 3;
+    
+    // The HTML code for the user role dropdown
     String userRoleSelectOrError = "";
     
     // Class names for errors
@@ -31,12 +36,13 @@
     String userRoleIdErrorClass = "";
     String submitSuccessClass = "";
 
+    // The DB connection is obtained before validation in order to get the user role dropdown
     DbConn dbc = new DbConn();
     msg = dbc.getErr();
 
-    if (request.getParameter("userEmail") != null) { // postback 
+    if (request.getParameter("userEmail") != null) {
 
-        // fill WebUserData object with form data (form data is always String)
+        // Fill WebUserData object with form data (form data is always String)
         wuStringData.userEmail = request.getParameter("userEmail");
         wuStringData.userPw = request.getParameter("userPw");
         wuStringData.userPw2 = request.getParameter("userPw2");
@@ -44,11 +50,13 @@
         wuStringData.birthday = request.getParameter("birthday");
         wuStringData.membershipFee = request.getParameter("membershipFee");
         wuStringData.userRoleId = request.getParameter("userRoleId");
+        
+        // Grab the user role parameter to persist the user's selection
         roleId = Integer.decode(wuStringData.userRoleId);
         
+        // Validate user input, set error messages.
+        wuValidate = new Validate(wuStringData);
         
-
-        wuValidate = new Validate(wuStringData); // validate user input, set error messages.
         if (wuValidate.isValidated()) { // data is good, proceed to try to insert
 
             if (msg.length() == 0) { // means no error getting db connection
@@ -63,6 +71,8 @@
             }
         }
         
+        // Check for error messages and set class error names accordingly
+        // My pages use the Bootstrap framework for error reporting
         if (!wuValidate.getUserEmailMsg().equals("")) {
             userEmailErrorClass = "has-error";
         }
@@ -81,6 +91,8 @@
         if (!wuValidate.getBirthdayMsg().equals("")) {
             birthdayErrorClass = "has-error";
         }
+        
+        // Check for successful insert, on success display green text, on error display red text
         if (msg.equals("Record inserted.")) {
             submitSuccessClass = "has-success";
         }
@@ -88,10 +100,16 @@
             submitSuccessClass = "has-error";
         }
     }
+    
+    // Create the user role dropdown
     userRoleSelectOrError = WebUserView.makeSelectFromUserRoles("form-control", dbc, roleId);
     
     dbc.close(); // NEVER have db connection leaks !!!
 %>
+
+<!-- My web app uses the Bootstrap framework to handle validation states of the
+     form elements. The label, input boxes, and error messages will all be 
+     displayed in red if a validation error has occured -->
 
 <jsp:include page="pre-content.jsp"></jsp:include>
             <div class="content">
@@ -126,7 +144,11 @@
                         </div>
                         <div class="form-group <%=membershipFeeErrorClass%>">
                             <label class="control-label" for="membershipFee">Membership fee (optional):</label>
-                            <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuStringData.membershipFee%>"/>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuStringData.membershipFee%>"/>
+                                <div class="input-group-addon">.00</div>
+                            </div>
                             <span class="control-label"><%=wuValidate.getMembershipFeeMsg()%></span>
                         </div>
                         <div class="form-group <%=userRoleIdErrorClass%>">
@@ -140,6 +162,5 @@
                         </div>
                     </form>
                     <a href="users.jsp"><h3>List Web Users</h3></a>
-                    <p><%=wuValidate.getAllValidationErrors()%></p>
                 </div>
 <jsp:include page="post-content.jsp"></jsp:include>

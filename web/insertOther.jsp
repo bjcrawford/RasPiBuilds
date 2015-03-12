@@ -5,9 +5,10 @@
  Desc:
 -->
 
-<%@page language="java" import="model.other.*" %>
-<%@page language="java" import="utils.*" %>
-<%@page language="java" import="sql.*" %>
+<%@page language="java" import="model.project.ProjectMods"%>
+<%@page language="java" import="model.project.StringData"%>
+<%@page language="java" import="model.project.Validate"%>
+<%@page language="java" import="sql.DbConn" %>
 <%
     // Constructor sets all fields of Project.StringData to "" (empty string) - good for 1st rendering
     StringData pStringData = new StringData();
@@ -15,9 +16,10 @@
     // Default constructor sets all error messages to "" - good for 1st rendering
     Validate pValidate = new Validate();
 
+    // Message for confirmation of state of the insertion
     String msg = "";
     
-    // Class names for errors
+    // Class names for success/error
     String projectNameErrorClass = "";
     String projectDescErrorClass = "";
     String projectGuideErrorClass = "";
@@ -25,16 +27,18 @@
     String projectCostErrorClass = "";
     String submitSuccessClass = "";
 
-    if (request.getParameter("projectName") != null) { // postback 
+    if (request.getParameter("projectName") != null) {
 
-        // fill WebUserData object with form data (form data is always String)
+        // Fill ProjectData object with form data (form data is always String)
         pStringData.projectName = request.getParameter("projectName");
         pStringData.projectDesc = request.getParameter("projectDesc");
         pStringData.projectGuide = request.getParameter("projectGuide");
         pStringData.projectImgUrl = request.getParameter("projectImgUrl");
         pStringData.projectCost = request.getParameter("projectCost");
         
-        pValidate = new Validate(pStringData); // validate user input, set error messages.
+        // Validate user input, set error messages.
+        pValidate = new Validate(pStringData); 
+        
         if (pValidate.isValidated()) { // data is good, proceed to try to insert
             
             DbConn dbc = new DbConn();
@@ -54,6 +58,8 @@
             dbc.close(); // NEVER have db connection leaks !!!
         }
         
+        // Check for error messages and set class error names accordingly
+        // My pages use the Bootstrap framework for error reporting
         if (!pValidate.getProjectNameMsg().equals("")) {
             projectNameErrorClass = "has-error";
         }
@@ -69,14 +75,25 @@
         if (!pValidate.getProjectCostMsg().equals("")) {
             projectCostErrorClass = "has-error";
         }
+        
+        // Check for successful insert, on success display green text, on error display red text
         if (msg.equals("Record inserted.")) {
             submitSuccessClass = "has-success";
         }
         else if (!msg.equals("")){
             submitSuccessClass = "has-error";
+            if (msg.equals("Cannot insert: a record with that project name already exists.")) {
+                msg = "";
+                projectNameErrorClass = "has-error";
+                pValidate.setProjectNameMsg("Project name already exists. Please choose another name.");
+            }
         }
     }
 %>
+
+<!-- My web app uses the Bootstrap framework to handle validation states of the
+     form elements. The label, input boxes, and error messages will all be 
+     displayed in red if a validation error has occured -->
 
 <jsp:include page="pre-content.jsp"></jsp:include>
             <div class="content">
@@ -106,7 +123,11 @@
                         </div>
                         <div class="form-group <%=projectCostErrorClass%>">
                             <label class="control-label" for="projectCost">Project Cost (optional):</label>
-                            <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%= pStringData.projectCost%>"/>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%= pStringData.projectCost%>"/>
+                                <div class="input-group-addon">.00</div>
+                            </div>
                             <span class="control-label"><%=pValidate.getProjectCostMsg()%></span>
                         </div>
                         <div class="form-group <%=submitSuccessClass%>">
@@ -115,6 +136,5 @@
                         </div>
                     </form>
                     <a href="other.jsp"><h3>List Projects</h3></a>
-                    <p><%=pValidate.getAllValidationErrors()%></p>
                 </div>
 <jsp:include page="post-content.jsp"></jsp:include>

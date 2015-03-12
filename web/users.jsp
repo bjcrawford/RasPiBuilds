@@ -23,9 +23,7 @@
                 <div class="content-text">
                     <br/>
                     <h3><a href="insertUser.jsp">Add a user</a></h3>
-                    <p>
-                        This table contains a list of all of the users in the database.
-                    </p>
+                    <p>This table contains a list of all of the users in the database.</p>
                     <br/>
                     <div class="table-responsive">
                         <%=userTableOrError%>

@@ -83,6 +83,20 @@
                         </p>
                     </div>
                     <h2>Lab 07 Insert<a id="lab07"></a></h2>
+                    <div class="indented-para">
+                        <p>
+                            Insert Web User:
+                            <a href="insertUser.jsp">
+                                User Registration
+                            </a>
+                            <br/>
+                            Insert Project:
+                            <a href="insertOther.jsp">
+                                Submit a Project
+                            </a>
+                            <br/>
+                        </p>
+                    </div>
                     <h2>Lab 08 Log On<a id="lab08"></a></h2>
                     <h2>Lab 09 Insert Associative<a id="lab09"></a></h2>
                     <h2>Lab 10 Update Ajax<a id="lab10"></a></h2>
