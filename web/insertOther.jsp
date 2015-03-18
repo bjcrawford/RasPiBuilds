@@ -85,7 +85,7 @@
             if (msg.equals("Cannot insert: a record with that project name already exists.")) {
                 msg = "";
                 projectNameErrorClass = "has-error";
-                pValidate.setProjectNameMsg("Project name already exists. Please choose another name.");
+                pValidate.setProjectNameMsg("Project name already exists. Please choose another.");
             }
         }
     }

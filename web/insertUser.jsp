@@ -98,6 +98,11 @@
         }
         else if (!msg.equals("")){
             submitSuccessClass = "has-error";
+            if (msg.equals("Cannot insert: a record with that email address already exists.")) {
+                msg = "";
+                userEmailErrorClass = "has-error";
+                wuValidate.setUserEmailMsg("Email address already exists. Please choose another.");
+            }
         }
     }
     

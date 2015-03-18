@@ -77,7 +77,7 @@ public class WebUserView {
      * of the user roles will be used for the values of the select options.
      *
      * @param cssClassName the name of a CSS style that will be applied to the
-     * HTML table. This style should be defined in the JSP page (header or style
+     * HTML select. This style should be defined in the JSP page (header or style
      * sheet referenced by the page).
      * @param dbc an open database connection.
      * @param selectedId the id of the user role that should appear as selected.

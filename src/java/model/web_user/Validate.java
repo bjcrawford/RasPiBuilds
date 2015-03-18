@@ -91,6 +91,10 @@ public class Validate {
     public String getUserEmailMsg() {
         return this.userEmailMsg;
     }
+    
+    public void setUserEmailMsg(String userEmailMsg) {
+        this.userEmailMsg = userEmailMsg;
+    }
 
     public String getUserPwMsg() {
         return this.userPwMsg;
