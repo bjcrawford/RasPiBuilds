@@ -43,11 +43,11 @@ public class ProjectView {
             results = stmt.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
-                    + "<th style='text-align:left'>Project Name</th>"
-                    + "<th style='text-align:left'>Project Description</th>"
-                    + "<th style='text-align:left'>Project Guidelines</th>"
+                    + "<th style='text-align:center'>Project Name</th>"
+                    + "<th style='text-align:center'>Project Description</th>"
+                    + "<th style='text-align:center'>Project Guidelines</th>"
                     + "<th style='text-align:center'>Project Image URL</th>"
-                    + "<th style='text-align:right'>Project Cost</th>"
+                    + "<th style='text-align:center'>Project Cost</th>"
                     + "</tr>";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"

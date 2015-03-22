@@ -53,13 +53,13 @@ public class BuildView {
             results = stmt.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
-                    + "<th style='text-align:left'>Build Name</th>"
-                    + "<th style='text-align:left'>Project Name</th>"
-                    + "<th style='text-align:left'>Build Comments</th>"
+                    + "<th style='text-align:center'>Build Name</th>"
+                    + "<th style='text-align:center'>Project Name</th>"
+                    + "<th style='text-align:center'>Build Comments</th>"
                     + "<th style='text-align:center'>Build Image URL</th>"
-                    + "<th style='text-align:right'>Build Cost</th>"
+                    + "<th style='text-align:center'>Build Cost</th>"
                     + "<th style='text-align:center'>Timestamp</th>"
-                    + "<th style='text-align:left'>Web User Name</th>"
+                    + "<th style='text-align:center'>Web User Name</th>"
                     + "</tr>";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"

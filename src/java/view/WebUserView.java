@@ -44,11 +44,11 @@ public class WebUserView {
             results = stmt.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
-                    + "<th style='text-align:left'>User Email</th>"
-                    + "<th style='text-align:left'>User Name</th>"
-                    + "<th style='text-align:left'>User Password</th>"
-                    + "<th style='text-align:right'>Membership Fee</th>"
-                    + "<th style='text-align:left'>User Role</th>"
+                    + "<th style='text-align:center'>User Email</th>"
+                    + "<th style='text-align:center'>User Name</th>"
+                    + "<th style='text-align:center'>User Password</th>"
+                    + "<th style='text-align:center'>Membership Fee</th>"
+                    + "<th style='text-align:center'>User Role</th>"
                     + "<th style='text-align:center'>Birthday</th>"
                     + "</tr>";
             while (results.next()) {
