@@ -14,12 +14,14 @@
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
+        <link rel="stylesheet" href="css/tinyeditor.css" />
         <script src="js/jquery_1.11.2.min.js"></script>
         <script src="js/jquery.popupoverlay.js"></script>
-        <script src="js/raspiscripts.js"  type="text/javascript"></script>
-        <script src="js/pacman.js"  type="text/javascript"></script>
-        <script src="js/raspberry.js"  type="text/javascript"></script>
-        <script src="js/pacmanAnimation.js"  type="text/javascript"></script>
+        <script src="js/raspiscripts.js" type="text/javascript"></script>
+        <script src="js/pacman.js" type="text/javascript"></script>
+        <script src="js/raspberry.js" type="text/javascript"></script>
+        <script src="js/pacmanAnimation.js" type="text/javascript"></script>
+        <script src="js/tinyeditor.js" type="text/javascript"></script>
         <title></title>
     </head>   
     <body onLoad="initializeCanvas();">

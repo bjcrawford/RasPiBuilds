@@ -100,7 +100,7 @@
                 <div id="page" class="projects" display="none"></div>
                 <div class="content-text">
                     <h1>Submit a Project</h1>
-                    <form name="insertOther" method="post" action="insertOther.jsp">
+                    <form name="insertOther" method="post" action="insertOther.jsp"  onsubmit="return pgTinyEditor.post();">
                         <div class="form-group <%=projectNameErrorClass%>">
                             <label class="control-label" for="projectName">Project Name:</label>
                             <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%= pStringData.projectName%>"/>
@@ -113,7 +113,12 @@
                         </div>
                         <div class="form-group <%=projectGuideErrorClass%>">
                             <label class="control-label" for="projectGuide">Project Guidelines:</label>
-                            <input class="form-control" type="text" id="inputProjectGuide" name="projectGuide" placeholder="Enter project guidelines" value="<%= pStringData.projectGuide%>"/>
+                            <input class="form-control" type="textarea" id="inputProjectGuide" name="projectGuide"/>
+                            
+                            <script src="js/project_guide_tinyeditor.js" type="text/javascript"></script>
+                            <script>pgTinyEditor.setEditorContent('<%=pStringData.projectGuide%>');</script>
+                            
+                            
                             <span class="control-label"><%=pValidate.getProjectGuideMsg()%></span>
                         </div>
                         <div class="form-group <%=projectImgUrlErrorClass%>">
