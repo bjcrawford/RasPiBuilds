@@ -56,14 +56,18 @@
                         <p>
                             <img src="img/raspberrypi(full).png" />
                         </p>
-                        <button class="rp-img1-popup_close btn btn-default">Close</button>
+                        <button type="button" class="rp-img1-popup_close btn btn-default btn-sm close-btn">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </div>
                     
                     <div id="rp-img2-popup" class="well raspi-popup">
                         <p>
                             <img src="img/raspberrypidiagram(full).png" />
                         </p>
-                        <button class="rp-img2-popup_close btn btn-default">Close</button>
+                        <button type="button" class="rp-img2-popup_close btn btn-default btn-sm close-btn">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </div>
                     
                 </div>

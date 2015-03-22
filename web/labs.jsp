@@ -121,7 +121,9 @@
                         <p>
                             <img src="img/Crawford,Brett-DataModel.png" />
                         </p>
-                        <button class="datamodel-img-popup_close btn btn-default">Close</button>
+                        <button type="button" class="datamodel-img-popup_close btn btn-default btn-sm close-btn">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </div>
                     
                 </div>

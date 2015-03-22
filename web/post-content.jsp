@@ -6,6 +6,9 @@
          app pages. This file begins inside the content div and
          finishes with an html close tag.
 --%>
+ 
+                <!-- Hidden popups -->
+                
                 <div id="signin-popup" class="well raspi-popup">
                     <h3>Sign in to your account</h3>
                     <form>
@@ -20,7 +23,9 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Sign in</button>
-                        <button type="button" class="signin-popup_close btn btn-default">Close</button>
+                        <button type="button" class="signin-popup_close btn btn-default btn-sm close-btn">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </form>
                 </div>
                 <hr/>

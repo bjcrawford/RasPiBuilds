@@ -250,6 +250,13 @@ body {
 .raspi-popup {
     background-color: rgba(0, 0, 0, 0.8);
     border: none;
+    position: relative;
+}
+
+.raspi-popup .close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
 }
 
 .table-striped > tbody > tr:nth-of-type(2n+1) {
