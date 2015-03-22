@@ -16,6 +16,7 @@ var pgTinyEditor = new TINY.editor.edit('editor',{
 	cssclass:'te',
 	controlclass:'tecontrol',
 	rowclass:'teheader',
+        bodyclass:'tebody',
 	dividerclass:'tedivider',
 	controls:['bold','italic','underline','strikethrough','|','subscript','superscript','|',
 			  'orderedlist','unorderedlist','|','outdent','indent','|','leftalign',

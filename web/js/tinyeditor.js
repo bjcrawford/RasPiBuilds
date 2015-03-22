@@ -45,13 +45,17 @@ TINY.editor = function() {
         this.t = T$(obj.id);
         this.obj = obj;
         this.xhtml = obj.xhtml;
-        var p = document.createElement('div'), w = document.createElement('div'), h = document.createElement('div'), l = obj.controls.length, i = 0;
+        var p = document.createElement('div');
+        var w = document.createElement('div');
+        var h = document.createElement('div');
+        var l = obj.controls.length, i = 0;
         this.i = document.createElement('iframe');
         this.i.width = obj.width || '100%';
         this.i.height = obj.height || '250';
         this.ie = T$$$();
         h.className = obj.rowclass || 'tinyeditor-header';
         p.className = obj.cssclass || 'tinyeditor';
+        w.className = obj.bodyclass || 'tinyeditor-body';
         p.style.width = this.i.width + 'px';
         p.appendChild(h);
         for (i; i < l; i++) {
