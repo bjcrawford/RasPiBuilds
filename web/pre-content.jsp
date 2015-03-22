@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="css/tinyeditor.css" />
         <script src="js/jquery_1.11.2.min.js"></script>
         <script src="js/jquery.popupoverlay.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/raspiscripts.js" type="text/javascript"></script>
         <script src="js/pacman.js" type="text/javascript"></script>
         <script src="js/raspberry.js" type="text/javascript"></script>
