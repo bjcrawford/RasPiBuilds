@@ -29,13 +29,22 @@
         <button id="pacman-exit-button">Exit</button>
         <br/>
         <div class="container">
-            <div class="title-container">
-                <div id="raspilogo" class="title-img">
-                    <img id="raspberry" src="img/raspilogo.png" alt="Raspberry Pi Logo">
+            <div class="header">
+                <div class="signin-container">
+                    <div class="signin-content">
+                        <a href="#signin-popup" class="signin-popup_open">
+                            <button type="button" class="btn btn-success btn-lg">Sign In</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="title">RasPi Builds</div>
-                <div class="title-desc">
-                    Inspiration for projects using Raspberry Pi
+                <div class="title-container">
+                    <div id="raspilogo" class="title-img">
+                        <img id="raspberry" src="img/raspilogo.png" alt="Raspberry Pi Logo">
+                    </div>
+                    <div class="title">RasPi Builds</div>
+                    <div class="title-desc">
+                        Inspiration for projects using Raspberry Pi
+                    </div>
                 </div>
             </div>
             <div class="nav">

@@ -142,6 +142,8 @@ function initPage() {
  */
 function initSelectedPage() {
     
+    initSignInPopup();
+    
     if (document.getElementById("page").className.indexOf("home") > -1) {
         document.title = "Home | RasPi Builds";
         document.getElementById("home-tab-connector").className = "";
@@ -185,6 +187,15 @@ function initSlideToggleParagraphs() {
         $("#whatis-raspibuilds-heading").click(function(){
             $("#whatis-raspibuilds-para").slideToggle();
         });
+    });
+}
+
+function initSignInPopup() {
+    
+    $(document).ready(function() {
+       
+        $('#signin-popup').popup();
+        
     });
 }
 

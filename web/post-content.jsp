@@ -6,6 +6,23 @@
          app pages. This file begins inside the content div and
          finishes with an html close tag.
 --%>
+                <div id="signin-popup" class="well raspi-popup">
+                    <h3>Sign in to your account</h3>
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                <input type="email" class="form-control" id="signin-email" placeholder="Email address">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                <input type="password" class="form-control" id="signin-pw" placeholder="Password">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Sign in</button>
+                        <button type="button" class="signin-popup_close btn btn-default">Close</button>
+                    </form>
+                </div>
                 <hr/>
                 <span class="theme-chooser">
                     Theme: 

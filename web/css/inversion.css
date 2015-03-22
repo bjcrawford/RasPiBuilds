@@ -61,6 +61,31 @@ body {
     min-width: 750px;
 }
 
+.header {
+    position: relative;
+}
+
+.signin-container {
+    display: table;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.signin-content {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .title-container {
     color: white;
     font-size: 19px;
