@@ -36,6 +36,9 @@
                         <a href="#signin-popup" class="signin-popup_open">
                             <button type="button" class="btn btn-success btn-lg">Sign In</button>
                         </a>
+                        <a href="insertUser.jsp">
+                            <button type="button" class="btn btn-default btn-lg">Sign Up</button>
+                        </a>
                     </div>
                 </div>
                 <div class="title-container">
