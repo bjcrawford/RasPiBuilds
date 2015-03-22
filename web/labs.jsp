@@ -94,6 +94,11 @@
                             <a href="insertOther.jsp">
                                 Submit a Project
                             </a>
+                            , Added a 
+                            <a href="http://www.scriptiny.com/2010/02/javascript-wysiwyg-editor/">
+                                WYSIWYG Editor
+                            </a> 
+                            to the Submit a Project page.
                             <br/>
                         </p>
                     </div>
