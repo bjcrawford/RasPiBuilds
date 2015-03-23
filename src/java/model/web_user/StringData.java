@@ -11,6 +11,7 @@ public class StringData {
     public String membershipFee = "";
     public String userRoleId = "";
     public String recordStatus = "default"; // will be used later when doing ajax
+    public String errorMsg = "";
 
     /**
      * @return the webUserId
