@@ -164,6 +164,12 @@
                     <span id="contact-tab-connector" class="tab-connector-unselected"></span>
                     <span class="tab-divider"></span>
                 </div>
+                <div id="membersOnly" class="tab">
+                    <a href="membersOnly.jsp"><span class="tab-link"></span></a>
+                    Members
+                    <span id="members-tab-connector" class="tab-connector-unselected"></span>
+                    <span class="tab-divider"></span>
+                </div>
                 <div id="labs" class="tab tab-with-dropdown">
                     
                     <a href="labs.jsp"><span class="tab-link"></span></a>

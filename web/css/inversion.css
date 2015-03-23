@@ -150,7 +150,7 @@ body {
     float: left;
     position: relative;
     padding: 10px;
-    width: 14.2857%;
+    width: 12.5%; //14.2857%;
     min-width: 98px; 
     color: #76a928;
     font-size: 18px;

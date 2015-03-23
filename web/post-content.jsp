@@ -17,7 +17,7 @@
                 
                 <div id="signin-popup" class="well raspi-popup">
                     <h3>Sign in to your account</h3>
-                    <form method="post">
+                    <form method="post" action="index.jsp">
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>

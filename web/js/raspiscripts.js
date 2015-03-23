@@ -170,6 +170,10 @@ function initSelectedPage() {
         document.title = "Contact | RasPi Builds";
         document.getElementById("contact-tab-connector").className = "";
     }
+    else if (document.getElementById("page").className.indexOf("members") > -1) {
+        document.title = "Members | RasPi Builds";
+        document.getElementById("members-tab-connector").className = "";
+    }
     else if (document.getElementById("page").className.indexOf("labs") > -1) {
         document.title = "Labs | RasPi Builds";
         document.getElementById("labs-tab-connector").className = "";
