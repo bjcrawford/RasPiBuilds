@@ -7,6 +7,8 @@
          and finishes inside an opened head tag.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.web_user.*" %>   
+<%@page import="sql.DbConn"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,18 +28,92 @@
         <title></title>
     </head>   
     <body onLoad="initializeCanvas();">
+        
+        <%
+            // variables to persist user entered data and give sign on success/failure message
+            String strUserEmail = "";
+            String strUserPw = "";
+            String signInMsg = "";
+            
+            StringData signedInWebUser;
+
+            //  Variables for the sign in/welcome content visiblity classes
+            String signInVisibilityClass = "signin-content-visible";
+            String welcomeVisibilityClass = "welcome-content-invisible";
+            
+            if ((signedInWebUser = (StringData) session.getAttribute("webUser")) != null) { // Web user is already signed in
+                signInVisibilityClass = "signin-content-invisible";
+                welcomeVisibilityClass = "welcome-content-visible";
+                String welcomeName = signedInWebUser.userName.equals("") ? signedInWebUser.userEmail : signedInWebUser.userName;
+                signInMsg = "Welcome, " + welcomeName + "</br>";
+            }
+            else { // Web user is not signed in, check for postback from sign in form
+
+                if (request.getParameter("signin-email") != null) { // postback
+
+                    strUserEmail = request.getParameter("signin-email");
+                    strUserPw = request.getParameter("signin-pw");
+                    DbConn dbc = new DbConn();
+
+                    // put database connection error message to be displayed
+                    // it will be "" empty string if no error.
+                    signInMsg = dbc.getErr();
+                    if (signInMsg.length() == 0) { // no error message -- database connection worked
+
+                        // pass in user's email address and password (along with open db connection)
+                        // to find method. The find method will return null if not found, else
+                        // it will return a web user StringData object. 
+                        signedInWebUser = WebUserMods.find(dbc, strUserEmail, strUserPw);
+                        
+                        if (signedInWebUser == null) { // Web users's credentials were not found
+                            signInMsg = "<span style=\"color: red;\">Invalid email or password</span></br>";
+                            try {
+                                //session.invalidate();
+                            } catch (Exception e) {
+                                // don't care. If session was already invalidated, then I dont 
+                                // need to do anything.
+                            }
+                        }
+                        else if (signedInWebUser.errorMsg.length() > 0) { // Exception thrown in the find method
+                            // Normally would not get this unless program has a bug.
+                            signInMsg = "Error " + signedInWebUser.errorMsg + "</br>";
+                        } 
+                        else { // Web user signed in sucessfully
+                            String welcomeName = signedInWebUser.userName.equals("") ? signedInWebUser.userEmail : signedInWebUser.userName;
+                            signInMsg = "Welcome, " + welcomeName + "</br>";
+
+                            // put object signedInWebUser into the session, giving it the name
+                            // "web_user" (you need to use this name, later to pull the object
+                            // back out of the session.
+                            session.setAttribute("webUser", signedInWebUser);
+                            
+                            signInVisibilityClass = "signin-content-invisible";
+                            welcomeVisibilityClass = "welcome-content-visible";
+                        }
+                    }
+                }
+            }
+        %>
+        
         <canvas id="pacman-canvas"></canvas>
         <button id="pacman-exit-button">Exit</button>
         <br/>
         <div class="container">
             <div class="header">
                 <div class="signin-container">
-                    <div class="signin-content">
+                    <div class="signin-content <%=signInVisibilityClass%>">
+                        <%=signInMsg%>
                         <a href="#signin-popup" class="signin-popup_open">
                             <button type="button" class="btn btn-success btn-lg">Sign In</button>
                         </a>
                         <a href="insertUser.jsp">
                             <button type="button" class="btn btn-default btn-lg">Sign Up</button>
+                        </a>
+                    </div>
+                    <div class="welcome-content <%=welcomeVisibilityClass%>">
+                        <%=signInMsg%>
+                        <a href="signout.jsp">
+                            <button type="button" class="btn btn-default btn-lg">Sign Out</button>
                         </a>
                     </div>
                 </div>

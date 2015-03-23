@@ -6,20 +6,26 @@
          app pages. This file begins inside the content div and
          finishes with an html close tag.
 --%>
+<%
+    String strUserEmail = "";
+    if (request.getParameter("signin-email") != null) { 
+        strUserEmail = request.getParameter("signin-email");
+    }
+%>
  
                 <!-- Hidden popups -->
                 
                 <div id="signin-popup" class="well raspi-popup">
                     <h3>Sign in to your account</h3>
-                    <form>
+                    <form method="post">
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                <input type="email" class="form-control" id="signin-email" placeholder="Email address">
+                                <input type="email" class="form-control" name="signin-email" id="signin-email" placeholder="Email address" value="<%=strUserEmail%>">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-lock" aria-hidden="true"></span>
-                                <input type="password" class="form-control" id="signin-pw" placeholder="Password">
+                                <input type="password" class="form-control" name="signin-pw" id="signin-pw" placeholder="Password">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Sign in</button>
