@@ -29,7 +29,7 @@ public class WebUserView {
         ResultSet results = null;
         try {
             String sql = "select "
-                    + "wu.web_user_id, wu.user_email, wu.user_password, "
+                    + "wu.web_user_id, wu.user_email, wu.user_password, wu.user_password_encr, "
                     + "wu.membership_fee, wu.user_role_id, wu.birthday, "
                     + "wu.user_name, ur.user_role_id, ur.role_name "
                     + "from "
@@ -46,8 +46,9 @@ public class WebUserView {
                     + "\t\t\t\t\t\t\t<tr>"
                     + "<th style='text-align:center'>User Email</th>"
                     + "<th style='text-align:center'>User Name</th>"
-                    + "<th style='text-align:center'>User Password</th>"
-                    + "<th style='text-align:center'>Membership Fee</th>"
+                    + "<th style='text-align:center'>User Pw</th>"
+                    + "<th style='text=align:center'>User Pw (Encr)</th>"
+                    + "<th style='text-align:center'>Fee</th>"
                     + "<th style='text-align:center'>User Role</th>"
                     + "<th style='text-align:center'>Birthday</th>"
                     + "</tr>";
@@ -56,6 +57,7 @@ public class WebUserView {
                         + FormatUtils.formatStringTd(results.getObject("user_email"))
                         + FormatUtils.formatStringTd(results.getObject("user_name"))
                         + FormatUtils.formatStringTd(results.getObject("user_password"))
+                        + FormatUtils.formatStringTd(results.getObject("user_password_encr"))
                         + FormatUtils.formatDollarTd(results.getObject("membership_fee"))
                         + FormatUtils.formatStringTd(results.getObject("role_name"))
                         + FormatUtils.formatDateTd(results.getObject("birthday"))

@@ -3,6 +3,7 @@ package model.web_user;
 import sql.PrepStatement;
 import sql.DbConn;
 import java.sql.*;
+import encryption.Encryption;
 
 /**
  * This class contains all code that modifies records in a table in the
@@ -45,17 +46,18 @@ public class WebUserMods {
         }
 
         TypedData wuTypedData = (TypedData) wuValidate.getTypedData();
-        String sql = "INSERT INTO web_user (user_email, user_password, " +
+        String sql = "INSERT INTO web_user (user_email, user_password, user_password_encr, " +
                 "user_name, birthday, membership_fee, user_role_id) " +
-                "VALUES (?,?,?,?,?,?)";
+                "VALUES (?,?,?,?,?,?,?)";
         try {
             PrepStatement pStat = new PrepStatement(dbc, sql);   
             pStat.setString     (1, wuTypedData.getUserEmail());
             pStat.setString     (2, wuTypedData.getUserPw());
-            pStat.setString     (3, wuTypedData.getUserName());
-            pStat.setDate       (4, wuTypedData.getBirthday());
-            pStat.setBigDecimal (5, wuTypedData.getMembershipFee());
-            pStat.setInt        (6, wuTypedData.getUserRoleId());
+            pStat.setString     (3, Encryption.encryptPw(wuTypedData.getUserPw()));
+            pStat.setString     (4, wuTypedData.getUserName());
+            pStat.setDate       (5, wuTypedData.getBirthday());
+            pStat.setBigDecimal (6, wuTypedData.getMembershipFee());
+            pStat.setInt        (7, wuTypedData.getUserRoleId());
             this.errorMsg = pStat.getAllErrors();
             if (this.errorMsg.length() != 0) {
                 return this.errorMsg;
@@ -113,17 +115,19 @@ public class WebUserMods {
      */
     public static StringData find(DbConn dbc, String userEmail, String userPassword) {
         StringData foundCust = new StringData();
+        
+        String userPasswordEncr = Encryption.encryptPw(userPassword);
 
         PreparedStatement stmt;
         ResultSet results;
         try {
             String sql = "select web_user_id, user_email, user_name, " +
                     "birthday, membership_fee, user_role_id from web_user " +
-                    "where user_email = ? and user_password = ?";
+                    "where user_email = ? and user_password_encr = ?";
 
             stmt = dbc.getConn().prepareStatement(sql);
             stmt.setString(1, userEmail);
-            stmt.setString(2, userPassword);
+            stmt.setString(2, userPasswordEncr);
 
             results = stmt.executeQuery();
 
