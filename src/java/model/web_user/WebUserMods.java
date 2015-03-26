@@ -106,7 +106,9 @@ public class WebUserMods {
      * Returns a StringData (web_user) object if one exists in the database
      * with the given email address and password. Otherwise, null is returned.
      * If an exception is thrown, the error message will be stored in the 
-     * returned StringData object (errorMsg property).
+     * returned StringData object (errorMsg property). This method encrypts
+     * the plaintext password received and compares it against the encrypted
+     * password stored in the web user table of the database.
      * 
      * @param dbc the database connection
      * @param userEmail the user email address

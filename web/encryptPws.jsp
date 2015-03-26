@@ -1,9 +1,11 @@
-<%-- 
-    Document   : encryptPws
-    Created on : Mar 25, 2015, 9:59:57 AM
-    Author     : Brett Crawford <brett.crawford@temple.edu>
---%>
-
+<!--
+ Author: Brett Crawford <brett.crawford@temple.edu>
+ File:   encryptPws.jsp
+ Date:   Jan 28, 2015
+ Desc:   This is a one time use file for encrypting all of the plaintext
+         passwords in the web user table of the database into a separate
+         column.
+-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 

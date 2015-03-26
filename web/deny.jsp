@@ -11,7 +11,6 @@
         msg = request.getParameter("denyMsg");
     }
 %>
-
 <jsp:include page="pre-content.jsp"></jsp:include> 
             <div class="content">
                 <div id="page" class="members" display="none"></div>

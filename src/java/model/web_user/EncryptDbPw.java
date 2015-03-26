@@ -2,7 +2,9 @@
  *  Author: Brett Crawford <brett.crawford@temple.edu>
  *  File:   EncryptDbPw.java
  *  Date:   Mar 25, 2015
- *  Desc:
+ *  Desc:   This is a one time use file for encrypting all of the plaintext
+ *          passwords in the web user table of the database into a separate
+ *          column.
  */
 package model.web_user;
 
@@ -12,10 +14,6 @@ import java.sql.ResultSet;
 import sql.DbConn;
 import encryption.Encryption;
 
-/**
- *
- * @author Brett Crawford <brett.crawford@temple.edu>
- */
 public class EncryptDbPw {
     
     public static String EncryptPws(DbConn dbc) {

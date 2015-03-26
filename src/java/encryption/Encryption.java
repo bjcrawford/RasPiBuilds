@@ -11,6 +11,11 @@ import sun.misc.BASE64Encoder;
 
 public class Encryption {
 
+    /**
+     * Encrypts the given plaintext using a base 64 encryption scheme.
+     * @param plaintext The text to encrypt.
+     * @return The encrypted text.
+     */
   public static String encryptPw(String plaintext) {
     String encryptedOrMsg = "Not Encrypted Yet";
     MessageDigest md = null;
