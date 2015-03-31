@@ -4,6 +4,7 @@ import sql.PrepStatement;
 import sql.DbConn;
 import java.sql.*;
 import encryption.Encryption;
+import utils.FormatUtils;
 
 /**
  * This class contains all code that modifies records in a table in the
@@ -116,7 +117,7 @@ public class WebUserMods {
      * @return a StringData (web_user) object if found, otherwise null
      */
     public static StringData find(DbConn dbc, String userEmail, String userPassword) {
-        StringData foundCust = new StringData();
+        StringData foundUser = new StringData();
         
         String userPasswordEncr = Encryption.encryptPw(userPassword);
 
@@ -134,31 +135,161 @@ public class WebUserMods {
             results = stmt.executeQuery();
 
             if (results.next()) {
-                foundCust.webUserId = results.getString("web_user_id");
-                foundCust.userEmail = results.getString("user_email");
-                foundCust.userName = results.getString("user_name");
-                foundCust.birthday = results.getString("birthday");
-                foundCust.membershipFee = results.getString("membership_fee");
-                foundCust.userRoleId = results.getString("user_role_id");
+                foundUser.webUserId = results.getString("web_user_id");
+                foundUser.userEmail = results.getString("user_email");
+                foundUser.userName = results.getString("user_name");
+                foundUser.birthday = results.getString("birthday");
+                foundUser.membershipFee = results.getString("membership_fee");
+                foundUser.userRoleId = results.getString("user_role_id");
                 results.close();
                 stmt.close();
-                return foundCust;
+                return foundUser;
             } 
             else {
                 return null;
             }
         } catch (Exception e) {
-            foundCust.errorMsg = "Exception thrown in " +
-                    "modelCustomer.DbAccess.find(): " + e.getMessage();
-            return foundCust;
+            foundUser.errorMsg = "Exception thrown in " +
+                    "model.web_user.WebUserMods.find(DbConn dbc, String userEmail, String userPassword): " + e.getMessage();
+            return foundUser;
+        }
+    }    
+    
+    /**
+     * Returns a StringData (web_user) object if one exists in the database
+     * with the given user id. Otherwise, null is returned.
+     * If an exception is thrown, the error message will be stored in the 
+     * returned StringData object (errorMsg property).
+     * 
+     * @param dbc the database connection
+     * @param userId the user id
+     * @return a StringData (web_user) object if found, otherwise null
+     */
+    public static StringData find(DbConn dbc, String userId) {
+        
+        StringData foundUser = new StringData();
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+            String sql = "select web_user_id, user_email, user_name, " +
+                    "birthday, membership_fee, user_role_id from web_user " +
+                    "where web_user_id = ?";
+
+            ps = dbc.getConn().prepareStatement(sql);
+            ps.setString(1, userId);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                foundUser.webUserId = rs.getString("web_user_id");
+                foundUser.userEmail = rs.getString("user_email");
+                foundUser.userName = rs.getString("user_name");
+                foundUser.birthday = FormatUtils.formatDate(rs.getObject("birthday"));
+                foundUser.membershipFee = rs.getString("membership_fee");
+                foundUser.userRoleId = rs.getString("user_role_id");
+                rs.close();
+                ps.close();
+                return foundUser;
+            } 
+            else {
+                return null;
+            }
+        } catch (Exception e) {
+            foundUser.errorMsg = "Exception thrown in " +
+                    "model.web_user.WebUserMods.find(DbConn dbc, String userId): " + e.getMessage();
+            return foundUser;
         }
     }
     
-    // a method to find a web user by web user id (instead of by email/pwd)
+    /**
+     * Updates a validated web user in the database. Returns an empty
+     * string on success. Otherwise, returns a descriptive error message.
+     * 
+     * @param wuValidate the web user validated object
+     * @return empty string on success, otherwise an error message
+     */
+    public String update(Validate wuValidate) {
+
+        this.errorMsg = "";
+        this.debugMsg = "";
+
+        if (!wuValidate.isValidated()) {
+            this.errorMsg = "Cannot update due to validation errors. " +
+                    "Please try again.";
+            return this.errorMsg;
+        }
+
+        TypedData wuTypedData = (TypedData) wuValidate.getTypedData();
+        String sql = "UPDATE web_user SET " + 
+                "user_email=?, " +
+                "user_password=?, " +
+                "user_password_encr=?, " +
+                "user_name=?, " +
+                "birthday=?, " + 
+                "membership_fee=?, " +
+                "user_role_id=? " +
+                "WHERE web_user_id=?";
+        try {
+            PrepStatement ps = new PrepStatement(dbc, sql);   
+            ps.setString     (1, wuTypedData.getUserEmail());
+            ps.setString     (2, wuTypedData.getUserPw());
+            ps.setString     (3, Encryption.encryptPw(wuTypedData.getUserPw()));
+            ps.setString     (4, wuTypedData.getUserName());
+            ps.setDate       (5, wuTypedData.getBirthday());
+            ps.setBigDecimal (6, wuTypedData.getMembershipFee());
+            ps.setInt        (7, wuTypedData.getUserRoleId());
+            ps.setInt        (8, wuTypedData.getWebUserId());
+            this.errorMsg = ps.getAllErrors();
+            if (this.errorMsg.length() != 0) {
+                return this.errorMsg;
+            }
+
+            try {
+                int numRows = ps.getPreparedStatement().executeUpdate();
+                if (numRows == 1) {
+                    return "";
+                } 
+                else {
+                    this.errorMsg = "Error: " + numRows +
+                            " records were updated (when only 1 was expected).";
+                    return this.errorMsg;
+                }
+            }
+            catch (SQLException e) {
+                if (e.getSQLState().equalsIgnoreCase("S1000")) {
+                    this.errorMsg = "Cannot insert: a record with that ID " +
+                            "already exists.";
+                } 
+                else if (e.getMessage().toLowerCase().contains("duplicate entry")) {
+                    this.errorMsg = "Cannot insert: a record with that email " +
+                            "address already exists.";
+                } 
+                else if (e.getMessage().toLowerCase().contains("foreign key")) {
+                    this.errorMsg = "Cannot insert: user role does not exist.";
+                } 
+                else {
+                    this.errorMsg = "WebUserMods.update: SQL Exception while " +
+                            "attempting update. SQLState:" + e.getSQLState() +
+                            ", Error message: " + e.getMessage();
+                }
+                return this.errorMsg;
+            }
+            catch (Exception e) {
+                this.errorMsg = "WebUserMods.update: General Exception during update operation. "
+                        + e.getMessage();
+                System.out.println(this.errorMsg);
+                return this.errorMsg;
+            }
+        }
+        catch (Exception e) {
+            this.errorMsg = "WebUserMods.update: Problem preparing statement (and/or substituting parameters). "
+                    + e.getMessage();
+            System.out.println(this.errorMsg);
+            return this.errorMsg;
+        }
+    }
     
-    // a method to insert a web user record
     
     // a method to delete a web user record
     
-    // a method to update a web user record
 }

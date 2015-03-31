@@ -6,6 +6,18 @@
  *          purposes within the web app.
  */
 
+
+// Some global values to allow for aynchronous calls
+var httpReq;
+if (window.XMLHttpRequest) {
+    httpReq = new XMLHttpRequest(); //For Firefox, Safari, Opera
+}
+else if (window.ActiveXObject) {
+    httpReq = new ActiveXObject("Microsoft.XMLHTTP"); //For IE 5+
+} else {
+    alert('ajax not supported');
+}
+
 /**
  * Enables/disables the user type radio buttons on the contact
  * page depending on the status of the registered user check box.
@@ -161,6 +173,7 @@ function initSelectedPage() {
     else if (document.getElementById("page").className.indexOf("users") > -1) {
         document.title = "Users | RasPi Builds";
         document.getElementById("users-tab-connector").className = "";
+        initUsersPopup();
     }
     else if (document.getElementById("page").className.indexOf("search") > -1) {
         document.title = "Search | RasPi Builds";
@@ -181,6 +194,10 @@ function initSelectedPage() {
     }
 }
 
+/**
+ * Initializes the slide toggle functionality on the index page paragraphs.
+ * @returns {undefined}
+ */
 function initSlideToggleParagraphs() {
     $(document).ready(function(){
         $("#whatis-raspberrypi-heading").click(function(){
@@ -194,6 +211,10 @@ function initSlideToggleParagraphs() {
     });
 }
 
+/**
+ * Initializes the sign in popup
+ * @returns {undefined}
+ */
 function initSignInPopup() {
     
     $(document).ready(function() {
@@ -203,6 +224,10 @@ function initSignInPopup() {
     });
 }
 
+/**
+ * Initializes the image popups on the index page
+ * @returns {undefined}
+ */
 function initHomePopups() {
     
     $(document).ready(function() {
@@ -213,8 +238,35 @@ function initHomePopups() {
     });
 }
 
+/**
+ * Initializes the user update popup
+ * @returns {undefined}
+ */
+function initUsersPopup() {
+    
+    $(document).ready(function() {
+        $('#userupdate-popup').popup({
+            onopen: function() {
+                
+                // Clear any data from previous populations
+                $('#updateuser-id').html("");
+                document.updateuserform.userId.value = "";
+                document.updateuserform.userEmail.value = "";
+                document.updateuserform.userPw.value = "";
+                document.updateuserform.userPw2.value = "";
+                document.updateuserform.userName.value = "";
+                document.updateuserform.birthday.value = "";
+                document.updateuserform.membershipFee.value = "";
+                document.updateuserform.userRoleId.value = "";
+            }
+        });
+    });
+}
 
-
+/**
+ * Initializes the image popup on the labs page
+ * @returns {undefined}
+ */
 function initLabsPopups() {
     
     $(document).ready(function() {
@@ -223,4 +275,64 @@ function initLabsPopups() {
 
     });
 }
+function openUserUpdatePopup(shouldOpen) {
+    
+    if (shouldOpen) {
+        $('#userupdate-popup').popup('show');
+    }
+}
 
+function requestUserInfoById(userId) {
+    httpReq.open("post", "getUserJSON.jsp?userId=" + userId);
+    httpReq.onreadystatechange = handleUserInfoByIdResponse;
+    httpReq.send(null);
+}
+
+function handleUserInfoByIdResponse() {
+
+    if (httpReq.readyState == 4 && httpReq.status == 200) {
+        
+        var userObj = eval(httpReq.responseText);
+
+        // Persist form data
+        $('#updateuser-id').html(userObj.webUserId);
+        document.updateuserform.userId.value = userObj.webUserId;
+        document.updateuserform.userEmail.value = userObj.userEmail;
+        document.updateuserform.userPw.value = "";
+        document.updateuserform.userPw2.value = "";
+        if (userObj.userName != "null") {
+            document.updateuserform.userName.value = userObj.userName;
+        }
+        if (userObj.birthday != "null") {
+            document.updateuserform.birthday.value = userObj.birthday;
+        }
+        if (userObj.membershipFee != "null") {
+            document.updateuserform.membershipFee.value = userObj.membershipFee;
+        }
+        document.updateuserform.userRoleId.value = userObj.userRoleId;
+
+        // Clear all css error classes
+        $('#userupdate-emailgroup').attr("class", "form-group");
+        $('#userupdate-pwgroup').attr("class", "form-group");
+        $('#userupdate-pw2group').attr("class", "form-group");
+        $('#userupdate-namegroup').attr("class", "form-group");
+        $('#userupdate-birthdaygroup').attr("class", "form-group");
+        $('#userupdate-membershipfeegroup').attr("class", "form-group");
+        $('#userupdate-roleidgroup').attr("class", "form-group");
+        
+        // Clear all error msgs
+        $('#userupdate-emailmsg').html("");
+        $('#userupdate-pwmsg').html("");
+        $('#userupdate-pw2msg').html("");
+        $('#userupdate-namemsg').html("");
+        $('#userupdate-birthdaymsg').html("");
+        $('#userupdate-membershipfeemsg').html("");
+        $('#userupdate-roleidmsg').html("");
+
+    }
+    else {
+        //alert("Response error\n" + 
+        //        "Status: " + httpReq.status +
+        //        "Status Text: " + httpReq.statusText);
+    }
+}
