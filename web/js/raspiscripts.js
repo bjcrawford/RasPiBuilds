@@ -14,7 +14,8 @@ if (window.XMLHttpRequest) {
 }
 else if (window.ActiveXObject) {
     httpReq = new ActiveXObject("Microsoft.XMLHTTP"); //For IE 5+
-} else {
+} 
+else {
     alert('ajax not supported');
 }
 
@@ -128,12 +129,18 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-
+/**
+ * Shows the value of a given cookie name in an alert. For debugging.
+ * 
+ * @param {String} name
+ */
 function showCookie(name) {
+    
     var cookieVal = readCookie(name);
     if (cookieVal === null) {
         alert ("No cookie value was stored with name " + name);
-    } else {
+    } 
+    else {
         alert ("The cookie named " + name + " has value " + cookieVal);
     }
 }
@@ -141,7 +148,6 @@ function showCookie(name) {
 /**
  * Calls the neccessary functions for page initialization. Called
  * from the close of every page.
- * @returns {undefined}
  */
 function initPage() {
     checkAndSetTheme();
@@ -196,7 +202,6 @@ function initSelectedPage() {
 
 /**
  * Initializes the slide toggle functionality on the index page paragraphs.
- * @returns {undefined}
  */
 function initSlideToggleParagraphs() {
     $(document).ready(function(){
@@ -212,8 +217,7 @@ function initSlideToggleParagraphs() {
 }
 
 /**
- * Initializes the sign in popup
- * @returns {undefined}
+ * Initializes the sign in popup.
  */
 function initSignInPopup() {
     
@@ -225,22 +229,20 @@ function initSignInPopup() {
 }
 
 /**
- * Initializes the image popups on the index page
- * @returns {undefined}
+ * Initializes the image popups on the index page.
  */
 function initHomePopups() {
     
     $(document).ready(function() {
 
         $('#rp-img1-popup').popup();
-
         $('#rp-img2-popup').popup();
     });
 }
 
 /**
- * Initializes the user update popup
- * @returns {undefined}
+ * Initializes the user update popup. Sets an onOpen listener function
+ * to clear any data when the popup is opened.
  */
 function initUsersPopup() {
     
@@ -248,7 +250,7 @@ function initUsersPopup() {
         $('#userupdate-popup').popup({
             onopen: function() {
                 
-                // Clear any data from previous populations
+                // Clear any previous data
                 $('#updateuser-id').html("");
                 document.updateuserform.userId.value = "";
                 document.updateuserform.userEmail.value = "";
@@ -264,8 +266,7 @@ function initUsersPopup() {
 }
 
 /**
- * Initializes the image popup on the labs page
- * @returns {undefined}
+ * Initializes the image popup on the labs page.
  */
 function initLabsPopups() {
     
@@ -275,6 +276,13 @@ function initLabsPopups() {
 
     });
 }
+
+/**
+ * Opens the user update form on the users page if passed true, Otherwise,
+ * does nothing.
+ * 
+ * @param {boolean} shouldOpen
+ */
 function openUserUpdatePopup(shouldOpen) {
     
     if (shouldOpen) {
@@ -282,19 +290,30 @@ function openUserUpdatePopup(shouldOpen) {
     }
 }
 
+/**
+ * Sends a request to the getUserJSON.jsp page for user information for a 
+ * given id. Responses are sent to the handleUserInfoByIdResponse() method.
+ * 
+ * @param {int} userId
+ */
 function requestUserInfoById(userId) {
     httpReq.open("post", "getUserJSON.jsp?userId=" + userId);
     httpReq.onreadystatechange = handleUserInfoByIdResponse;
     httpReq.send(null);
 }
 
+/**
+ * Handles receiving a response from a request for user information by id.
+ * Populates fields on the user update form with non-null data, removes any 
+ * css error classes, and clears any error messages.
+ */
 function handleUserInfoByIdResponse() {
 
     if (httpReq.readyState == 4 && httpReq.status == 200) {
         
         var userObj = eval(httpReq.responseText);
 
-        // Persist form data
+        // Populate form data
         $('#updateuser-id').html(userObj.webUserId);
         document.updateuserform.userId.value = userObj.webUserId;
         document.updateuserform.userEmail.value = userObj.userEmail;
