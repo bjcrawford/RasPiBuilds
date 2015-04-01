@@ -11,6 +11,10 @@
 <%@page language="java" import="sql.DbConn" %>
 <%@page language="java" import="view.WebUserView" %>
 <%
+    // The user table
+    String userTableOrError = "";
+    
+    // Objects for the update functionality
     StringData wuStringData = new StringData();
     Validate wuValidate = new Validate();
 
@@ -30,38 +34,34 @@
     String userRoleIdErrorClass = "";
     String submitSuccessClass = "";
 
+    // Default value for role id select
     int roleId = 1;
+    
+    // Don't automatically show user update popup on first load
     boolean shouldOpenPopup = false;
     
     DbConn dbc = new DbConn();
-    String userTableOrError = dbc.getErr();
-    if (userTableOrError.length() == 0) { 
-        String classes = "user-table table table-striped table-bordered";
-        userTableOrError = WebUserView.makeTableFromAllUsers(classes, dbc);
-    }
+    if (dbc.getErr().length() == 0) { 
     
-    if (request.getParameter("userId") != null) { // Postback, perform update
-        
-        // Fill WebUserData object with form data (form data is always String)
-        wuStringData.webUserId = request.getParameter("userId");
-        wuStringData.userEmail = request.getParameter("userEmail");
-        wuStringData.userPw = request.getParameter("userPw");
-        wuStringData.userPw2 = request.getParameter("userPw2");
-        wuStringData.userName = request.getParameter("userName");
-        wuStringData.birthday = request.getParameter("birthday");
-        wuStringData.membershipFee = request.getParameter("membershipFee");
-        wuStringData.userRoleId = request.getParameter("userRoleId");
-        roleId = Integer.decode(wuStringData.userRoleId);
-        
-    
-        // Validate user input, set error messages.
-        wuValidate = new Validate(wuStringData);
+        if (request.getParameter("userId") != null) { // Postback, perform update
+            
+            // Populate StringData object with posted params
+            wuStringData.webUserId = request.getParameter("userId");
+            wuStringData.userEmail = request.getParameter("userEmail");
+            wuStringData.userPw = request.getParameter("userPw");
+            wuStringData.userPw2 = request.getParameter("userPw2");
+            wuStringData.userName = request.getParameter("userName");
+            wuStringData.birthday = request.getParameter("birthday");
+            wuStringData.membershipFee = request.getParameter("membershipFee");
+            wuStringData.userRoleId = request.getParameter("userRoleId");
+            roleId = Integer.decode(wuStringData.userRoleId);
 
-        if (wuValidate.isValidated()) { // data is good, proceed to try to update
+            // Validate user input, set error messages.
+            wuValidate = new Validate(wuStringData);
 
-            if (msg.length() == 0) { // means no error getting db connection
+            if (wuValidate.isValidated()) {
 
-                // Instantiate Web User Mod object and pass validated String Data to its insert method
+                // Instantiate WebUserMods object and pass validated StringData to its update method
                 WebUserMods webUserMods = new WebUserMods(dbc);
                 msg = webUserMods.update(wuValidate);
 
@@ -69,51 +69,62 @@
                     msg = "Record " + wuStringData.userEmail + " updated. ";
                 }
             }
-        }
-        
-        // Check for error messages and set class error names accordingly
-        // My pages use the Bootstrap framework for error reporting
-        if (!wuValidate.getUserEmailMsg().equals("")) {
-            userEmailErrorClass = "has-error";
-        }
-        if (!wuValidate.getUserPwMsg().equals("")) {
-            userPwErrorClass = "has-error";
-        }
-        if (!wuValidate.getUserPw2Msg().equals("")) {
-            userPw2ErrorClass = "has-error";
-        }
-        if (!wuValidate.getMembershipFeeMsg().equals("")) {
-            membershipFeeErrorClass = "has-error";
-        }
-        if (!wuValidate.getUserRoleIdMsg().equals("")) {
-            userRoleIdErrorClass = "has-error";
-        }
-        if (!wuValidate.getBirthdayMsg().equals("")) {
-            birthdayErrorClass = "has-error";
-        }
-        
-        // Check for successful insert, on success display green text, on error display red text
-        if (msg.startsWith("Record") && msg.endsWith("updated.")) {
-            submitSuccessClass = "has-success";
-        }
-        else if (!msg.equals("")){
-            submitSuccessClass = "has-error";
-            if (msg.equals("Cannot update a record with that email address already exists.")) {
-                msg = "";
+
+            // Check for error messages and set class error names accordingly
+            // My pages use the Bootstrap framework for error reporting
+            if (!wuValidate.getUserEmailMsg().equals("")) {
                 userEmailErrorClass = "has-error";
-                wuValidate.setUserEmailMsg("Email address already exists. Please choose another.");
             }
+            if (!wuValidate.getUserPwMsg().equals("")) {
+                userPwErrorClass = "has-error";
+            }
+            if (!wuValidate.getUserPw2Msg().equals("")) {
+                userPw2ErrorClass = "has-error";
+            }
+            if (!wuValidate.getMembershipFeeMsg().equals("")) {
+                membershipFeeErrorClass = "has-error";
+            }
+            if (!wuValidate.getUserRoleIdMsg().equals("")) {
+                userRoleIdErrorClass = "has-error";
+            }
+            if (!wuValidate.getBirthdayMsg().equals("")) {
+                birthdayErrorClass = "has-error";
+            }
+
+            // Check for successful insert, on success display green text, on error display red text
+            if (msg.startsWith("Record") && msg.endsWith("updated.")) {
+                submitSuccessClass = "has-success";
+            }
+            else if (!msg.equals("")){
+                submitSuccessClass = "has-error";
+                if (msg.equals("Cannot update a record with that email address already exists.")) {
+                    msg = "";
+                    userEmailErrorClass = "has-error";
+                    wuValidate.setUserEmailMsg("Email address already exists. Please choose another.");
+                }
+            }
+
+            // If on postback, we want to open the popup automatically so the 
+            // user can see the persisted data or error messages associated
+            // with the update
+            shouldOpenPopup = true;
         }
         
-        // Need to figure out how to open the update user popup from here
-        shouldOpenPopup = true;
+        // Create the table of users
+        String classes = "user-table table table-striped table-bordered";
+        userTableOrError = WebUserView.makeTableFromAllUsers(classes, dbc);
+        
+        // Create the user role dropdown on user update form
+        userRoleSelectOrError = WebUserView.makeSelectFromUserRoles("form-control", dbc, roleId);
+        
+    }
+    else {
+        userTableOrError = dbc.getErr();
     }
     
     
     
     
-    // Create the user role dropdown on user update form
-    userRoleSelectOrError = WebUserView.makeSelectFromUserRoles("form-control", dbc, roleId);
     
     dbc.close();
 %>
