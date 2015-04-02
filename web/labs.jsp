@@ -32,9 +32,10 @@
                     <div class="indented-para">
                         <p>
                             <b>Home Page:</b>
-                            <a href="index.jsp">
-                                My Homepage
-                            </a>
+                            <a href="index.jsp">My Homepage</a>.
+                            If you click on an image or image link on the home page
+                            or labs page, it is displayed using a 
+                            <a href="http://dev.vast.com/jquery-popup-overlay/">jQuery Popup Overlay</a>.
                             <br/>
                         </p>
                     </div>
@@ -69,6 +70,11 @@
                             <a href="users.jsp">
                                 Users
                             </a>
+                            <br/>
+                            <b>Extra:</b>
+                            Used the 
+                            <a href="http://www.getbootstrap.com">Bootstrap</a>
+                            (a HTML, CSS, and JS framework) to style the site.
                         </p>
                     </div>
                     <h2>Lab 06 Search<a id="lab06"></a></h2>
@@ -104,7 +110,9 @@
                         <p>
                             <b>Sign In/Sign Off:</b> Any page (in the pre-content file). After 
                             successful or unsuccessful sign in, users are redirected to
-                            the index page.
+                            the index page. The sign on form is displayed using a 
+                            <a href="http://dev.vast.com/jquery-popup-overlay/">jQuery Popup Overlay</a>.
+                            
                             <br/>
                             <b>Members Only:</b>
                             <a href="membersOnly.jsp">Members Only</a>,
@@ -125,8 +133,24 @@
                             <br/>
                         </p>
                     </div>
-                    <h2>Lab 09 Insert Associative<a id="lab09"></a></h2>
-                    <h2>Lab 10 Update Ajax<a id="lab10"></a></h2>
+                    <h2>Lab 09 Update Ajax<a id="lab09"></a></h2>
+                    <div class="indented-para">
+                        <p>
+                            <b>Update User:</b>
+                            <a href="users.jsp">Users</a>,
+                            Click the pencil icon next to any record to update.
+                            <br/>
+                            <b>Update Project:</b>
+                            <a href="other.jsp">Projects</a>,
+                            Click the pencil icon next to any record to update. I
+                            had issues trying to get the WYSIWYG editor to work
+                            inside of the 
+                            <a href="http://dev.vast.com/jquery-popup-overlay/">jQuery Popup Overlay</a>
+                            that I used to display the update form. This will be addressed at a later time.
+                            <br/>
+                        </p>
+                    </div>
+                    <h2>Lab 10 Delete<a id="lab10"></a></h2>
                     <h2>Challenge<a id="challenge"></a></h2>
                     <div class="indented-para">
                         <p>

@@ -43,6 +43,7 @@ public class ProjectView {
             results = stmt.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
+                    + "<th style='text-align:center'>Edit</th>"
                     + "<th style='text-align:center'>Project Name</th>"
                     + "<th style='text-align:center'>Project Description</th>"
                     + "<th style='text-align:center'>Project Guidelines</th>"
@@ -51,6 +52,12 @@ public class ProjectView {
                     + "</tr>";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
+                        + "<td style='text-align:center; vertical-align: middle;'>"
+                        + "<a href=\"#projectupdate-popup\" class=\"projectupdate-popup_open\" "
+                        + "onclick=\"requestProjectInfoById("
+                        + results.getString("project_id") + ")\">"
+                        + "<span class=\"input-group-addon glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
+                        + "</a></td>"
                         + FormatUtils.formatStringTd(results.getObject("project_name"))
                         + FormatUtils.formatStringTd(results.getObject("project_desc"))
                         + FormatUtils.formatStringTd(results.getObject("project_guide"))

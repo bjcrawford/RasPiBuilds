@@ -9,6 +9,7 @@ public class StringData {
     public String projectImgUrl = "";
     public String projectCost = "";
     public String recordStatus = "default"; // will be used later when doing ajax
+    public String errorMsg = "";
 
     /**
      * @return the projectId

@@ -7,7 +7,7 @@ import encryption.Encryption;
 import utils.FormatUtils;
 
 /**
- * This class contains all code that modifies records in a table in the
+ * This class contains all code that modifies web user records in a table in the
  * database.
  */
 public class WebUserMods {
@@ -275,8 +275,8 @@ public class WebUserMods {
                 return this.errorMsg;
             }
             catch (Exception e) {
-                this.errorMsg = "WebUserMods.update: General Exception during update operation. "
-                        + e.getMessage();
+                this.errorMsg = "WebUserMods.update: General Exception during " +
+                        "update operation. " + e.getMessage();
                 System.out.println(this.errorMsg);
                 return this.errorMsg;
             }
@@ -288,7 +288,6 @@ public class WebUserMods {
             return this.errorMsg;
         }
     }
-    
     
     // a method to delete a web user record
     

@@ -54,7 +54,7 @@ public class WebUserView {
                     + "</tr>\n";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
-                        + "<td style='text-align:center'>"
+                        + "<td style='text-align:center; vertical-align: middle;'>"
                         + "<a href=\"#userupdate-popup\" class=\"userupdate-popup_open\" "
                         + "onclick=\"requestUserInfoById("
                         + results.getString("web_user_id") + ")\">"

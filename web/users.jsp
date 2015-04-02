@@ -24,6 +24,9 @@
     // The HTML code for the user role dropdown
     String userRoleSelectOrError = "";
     
+    // Default value for role id select
+    int roleId = 1;
+    
     // Class names for errors on form submission
     String userEmailErrorClass = "";
     String userPwErrorClass = "";
@@ -34,9 +37,6 @@
     String userRoleIdErrorClass = "";
     String submitSuccessClass = "";
 
-    // Default value for role id select
-    int roleId = 1;
-    
     // Don't automatically show user update popup on first load
     boolean shouldOpenPopup = false;
     
@@ -56,9 +56,7 @@
             wuStringData.userRoleId = request.getParameter("userRoleId");
             roleId = Integer.decode(wuStringData.userRoleId);
 
-            // Validate user input, set error messages.
             wuValidate = new Validate(wuStringData);
-
             if (wuValidate.isValidated()) {
 
                 // Instantiate WebUserMods object and pass validated StringData to its update method
@@ -91,7 +89,7 @@
                 birthdayErrorClass = "has-error";
             }
 
-            // Check for successful insert, on success display green text, on error display red text
+            // Check for successful update, on success display green text, on error display red text
             if (msg.startsWith("Record") && msg.endsWith("updated.")) {
                 submitSuccessClass = "has-success";
             }
@@ -122,10 +120,6 @@
         userTableOrError = dbc.getErr();
     }
     
-    
-    
-    
-    
     dbc.close();
 %>
 
@@ -146,9 +140,7 @@
                         <%=userTableOrError%>
                     </div>
                 </div>
-                    
                 <!-- Hidden user update popup -->    
-                    
                 <div id="userupdate-popup" class="well raspi-popup">
                     <h3>Update User - ID: <span id="updateuser-id"><%= wuStringData.webUserId%></span></h3>
                     <form name="updateuserform" action="users.jsp" method="post">

@@ -175,6 +175,7 @@ function initSelectedPage() {
     else if (document.getElementById("page").className.indexOf("projects") > -1) {
         document.title = "Projects | RasPi Builds";
         document.getElementById("projects-tab-connector").className = "";
+        initProjectPopup();
     }
     else if (document.getElementById("page").className.indexOf("users") > -1) {
         document.title = "Users | RasPi Builds";
@@ -238,6 +239,27 @@ function initHomePopups() {
         $('#rp-img1-popup').popup();
         $('#rp-img2-popup').popup();
     });
+}/**
+ * Initializes the project update popup. Sets an onOpen listener function
+ * to clear any data when the popup is opened.
+ */
+function initProjectPopup() {
+    
+    $(document).ready(function() {
+        $('#projectupdate-popup').popup({
+            onopen: function() {
+                
+                // Clear previous data
+                $('#updateproject-id').html("");
+                document.updateprojectform.projectName.value = "";
+                document.updateprojectform.projectDesc.value = "";
+                document.updateprojectform.projectGuide.value = "";
+                //pgTinyEditor.setEditorContent("");
+                document.updateprojectform.projectImgUrl.value = "";
+                document.updateprojectform.projectCost.value = "";
+            }
+        });
+    });
 }
 
 /**
@@ -250,7 +272,7 @@ function initUsersPopup() {
         $('#userupdate-popup').popup({
             onopen: function() {
                 
-                // Clear any previous data
+                // Clear previous data
                 $('#updateuser-id').html("");
                 document.updateuserform.userId.value = "";
                 document.updateuserform.userEmail.value = "";
@@ -287,6 +309,19 @@ function openUserUpdatePopup(shouldOpen) {
     
     if (shouldOpen) {
         $('#userupdate-popup').popup('show');
+    }
+}
+
+/**
+ * Opens the project update form on the projects page if passed true, Otherwise,
+ * does nothing.
+ * 
+ * @param {boolean} shouldOpen
+ */
+function openProjectUpdatePopup(shouldOpen) {
+    
+    if (shouldOpen) {
+        $('#projectupdate-popup').popup('show');
     }
 }
 
@@ -329,8 +364,8 @@ function handleUserInfoByIdResponse() {
             document.updateuserform.membershipFee.value = userObj.membershipFee;
         }
         document.updateuserform.userRoleId.value = userObj.userRoleId;
-
-        // Clear all css error classes
+              
+        // Clear css error classes
         $('#userupdate-emailgroup').attr("class", "form-group");
         $('#userupdate-pwgroup').attr("class", "form-group");
         $('#userupdate-pw2group').attr("class", "form-group");
@@ -338,8 +373,9 @@ function handleUserInfoByIdResponse() {
         $('#userupdate-birthdaygroup').attr("class", "form-group");
         $('#userupdate-membershipfeegroup').attr("class", "form-group");
         $('#userupdate-roleidgroup').attr("class", "form-group");
-        
-        // Clear all error msgs
+        $('#userupdate-submitgroup').attr("class", "form-group");
+
+        // Clear error msgs
         $('#userupdate-emailmsg').html("");
         $('#userupdate-pwmsg').html("");
         $('#userupdate-pw2msg').html("");
@@ -347,11 +383,61 @@ function handleUserInfoByIdResponse() {
         $('#userupdate-birthdaymsg').html("");
         $('#userupdate-membershipfeemsg').html("");
         $('#userupdate-roleidmsg').html("");
-
+        $('#userupdate-submitmsg').html("");
     }
-    else {
-        //alert("Response error\n" + 
-        //        "Status: " + httpReq.status +
-        //        "Status Text: " + httpReq.statusText);
+}
+
+/**
+ * Sends a request to the getProjectJSON.jsp page for project information for a 
+ * given id. Responses are sent to the handleProjectInfoByIdResponse() method.
+ * 
+ * @param {int} projectId
+ */
+function requestProjectInfoById(projectId) {
+    httpReq.open("post", "getProjectJSON.jsp?projectId=" + projectId);
+    httpReq.onreadystatechange = handleProjectInfoByIdResponse;
+    httpReq.send(null);
+}
+
+/**
+ * Handles receiving a response from a request for project information by id.
+ * Populates fields on the project update form with non-null data, removes any 
+ * css error classes, and clears any error messages.
+ */
+function handleProjectInfoByIdResponse() {
+
+    if (httpReq.readyState == 4 && httpReq.status == 200) {
+        
+        var projectObj = eval(httpReq.responseText);
+
+        // Populate form data
+        $('#updateproject-id').html(projectObj.projectId);
+        document.updateprojectform.projectId.value = projectObj.projectId;
+        document.updateprojectform.projectName.value = projectObj.projectName;
+        document.updateprojectform.projectDesc.value = projectObj.projectDesc;
+        document.updateprojectform.projectGuide.value = projectObj.projectGuide;
+        //pgTinyEditor.setEditorContent(projectObj.projectGuide);
+        if (projectObj.projectImgUrl != "null") {
+            document.updateprojectform.projectImgUrl.value = projectObj.projectImgUrl;
+        }
+        if (projectObj.projectCost != "null") {
+            document.updateprojectform.projectCost.value = projectObj.projectCost;
+        }
+                
+        // Clear css error classes
+        $('#projectupdate-namegroup').attr("class", "form-group");
+        $('#projectupdate-descgroup').attr("class", "form-group");
+        $('#projectupdate-guidegroup').attr("class", "form-group");
+        $('#projectupdate-imgurlgroup').attr("class", "form-group");
+        $('#projectupdate-costgroup').attr("class", "form-group");
+        $('#projectupdate-submitgroup').attr("class", "form-group");
+
+        // Clear error msgs
+        $('#projectupdate-namemsg').html("");
+        $('#projectupdate-descmsg').html("");
+        $('#projectupdate-guidemsg').html("");
+        $('#projectupdate-imgurlmsg').html("");
+        $('#projectupdate-costmsg').html("");
+        $('#projectupdate-submitmsg').html("");
     }
 }

@@ -100,7 +100,7 @@
                 <div id="page" class="projects" display="none"></div>
                 <div class="content-text">
                     <h1>Submit a Project</h1>
-                    <form name="insertOther" method="post" action="insertOther.jsp"  onsubmit="return pgTinyEditor.post();">
+                    <form name="insertOther" method="post" action="insertOther.jsp" onsubmit="return pgTinyEditor.post();">
                         <div class="form-group <%=projectNameErrorClass%>">
                             <label class="control-label" for="projectName">Project Name:</label>
                             <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%= pStringData.projectName%>"/>

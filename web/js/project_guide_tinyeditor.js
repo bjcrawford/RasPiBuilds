@@ -25,7 +25,7 @@ var pgTinyEditor = new TINY.editor.edit('editor',{
 	footer:true,
 	fonts:['Verdana','Arial','Georgia','Trebuchet MS'],
 	xhtml:true,
-	cssfile:'css/tinyeditor.style.css',
+	cssfile:'css/tinyeditor.css',
 	bodyid:'editor',
 	footerclass:'tefooter',
 	toggle:{text:'source',activetext:'wysiwyg',cssclass:'toggle'},
