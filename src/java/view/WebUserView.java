@@ -58,7 +58,9 @@ public class WebUserView {
                         + "<a href=\"#userupdate-popup\" class=\"userupdate-popup_open\" "
                         + "onclick=\"requestUserInfoById("
                         + results.getString("web_user_id") + ")\">"
-                        + "<span class=\"input-group-addon glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
+                        + "<button type=\"button\" class=\"btn btn-default\">"
+                        + "  <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
+                        + "</button>"
                         + "</a></td>"
                         + FormatUtils.formatStringTd(results.getObject("user_email"))
                         + FormatUtils.formatStringTd(results.getObject("user_name"))

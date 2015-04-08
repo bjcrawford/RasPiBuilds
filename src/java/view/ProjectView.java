@@ -56,7 +56,9 @@ public class ProjectView {
                         + "<a href=\"#projectupdate-popup\" class=\"projectupdate-popup_open\" "
                         + "onclick=\"requestProjectInfoById("
                         + results.getString("project_id") + ")\">"
-                        + "<span class=\"input-group-addon glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
+                        + "<button type=\"button\" class=\"btn btn-default\">"
+                        + "  <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
+                        + "</button>"
                         + "</a></td>"
                         + FormatUtils.formatStringTd(results.getObject("project_name"))
                         + FormatUtils.formatStringTd(results.getObject("project_desc"))
