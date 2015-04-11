@@ -42,7 +42,7 @@
                 // WebUserMods.find() is the method which verifies a user's credentials
                 signedInWebUser = WebUserMods.find(dbc, strUserEmail, strUserPw);
 
-                if (signedInWebUser == null) { // Web users's credentials were not found
+                if (signedInWebUser.errorMsg.equals("WebUserMods.find: Record not found")) {
                     signInMsg = "<span style=\"color: red;\">Invalid email or password</span></br>";
                     try {
                         session.invalidate();
