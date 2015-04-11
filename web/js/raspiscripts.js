@@ -171,16 +171,19 @@ function initSelectedPage() {
     else if (document.getElementById("page").className.indexOf("builds") > -1) {
         document.title = "Builds | RasPi Builds";
         document.getElementById("builds-tab-connector").className = "";
+        //initBuildDeletePopup();
     }
     else if (document.getElementById("page").className.indexOf("projects") > -1) {
         document.title = "Projects | RasPi Builds";
         document.getElementById("projects-tab-connector").className = "";
-        initProjectPopup();
+        initProjectUpdatePopup();
+        //initProjectDeletePopup();
     }
     else if (document.getElementById("page").className.indexOf("users") > -1) {
         document.title = "Users | RasPi Builds";
         document.getElementById("users-tab-connector").className = "";
-        initUsersPopup();
+        initUsersUpdatePopup();
+        initUsersDeletePopup();
     }
     else if (document.getElementById("page").className.indexOf("search") > -1) {
         document.title = "Search | RasPi Builds";
@@ -243,7 +246,7 @@ function initHomePopups() {
  * Initializes the project update popup. Sets an onOpen listener function
  * to clear any data when the popup is opened.
  */
-function initProjectPopup() {
+function initProjectUpdatePopup() {
     
     $(document).ready(function() {
         $('#projectupdate-popup').popup({
@@ -263,10 +266,30 @@ function initProjectPopup() {
 }
 
 /**
+ * Initializes the project delete popup. Sets an onOpen listener function
+ * to clear any data when the popup is opened.
+ */
+function initProjectDeletePopup() {
+    
+    $(document).ready(function() {
+        $('#projectdelete-popup').popup({
+            onopen: function() {
+                
+                // Clear previous data
+                $('#deleteproject-id').html("");
+                $('#deleteproject-name').html("");
+                document.deleteprojectform.deleteProjectId.value = "";
+                document.deleteprojectform.deleteProjectName.value = "";
+            }
+        });
+    });
+}
+
+/**
  * Initializes the user update popup. Sets an onOpen listener function
  * to clear any data when the popup is opened.
  */
-function initUsersPopup() {
+function initUsersUpdatePopup() {
     
     $(document).ready(function() {
         $('#userupdate-popup').popup({
@@ -282,6 +305,54 @@ function initUsersPopup() {
                 document.updateuserform.birthday.value = "";
                 document.updateuserform.membershipFee.value = "";
                 document.updateuserform.userRoleId.value = "";
+            }
+        });
+    });
+}
+
+/**
+ * Initializes the user update popup. Sets an onOpen listener function
+ * to clear any data when the popup is opened.
+ */
+function initUsersDeletePopup() {
+    
+    $(document).ready(function() {
+        $('#userdelete-popup').popup({
+            onopen: function() {
+                
+                // Clear previous data
+                $('#deleteuser-id').html("");
+                $('#deleteuser-email').html("");
+                document.deleteuserform.deleteUserId.value = "";
+                document.deleteuserform.deleteUserEmail.value = "";
+                
+                // Clear hidden confirmation elements
+                $('#userdelete-popup-confirm').removeClass("hidden");
+                $('#userdelete-submitbutton').removeClass("hidden");
+                $('#userdelete-cancelbutton').removeClass("hidden");
+        
+                // Clear submit button disabled attribute
+                $('#userdelete-submitbutton').removeAttr("disabled");
+            }
+        });
+    });
+}
+
+/**
+ * Initializes the build delete popup. Sets an onOpen listener function
+ * to clear any data when the popup is opened.
+ */
+function initBuildDeletePopup() {
+    
+    $(document).ready(function() {
+        $('#builddelete-popup').popup({
+            onopen: function() {
+                
+                // Clear previous data
+                $('#deletebuild-id').html("");
+                $('#deletebuild-name').html("");
+                document.deletebuildform.deleteBuildId.value = "";
+                document.deletebuildform.deleteBuildName.value = "";
             }
         });
     });
@@ -313,6 +384,19 @@ function openUserUpdatePopup(shouldOpen) {
 }
 
 /**
+ * Opens the user delete popup on the users page if passed true, Otherwise,
+ * does nothing.
+ * 
+ * @param {boolean} shouldOpen
+ */
+function openUserDeletePopup(shouldOpen) {
+    
+    if (shouldOpen) {
+        $('#userdelete-popup').popup('show');
+    }
+}
+
+/**
  * Opens the project update form on the projects page if passed true, Otherwise,
  * does nothing.
  * 
@@ -326,23 +410,24 @@ function openProjectUpdatePopup(shouldOpen) {
 }
 
 /**
- * Sends a request to the getUserJSON.jsp page for user information for a 
- * given id. Responses are sent to the handleUserInfoByIdResponse() method.
+ * Sends a request associated with an update to the getUserJSON.jsp page for 
+ * user information for a given id. Responses are sent to the 
+ * handleUpdateUserInfoByIdResponse() method.
  * 
  * @param {int} userId
  */
-function requestUserInfoById(userId) {
+function requestUpdateUserInfoById(userId) {
     httpReq.open("post", "getUserJSON.jsp?userId=" + userId);
-    httpReq.onreadystatechange = handleUserInfoByIdResponse;
+    httpReq.onreadystatechange = handleUpdateUserInfoByIdResponse;
     httpReq.send(null);
 }
 
 /**
- * Handles receiving a response from a request for user information by id.
- * Populates fields on the user update form with non-null data, removes any 
- * css error classes, and clears any error messages.
+ * Handles receiving a response from a request associated with a user update
+ * for user information by id. Populates fields on the user update form with 
+ * non-null data, removes any css error classes, and clears any error messages.
  */
-function handleUserInfoByIdResponse() {
+function handleUpdateUserInfoByIdResponse() {
 
     if (httpReq.readyState == 4 && httpReq.status == 200) {
         
@@ -352,8 +437,8 @@ function handleUserInfoByIdResponse() {
         $('#updateuser-id').html(userObj.webUserId);
         document.updateuserform.userId.value = userObj.webUserId;
         document.updateuserform.userEmail.value = userObj.userEmail;
-        document.updateuserform.userPw.value = "";
-        document.updateuserform.userPw2.value = "";
+        document.updateuserform.userPw.value = userObj.userPw;
+        document.updateuserform.userPw2.value = userObj.userPw;
         if (userObj.userName != "null") {
             document.updateuserform.userName.value = userObj.userName;
         }
@@ -386,6 +471,47 @@ function handleUserInfoByIdResponse() {
         $('#userupdate-submitmsg').html("");
     }
 }
+
+
+/**
+ * Sends a request associated with a delete to the getUserJSON.jsp page for 
+ * user information for a given id. Responses are sent to the 
+ * handleDeleteUserInfoByIdResponse() method.
+ * 
+ * @param {int} userId
+ */
+function requestDeleteUserInfoById(userId) {
+    httpReq.open("post", "getUserJSON.jsp?userId=" + userId);
+    httpReq.onreadystatechange = handleDeleteUserInfoByIdResponse;
+    httpReq.send(null);
+}
+
+/**
+ * Handles receiving a response from a request associated with a user delete
+ * for user information by id. Populates fields on the verify user delete form 
+ * with non-null data.
+ */
+function handleDeleteUserInfoByIdResponse() {
+
+    if (httpReq.readyState == 4 && httpReq.status == 200) {
+        
+        var userObj = eval(httpReq.responseText);
+        
+        // Populate form data
+        $('#deleteuser-id').html(userObj.webUserId);
+        $('#deleteuser-email').html(userObj.userEmail);
+        document.deleteuserform.deleteUserId.value = userObj.webUserId;
+        document.deleteuserform.deleteUserEmail.value = userObj.userEmail;
+        
+        // Clear css error classes
+        $('#userdelete-submitgroup').attr("class", "form-group");
+
+        // Clear error msgs
+        $('#userdelete-submitmsg').html("");
+        
+    }
+}
+
 
 /**
  * Sends a request to the getProjectJSON.jsp page for project information for a 

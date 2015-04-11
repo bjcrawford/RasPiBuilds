@@ -51,12 +51,13 @@ public class WebUserView {
                     + "<th style='text-align:center'>Fee</th>"
                     + "<th style='text-align:center'>User Role</th>"
                     + "<th style='text-align:center'>Birthday</th>"
+                    + "<th style='text-align:center'>Delete</th>"
                     + "</tr>\n";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
                         + "<td style='text-align:center; vertical-align: middle;'>"
                         + "<a href=\"#userupdate-popup\" class=\"userupdate-popup_open\" "
-                        + "onclick=\"requestUserInfoById("
+                        + "onclick=\"requestUpdateUserInfoById("
                         + results.getString("web_user_id") + ")\">"
                         + "<button type=\"button\" class=\"btn btn-default\">"
                         + "  <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
@@ -68,6 +69,14 @@ public class WebUserView {
                         + FormatUtils.formatDollarTd(results.getObject("membership_fee"))
                         + FormatUtils.formatStringTd(results.getObject("role_name"))
                         + FormatUtils.formatDateTd(results.getObject("birthday"))
+                        + "<td style='text-align:center; vertical-align: middle;'>"
+                        + "<a href=\"#userdelete-popup\" class=\"userdelete-popup_open\" "
+                        + "onclick=\"requestDeleteUserInfoById("
+                        + results.getString("web_user_id") + ")\">"
+                        + "<button type=\"button\" class=\"btn btn-default\">"
+                        + "  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>"
+                        + "</button>"
+                        + "</a></td>"
                         + "</tr>\n";
             }
             htmlTable += "\t\t\t\t\t\t</table>";
