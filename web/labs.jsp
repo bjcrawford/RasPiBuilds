@@ -151,6 +151,22 @@
                         </p>
                     </div>
                     <h2>Lab 10 Delete<a id="lab10"></a></h2>
+                    <div class="indented-para">
+                        <p>
+                            <b>Delete User:</b>
+                            <a href="users.jsp">Users</a>,
+                            Click the trash can icon next to any record to delete.
+                            <br/>
+                            <b>Delete Project:</b>
+                            <a href="other.jsp">Projects</a>,
+                            Click the trash can icon next to any record to delete.
+                            <br/>
+                            <b>Delete Build:</b>
+                            <a href="assoc.jsp">Builds</a>,
+                            Click the trash can icon next to any record to delete.
+                            <br/>
+                        </p>
+                    </div>
                     <h2>Challenge<a id="challenge"></a></h2>
                     <div class="indented-para">
                         <p>
