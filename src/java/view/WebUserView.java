@@ -25,8 +25,8 @@ public class WebUserView {
      */
     public static String makeTableFromAllUsers(String cssClassName, DbConn dbc) {
         String htmlTable = "";
-        PreparedStatement stmt = null;
-        ResultSet results = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             String sql = "select "
                     + "wu.web_user_id, wu.user_email, wu.user_password, wu.user_password_encr, "
@@ -40,8 +40,8 @@ public class WebUserView {
                     + "wu.user_role_id = ur.user_role_id "
                     + "order by "
                     + "wu.user_email";
-            stmt = dbc.getConn().prepareStatement(sql);
-            results = stmt.executeQuery();
+            ps = dbc.getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
                     + "<th style='text-align:center'>Edit</th>"
@@ -53,26 +53,26 @@ public class WebUserView {
                     + "<th style='text-align:center'>Birthday</th>"
                     + "<th style='text-align:center'>Delete</th>"
                     + "</tr>\n";
-            while (results.next()) {
+            while (rs.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
                         + "<td style='text-align:center; vertical-align: middle;'>"
                         + "<a href=\"#userupdate-popup\" class=\"userupdate-popup_open\" "
                         + "onclick=\"requestUpdateUserInfoById("
-                        + results.getString("web_user_id") + ")\">"
+                        + rs.getString("web_user_id") + ")\">"
                         + "<button type=\"button\" class=\"btn btn-default\">"
                         + "  <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
                         + "</button>"
                         + "</a></td>"
-                        + FormatUtils.formatStringTd(results.getObject("user_email"))
-                        + FormatUtils.formatStringTd(results.getObject("user_name"))
-                        + FormatUtils.formatStringTd(results.getObject("user_password"))
-                        + FormatUtils.formatDollarTd(results.getObject("membership_fee"))
-                        + FormatUtils.formatStringTd(results.getObject("role_name"))
-                        + FormatUtils.formatDateTd(results.getObject("birthday"))
+                        + FormatUtils.formatStringTd(rs.getObject("user_email"))
+                        + FormatUtils.formatStringTd(rs.getObject("user_name"))
+                        + FormatUtils.formatStringTd(rs.getObject("user_password"))
+                        + FormatUtils.formatDollarTd(rs.getObject("membership_fee"))
+                        + FormatUtils.formatStringTd(rs.getObject("role_name"))
+                        + FormatUtils.formatDateTd(rs.getObject("birthday"))
                         + "<td style='text-align:center; vertical-align: middle;'>"
                         + "<a href=\"#userdelete-popup\" class=\"userdelete-popup_open\" "
                         + "onclick=\"requestDeleteUserInfoById("
-                        + results.getString("web_user_id") + ")\">"
+                        + rs.getString("web_user_id") + ")\">"
                         + "<button type=\"button\" class=\"btn btn-default\">"
                         + "  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>"
                         + "</button>"
@@ -80,8 +80,8 @@ public class WebUserView {
                         + "</tr>\n";
             }
             htmlTable += "\t\t\t\t\t\t</table>";
-            results.close();
-            stmt.close();
+            rs.close();
+            ps.close();
             return htmlTable;
         } catch (Exception e) {
             return "Exception thrown in WebUserView.listAllUsers(): " + e.getMessage()

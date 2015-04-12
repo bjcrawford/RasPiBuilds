@@ -6,25 +6,24 @@
 
 <%
             String userId = request.getParameter("userId");
-            StringData userStringData = new StringData();
+            StringData wuStringData = new StringData();
             
             DbConn dbc = new DbConn();
-            String dbError = dbc.getErr();
             
-            if (dbError.length() != 0) {
-                userStringData.setRecordStatus("Database connection error in " +
-                        "getUserJSON.jsp: " + dbError); 
+            if (dbc.getErr().length() != 0) {
+                wuStringData.setRecordStatus("Database connection error in " +
+                        "getUserJSON.jsp: " + dbc.getErr()); 
             } 
             else {
-                userStringData = WebUserMods.find(dbc, userId);
-                if (userStringData.errorMsg.length() != 0) {
-                    userStringData.setRecordStatus("getUserJSON.jsp. Problem finding " +
-                            "record with id " + userId + ": " + userStringData.errorMsg);
+                wuStringData = WebUserMods.find(dbc, userId);
+                if (wuStringData.getErrorMsg().length() != 0) {
+                    wuStringData.setRecordStatus("getUserJSON.jsp. Problem finding " +
+                            "record with id " + userId + ": " + wuStringData.getErrorMsg());
                 } 
                 else {
-                    userStringData.setRecordStatus ("User found in database.");
+                    wuStringData.setRecordStatus ("User found in database.");
                 }
             }
-            out.print(userStringData.toJSON());
+            out.print(wuStringData.toJSON());
             dbc.close();
 %>

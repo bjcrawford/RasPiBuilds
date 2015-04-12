@@ -1,7 +1,9 @@
 package model.project;
 
 import sql.DbConn;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * This class contains all code that modifies project records in a table in the

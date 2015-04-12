@@ -6,25 +6,24 @@
 
 <%
             String projectId = request.getParameter("projectId");
-            StringData projectStringData = new StringData();
+            StringData pStringData = new StringData();
             
             DbConn dbc = new DbConn();
-            String dbError = dbc.getErr();
             
-            if (dbError.length() != 0) {
-                projectStringData.setRecordStatus("Database connection error in " +
-                        "getUserJSON.jsp: " + dbError); 
+            if (dbc.getErr().length() != 0) {
+                pStringData.setRecordStatus("Database connection error in " +
+                        "getProjectJSON.jsp: " + dbc.getErr()); 
             } 
             else {
-                projectStringData = ProjectMods.find(dbc, projectId);
-                if (projectStringData.errorMsg.length() != 0) {
-                    projectStringData.setRecordStatus("getUserJSON.jsp. Problem finding " +
-                            "record with id " + projectId + ": " + projectStringData.errorMsg);
+                pStringData = ProjectMods.find(dbc, projectId);
+                if (pStringData.errorMsg.length() != 0) {
+                    pStringData.setRecordStatus("getProjectJSON.jsp. Problem finding " +
+                            "record with id " + projectId + ": " + pStringData.errorMsg);
                 } 
                 else {
-                    projectStringData.setRecordStatus ("Project found in database.");
+                    pStringData.setRecordStatus ("Project found in database.");
                 }
             }
-            out.print(projectStringData.toJSON());
+            out.print(pStringData.toJSON());
             dbc.close();
 %>
