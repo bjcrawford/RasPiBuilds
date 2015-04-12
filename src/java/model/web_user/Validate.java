@@ -11,68 +11,75 @@ import utils.*;
 public class Validate { 
 
     // validation error messages, one per field to be validated
-    private String userEmailMsg = "";
-    private String userPwMsg = "";
-    private String userPw2Msg = "";
-    private String userNameMsg = "";
-    private String birthdayMsg = "";
-    private String membershipFeeMsg = "";
-    private String userRoleIdMsg = "";
+    private String userEmailMsg;
+    private String userPwMsg;
+    private String userPw2Msg;
+    private String userNameMsg;
+    private String birthdayMsg;
+    private String membershipFeeMsg;
+    private String userRoleIdMsg;
     
     private boolean isValidated = false; // true iff all fields validate ok.
     private String debugMsg = "";
     
     // Web User data fields from form (all String, pre-validation), bundled in this object
-    private StringData webUserStringData = new StringData();
+    private StringData wuStringData = new StringData();
     
     // Web User data fields after validation (various data types), bundled into this object
-    private TypedData webUserTypedData = new TypedData();
+    private TypedData wuTypedData = new TypedData();
     
     // default constructor is good for first rendering 
     //   -- all error messages are set to "" (empty string).
     public Validate() {
+        userEmailMsg = "";
+        userPwMsg = "";
+        userPw2Msg = "";
+        userNameMsg = "";
+        birthdayMsg = "";
+        membershipFeeMsg = "";
+        userRoleIdMsg = "";
     }
 
     public Validate(StringData webUserStringData) {
         // validationUtils method validates each user input (String even if destined for other type) from WebUser object
         // side effect of validationUtils method puts validated, converted typed value into TypedData object
-        this.webUserStringData = webUserStringData;
+        this.wuStringData = webUserStringData;
 
         // this is not needed for insert, but will be needed for update.
-        if (webUserStringData.webUserId != null && webUserStringData.webUserId.length() != 0) {
-            ValidateInteger vi = new ValidateInteger(webUserStringData.webUserId, true);
-            webUserTypedData.setWebUserId(vi.getConvertedInteger());
+        if (webUserStringData.getWebUserId() != null && webUserStringData.getWebUserId().length() != 0) {
+            ValidateInteger vi = new ValidateInteger(webUserStringData.getWebUserId(), true);
+            wuTypedData.setWebUserId(vi.getConvertedInteger());
         }
 
-        ValidateString vstr = new ValidateString(webUserStringData.userEmail, 45, true);
-        webUserTypedData.setUserEmail(vstr.getConvertedString());
+        ValidateString vstr = new ValidateString(webUserStringData.getUserEmail(), 45, true);
+        wuTypedData.setUserEmail(vstr.getConvertedString());
         this.userEmailMsg = vstr.getError();
 
-        vstr = new ValidateString(webUserStringData.userPw, 45, true);
-        webUserTypedData.setUserPw(vstr.getConvertedString());
+        vstr = new ValidateString(webUserStringData.getUserPw(), 45, true);
+        wuTypedData.setUserPw(vstr.getConvertedString());
         this.userPwMsg = this.userPw2Msg = vstr.getError();
         
 
-        vstr = new ValidateString(webUserStringData.userPw2, 45, true);
-        webUserTypedData.setUserPw2(vstr.getConvertedString());
-        if (webUserTypedData.getUserPw().compareTo(webUserTypedData.getUserPw2()) != 0) {
+        vstr = new ValidateString(webUserStringData.getUserPw2(), 45, true);
+        wuTypedData.setUserPw2(vstr.getConvertedString());
+        if (wuTypedData.getUserPw().compareTo(wuTypedData.getUserPw2()) != 0) {
             this.userPw2Msg = "Both passwords must match.";
         }
         
-        vstr = new ValidateString(webUserStringData.userName, 45, false);
-        webUserTypedData.setUserName(vstr.getConvertedString());
+        vstr = new ValidateString(webUserStringData.getUserName(), 45, false);
+        wuTypedData.setUserName(vstr.getConvertedString());
         this.userNameMsg = vstr.getError();
 
-        ValidateDecimal vdec = new ValidateDecimal(webUserStringData.membershipFee, false);
-        webUserTypedData.setMembershipFee(vdec.getConvertedDecimal());
+        ValidateDecimal vdec = new ValidateDecimal(webUserStringData.getMembershipFee(), false);
+        wuTypedData.setMembershipFee(vdec.getConvertedDecimal());
         this.membershipFeeMsg = vdec.getError();
 
-        ValidateInteger vi = new ValidateInteger(webUserStringData.userRoleId, true);
-        webUserTypedData.setUserRoleId(vi.getConvertedInteger());
+        ValidateInteger vi = new ValidateInteger(webUserStringData.getUserRoleId(), true);
+        wuTypedData.setUserRoleId(vi.getConvertedInteger());
         this.userRoleIdMsg = vi.getError();
 
-        ValidateDate vdate = new ValidateDate(webUserStringData.birthday, false);
-        webUserTypedData.setBirthday(vdate.getConvertedDate());
+        ValidateDate vdate = new ValidateDate(webUserStringData.getBirthday(), false);
+        wuTypedData.setBirthday(vdate.getConvertedDate());
         this.birthdayMsg = vdate.getError();
 
         String allMessages = this.userEmailMsg + this.userPwMsg + this.userPw2Msg + this.membershipFeeMsg + 
@@ -81,11 +88,11 @@ public class Validate {
     }
 
     public StringData getStringData() {
-        return this.webUserStringData;
+        return this.wuStringData;
     }
 
     public TypedData getTypedData() {
-        return this.webUserTypedData;
+        return this.wuTypedData;
     }
 
     public String getUserEmailMsg() {

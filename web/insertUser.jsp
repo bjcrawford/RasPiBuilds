@@ -43,16 +43,16 @@
     if (request.getParameter("userEmail") != null) {
 
         // Fill WebUserData object with form data (form data is always String)
-        wuStringData.userEmail = request.getParameter("userEmail");
-        wuStringData.userPw = request.getParameter("userPw");
-        wuStringData.userPw2 = request.getParameter("userPw2");
-        wuStringData.userName = request.getParameter("userName");
-        wuStringData.birthday = request.getParameter("birthday");
-        wuStringData.membershipFee = request.getParameter("membershipFee");
-        wuStringData.userRoleId = request.getParameter("userRoleId");
+        wuStringData.setUserEmail(request.getParameter("userEmail"));
+        wuStringData.setUserPw(request.getParameter("userPw"));
+        wuStringData.setUserPw2(request.getParameter("userPw2"));
+        wuStringData.setUserName(request.getParameter("userName"));
+        wuStringData.setBirthday(request.getParameter("birthday"));
+        wuStringData.setMembershipFee(request.getParameter("membershipFee"));
+        wuStringData.setUserRoleId(request.getParameter("userRoleId"));
         
         // Grab the user role parameter to persist the user's selection
-        roleId = Integer.decode(wuStringData.userRoleId);
+        roleId = Integer.decode(wuStringData.getUserRoleId());
         
         // Validate user input, set error messages.
         wuValidate = new Validate(wuStringData);
@@ -124,34 +124,34 @@
                     <form name="insertUser" method="post" action="insertUser.jsp">
                         <div class="form-group <%=userEmailErrorClass%>">
                             <label class="control-label" for="userEmail">Your email:</label>
-                            <input class="form-control" type="text" id="inputUserEmail" name="userEmail" placeholder="Enter email" value="<%= wuStringData.userEmail%>"/>
+                            <input class="form-control" type="text" id="inputUserEmail" name="userEmail" placeholder="Enter email" value="<%= wuStringData.getUserEmail()%>"/>
                             <span class="control-label"><%=wuValidate.getUserEmailMsg()%></span>
                         </div>
                         <div class="form-group <%=userPwErrorClass%>">
                             <label class="control-label" for="userPw">Your password:</label>
-                            <input class="form-control" type="password" id="inputUserPw" name="userPw" placeholder="Enter password" value="<%= wuStringData.userPw%>"/>
+                            <input class="form-control" type="password" id="inputUserPw" name="userPw" placeholder="Enter password" value="<%= wuStringData.getUserPw()%>"/>
                             <span class="control-label"><%=wuValidate.getUserPwMsg()%></span>
                         </div>
                         <div class="form-group <%=userPw2ErrorClass%>">
                             <label class="control-label" for="userPw2">Re-enter password:</label>
-                            <input class="form-control" type="password" id="inputUserPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuStringData.userPw2%>"/>
+                            <input class="form-control" type="password" id="inputUserPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuStringData.getUserPw2()%>"/>
                             <span class="control-label"><%=wuValidate.getUserPw2Msg()%></span>
                         </div>
                         <div class="form-group <%=userNameErrorClass%>">
                             <label class="control-label" for="userName">Your user name (optional):</label>
-                            <input class="form-control" type="text" id="inputUserName" name="userName" placeholder="Enter user name" value="<%= wuStringData.userName%>"/>
+                            <input class="form-control" type="text" id="inputUserName" name="userName" placeholder="Enter user name" value="<%= wuStringData.getUserName()%>"/>
                             <span class="control-label"><%=wuValidate.getUserNameMsg()%></span>
                         </div>
                         <div class="form-group <%=birthdayErrorClass%>">
                             <label class="control-label" for="birthday">Your birthday (optional):</label>
-                            <input class="form-control" type="text" id="inputBirthday" name="birthday" placeholder="Enter birthday" value="<%= wuStringData.birthday%>"/>
+                            <input class="form-control" type="text" id="inputBirthday" name="birthday" placeholder="Enter birthday" value="<%= wuStringData.getBirthday()%>"/>
                             <span class="control-label"><%=wuValidate.getBirthdayMsg()%></span>
                         </div>
                         <div class="form-group <%=membershipFeeErrorClass%>">
                             <label class="control-label" for="membershipFee">Membership fee (optional):</label>
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
-                                <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuStringData.membershipFee%>"/>
+                                <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuStringData.getMembershipFee()%>"/>
                                 <div class="input-group-addon">.00</div>
                             </div>
                             <span class="control-label"><%=wuValidate.getMembershipFeeMsg()%></span>

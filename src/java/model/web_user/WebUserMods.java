@@ -1,7 +1,9 @@
 package model.web_user;
 
 import sql.DbConn;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import encryption.Encryption;
 import utils.FormatUtils;
 
@@ -111,22 +113,22 @@ public class WebUserMods {
             ps.setString(2, userPasswordEncr);
             rs = ps.executeQuery();
             if (rs.next()) {
-                foundUser.webUserId = rs.getString("web_user_id");
-                foundUser.userEmail = rs.getString("user_email");
-                foundUser.userName = rs.getString("user_name");
-                foundUser.birthday = rs.getString("birthday");
-                foundUser.membershipFee = rs.getString("membership_fee");
-                foundUser.userRoleId = rs.getString("user_role_id");
+                foundUser.setWebUserId(rs.getString("web_user_id"));
+                foundUser.setUserEmail(rs.getString("user_email"));
+                foundUser.setUserName(rs.getString("user_name"));
+                foundUser.setBirthday(rs.getString("birthday"));
+                foundUser.setMembershipFee(rs.getString("membership_fee"));
+                foundUser.setUserRoleId(rs.getString("user_role_id"));
             } 
             else {
-                foundUser.errorMsg = "WebUserMods.find: Record not found";
+                foundUser.setErrorMsg("WebUserMods.find: Record not found");
             }
             rs.close();
             ps.close();
         } 
         catch (Exception e) {
-            foundUser.errorMsg = "WebUserMods.find: General Exception during " +
-                        "find operation: " + e.getMessage();
+            foundUser.setErrorMsg("WebUserMods.find: General Exception during " +
+                        "find operation: " + e.getMessage());
         }
         
         return foundUser;
@@ -154,24 +156,24 @@ public class WebUserMods {
             ps.setString(1, webUserId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                foundUser.webUserId = rs.getString("web_user_id");
-                foundUser.userEmail = rs.getString("user_email");
-                foundUser.userName = rs.getString("user_name");
-                foundUser.userPw = rs.getString("user_password");
-                foundUser.birthday = FormatUtils.formatDate(rs.getObject("birthday"));
-                foundUser.membershipFee = rs.getString("membership_fee");
-                foundUser.userRoleId = rs.getString("user_role_id");
+                foundUser.setWebUserId(rs.getString("web_user_id"));
+                foundUser.setUserEmail(rs.getString("user_email"));
+                foundUser.setUserName(rs.getString("user_name"));
+                foundUser.setUserPw(rs.getString("user_password"));
+                foundUser.setBirthday(FormatUtils.formatDate(rs.getObject("birthday")));
+                foundUser.setMembershipFee(rs.getString("membership_fee"));
+                foundUser.setUserRoleId(rs.getString("user_role_id"));
             }
             else {
-                foundUser.errorMsg = "WebUserMods.find: web_user_id " + webUserId +
-                        " was not found";
+                foundUser.setErrorMsg("WebUserMods.find: web_user_id " + webUserId +
+                        " was not found");
             }
             rs.close();
             ps.close();
         }
         catch (Exception e) {
-            foundUser.errorMsg = "WebUserMods.find: General Exception during " +
-                        "find operation: " + e.getMessage();
+            foundUser.setErrorMsg("WebUserMods.find: General Exception during " +
+                        "find operation: " + e.getMessage());
         }
         
         return foundUser;

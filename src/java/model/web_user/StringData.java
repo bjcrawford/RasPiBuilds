@@ -2,16 +2,16 @@ package model.web_user;
 
 public class StringData {
 
-    public String webUserId = "";
-    public String userEmail = "";
-    public String userPw = "";
-    public String userPw2 = "";
-    public String userName = "";
-    public String birthday = "";
-    public String membershipFee = "";
-    public String userRoleId = "";
-    public String recordStatus = "default"; // will be used later when doing ajax
-    public String errorMsg = "";
+    private String webUserId = "";
+    private String userEmail = "";
+    private String userPw = "";
+    private String userPw2 = "";
+    private String userName = "";
+    private String birthday = "";
+    private String membershipFee = "";
+    private String userRoleId = "";
+    private String recordStatus = "default"; // will be used later when doing ajax
+    private String errorMsg = "";
 
     /**
      * @return the webUserId
@@ -137,6 +137,20 @@ public class StringData {
      */
     public void setRecordStatus(String recordStatus) {
         this.recordStatus = recordStatus;
+    }
+
+    /**
+     * @return the errorMsg
+     */
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    /**
+     * @param errorMsg the errorMsg to set
+     */
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     @Override

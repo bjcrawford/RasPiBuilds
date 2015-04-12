@@ -64,15 +64,15 @@
         if (request.getParameter("userId") != null) { // update postback
             
             // Populate StringData object with posted params
-            wuUpdateStringData.webUserId = request.getParameter("userId");
-            wuUpdateStringData.userEmail = request.getParameter("userEmail");
-            wuUpdateStringData.userPw = request.getParameter("userPw");
-            wuUpdateStringData.userPw2 = request.getParameter("userPw2");
-            wuUpdateStringData.userName = request.getParameter("userName");
-            wuUpdateStringData.birthday = request.getParameter("birthday");
-            wuUpdateStringData.membershipFee = request.getParameter("membershipFee");
-            wuUpdateStringData.userRoleId = request.getParameter("userRoleId");
-            roleId = Integer.decode(wuUpdateStringData.userRoleId);
+            wuUpdateStringData.setWebUserId(request.getParameter("userId"));
+            wuUpdateStringData.setUserEmail(request.getParameter("userEmail"));
+            wuUpdateStringData.setUserPw(request.getParameter("userPw"));
+            wuUpdateStringData.setUserPw2(request.getParameter("userPw2"));
+            wuUpdateStringData.setUserName(request.getParameter("userName"));
+            wuUpdateStringData.setBirthday(request.getParameter("birthday"));
+            wuUpdateStringData.setMembershipFee(request.getParameter("membershipFee"));
+            wuUpdateStringData.setUserRoleId(request.getParameter("userRoleId"));
+            roleId = Integer.decode(wuUpdateStringData.getUserRoleId());
 
             wuUpdateValidate = new Validate(wuUpdateStringData);
             if (wuUpdateValidate.isValidated()) {
@@ -82,7 +82,7 @@
                 updateMsg = webUserMods.update(wuUpdateValidate);
 
                 if (updateMsg.length() == 0) { // empty string means record was sucessfully updated
-                    updateMsg = "Record " + wuUpdateStringData.userEmail + " updated. ";
+                    updateMsg = "Record " + wuUpdateStringData.getUserEmail() + " updated. ";
                 }
             }
 
@@ -129,15 +129,15 @@
             
             try {
                 int userId = Integer.decode(request.getParameter("deleteUserId"));
-                wuDeleteStringData.webUserId = String.valueOf(userId);
-                wuDeleteStringData.userEmail = request.getParameter("deleteUserEmail");
+                wuDeleteStringData.setWebUserId(String.valueOf(userId));
+                wuDeleteStringData.setUserEmail(request.getParameter("deleteUserEmail"));
 
                 // Instantiate WebUserMods object and pass validated StringData to its delete method
                 WebUserMods webUserMods = new WebUserMods(dbc);
                 deleteMsg = webUserMods.delete(userId);
                 
                 if (deleteMsg.length() == 0) { // empty string means record was sucessfully deleted
-                    deleteMsg = "Record " + wuDeleteStringData.userEmail + " deleted. ";
+                    deleteMsg = "Record " + wuDeleteStringData.getUserEmail() + " deleted. ";
                     submitDeleteClass = "has-success";
                     submitDeleteElementsHidden = "hidden";
                 }
@@ -193,15 +193,15 @@
                 </div>
                 <!-- Hidden user update popup -->    
                 <div id="userupdate-popup" class="well raspi-popup">
-                    <h3>Update User - ID: <span id="updateuser-id"><%= wuUpdateStringData.webUserId%></span></h3>
+                    <h3>Update User - ID: <span id="updateuser-id"><%= wuUpdateStringData.getWebUserId()%></span></h3>
                     <form name="updateuserform" action="users.jsp" method="post">
-                        <input class="hidden" type="text" id="inputUserId" name="userId" value="<%= wuUpdateStringData.webUserId%>">
+                        <input class="hidden" type="text" id="inputUserId" name="userId" value="<%= wuUpdateStringData.getWebUserId()%>">
                         <table>
                             <tr>
                                 <td>
                                     <div id="userupdate-emailgroup" class="form-group <%=userEmailErrorClass%>">
                                         <label class="control-label" for="userEmail">Your email:</label>
-                                        <input class="form-control" type="text" id="inputUserEmail" name="userEmail" placeholder="Enter email" value="<%= wuUpdateStringData.userEmail%>"/>
+                                        <input class="form-control" type="text" id="inputUserEmail" name="userEmail" placeholder="Enter email" value="<%= wuUpdateStringData.getUserEmail()%>"/>
                                         <span id="userupdate-emailmsg" class="control-label"><%=wuUpdateValidate.getUserEmailMsg()%></span>
                                     </div>
                                 </td>
@@ -211,7 +211,7 @@
                                 <td>
                                     <div id="userupdate-namegroup" class="form-group <%=userNameErrorClass%>">
                                         <label class="control-label" for="userName">Your user name (optional):</label>
-                                        <input class="form-control" type="text" id="inputUserName" name="userName" placeholder="Enter user name" value="<%= wuUpdateStringData.userName%>"/>
+                                        <input class="form-control" type="text" id="inputUserName" name="userName" placeholder="Enter user name" value="<%= wuUpdateStringData.getUserName()%>"/>
                                         <span id="userupdate-namemsg" class="control-label"><%=wuUpdateValidate.getUserNameMsg()%></span>
                                     </div>
                                 </td>
@@ -220,7 +220,7 @@
                                 <td>
                                     <div id="userupdate-pwgroup" class="form-group <%=userPwErrorClass%>">
                                         <label class="control-label" for="userPw">Your password:</label>
-                                        <input class="form-control" type="password" id="inputUserPw" name="userPw" placeholder="Enter password" value="<%= wuUpdateStringData.userPw%>"/>
+                                        <input class="form-control" type="password" id="inputUserPw" name="userPw" placeholder="Enter password" value="<%= wuUpdateStringData.getUserPw()%>"/>
                                         <span id="userupdate-pwmsg" class="control-label"><%=wuUpdateValidate.getUserPwMsg()%></span>
                                     </div>
                                 </td>
@@ -230,7 +230,7 @@
                                 <td>
                                     <div id="userupdate-birthdaygroup" class="form-group <%=birthdayErrorClass%>">
                                         <label class="control-label" for="birthday">Your birthday (optional):</label>
-                                        <input class="form-control" type="text" id="inputBirthday" name="birthday" placeholder="Enter birthday" value="<%= wuUpdateStringData.birthday%>"/>
+                                        <input class="form-control" type="text" id="inputBirthday" name="birthday" placeholder="Enter birthday" value="<%= wuUpdateStringData.getBirthday()%>"/>
                                         <span id="userupdate-birthdaymsg" class="control-label"><%=wuUpdateValidate.getBirthdayMsg()%></span>
                                     </div>
                                 </td>
@@ -239,7 +239,7 @@
                                 <td>
                                     <div id="userupdate-pw2group" class="form-group <%=userPw2ErrorClass%>">
                                         <label class="control-label" for="userPw2">Re-enter password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input class="form-control" type="password" id="inputUserPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuUpdateStringData.userPw2%>"/>
+                                        <input class="form-control" type="password" id="inputUserPw2" name="userPw2" placeholder="Re-enter password" value="<%= wuUpdateStringData.getUserPw2()%>"/>
                                         <span id="userupdate-pw2msg" class="control-label"><%=wuUpdateValidate.getUserPw2Msg()%></span>
                                     </div>
                                 </td>
@@ -251,7 +251,7 @@
                                         <label class="control-label" for="membershipFee">Membership fee (optional):</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">$</div>
-                                            <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuUpdateStringData.membershipFee%>"/>
+                                            <input class="form-control" type="text" id="inputMembershipFee" name="membershipFee" placeholder="Enter membership fee" value="<%= wuUpdateStringData.getMembershipFee()%>"/>
                                             <div class="input-group-addon">.00</div>
                                         </div>
                                         <span id="userupdate-membershipfeemsg" class="control-label"><%=wuUpdateValidate.getMembershipFeeMsg()%></span>
@@ -277,16 +277,16 @@
                 
                 <!-- Hidden user delete popup -->    
                 <div id="userdelete-popup" class="well raspi-popup">
-                    <h3>Delete User - ID: <span id="deleteuser-id"><%= wuDeleteStringData.webUserId%></span></h3>
+                    <h3>Delete User - ID: <span id="deleteuser-id"><%= wuDeleteStringData.getWebUserId()%></span></h3>
                     <span id="userdelete-popup-confirm" class="<%=submitDeleteElementsHidden%>">
                         <p>Are you sure you wish to delete this user?</p>
                         <span><b>User email:</b></span>
-                        <span id="deleteuser-email"><%=wuDeleteStringData.userEmail%></span>
+                        <span id="deleteuser-email"><%=wuDeleteStringData.getUserEmail()%></span>
                         </br></br>
                     </span>
                     <form name="deleteuserform" action="users.jsp" method="post">
-                        <input class="hidden" type="text" id="inputDeleteUserId" name="deleteUserId" value="<%=wuDeleteStringData.webUserId%>">
-                        <input class="hidden" type="text" id="inputDeleteUserEmail" name="deleteUserEmail" value="<%=wuDeleteStringData.userEmail%>">
+                        <input class="hidden" type="text" id="inputDeleteUserId" name="deleteUserId" value="<%=wuDeleteStringData.getWebUserId()%>">
+                        <input class="hidden" type="text" id="inputDeleteUserEmail" name="deleteUserEmail" value="<%=wuDeleteStringData.getUserEmail()%>">
                         <span id="userdelete-submitgroup" class="form-group <%=submitDeleteClass%>">
                             <div class="center-text"><span id="userdelete-submitmsg" class="control-label"><%=deleteMsg%></span></div>
                             <input type="submit" id="userdelete-submitbutton" class="btn btn-default btn-danger <%=submitDeleteElementsHidden%>" disabled="disabled" value="Delete">
