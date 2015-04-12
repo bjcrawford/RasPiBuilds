@@ -134,7 +134,7 @@
 
                 // Instantiate WebUserMods object and pass validated StringData to its delete method
                 WebUserMods webUserMods = new WebUserMods(dbc);
-                //deleteMsg = webUserMods.delete(userId);
+                deleteMsg = webUserMods.delete(userId);
                 
                 if (deleteMsg.length() == 0) { // empty string means record was sucessfully deleted
                     deleteMsg = "Record " + wuDeleteStringData.userEmail + " deleted. ";
@@ -143,8 +143,8 @@
                 }
                 else {
                     submitDeleteClass = "has-error";
-                    if (deleteMsg.equals("Something related to a foreign key")) {
-                        deleteMsg = "Display a more appropriate message";
+                    if (deleteMsg.contains("Cannot delete or update a parent row: a foreign key constraint fails")) {
+                        deleteMsg = "Please delete any associated Builds before deleting this User.";
                     }
                 }
             }

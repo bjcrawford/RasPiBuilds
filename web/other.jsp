@@ -129,8 +129,8 @@
                 }
                 else {
                     submitDeleteClass = "has-error";
-                    if (deleteMsg.equals("Something related to a foreign key")) {
-                        deleteMsg = "Display a more appropriate message";
+                    if (deleteMsg.contains("Cannot delete or update a parent row: a foreign key constraint fails")) {
+                        deleteMsg = "Please delete any associated Builds before deleting this Project.";
                     }
                 }
             }
