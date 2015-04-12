@@ -25,7 +25,7 @@
     if ((signedInWebUser = (StringData) session.getAttribute("webUser")) != null) { // Web user is already signed in
         signInVisibilityClass = "signin-content-invisible";
         welcomeVisibilityClass = "welcome-content-visible";
-        String welcomeName = signedInWebUser.userName.equals("") ? signedInWebUser.userEmail : signedInWebUser.userName;
+        String welcomeName = signedInWebUser.getUserName().equals("") ? signedInWebUser.getUserEmail() : signedInWebUser.getUserName();
         signInMsg = "Welcome, " + welcomeName + "</br>";
     }
     else { // Web user is not signed in, check for postback from sign in form
@@ -42,7 +42,7 @@
                 // WebUserMods.find() is the method which verifies a user's credentials
                 signedInWebUser = WebUserMods.find(dbc, strUserEmail, strUserPw);
 
-                if (signedInWebUser.errorMsg.equals("WebUserMods.find: Record not found")) {
+                if (signedInWebUser.getErrorMsg().equals("WebUserMods.find: Record not found")) {
                     signInMsg = "<span style=\"color: red;\">Invalid email or password</span></br>";
                     try {
                         session.invalidate();
@@ -50,12 +50,12 @@
                         System.out.println(e.getMessage());
                     }
                 }
-                else if (signedInWebUser.errorMsg.length() > 0) { // Exception thrown in the find method
+                else if (signedInWebUser.getErrorMsg().length() > 0) { // Exception thrown in the find method
                     // This will look ugly on screen, but will probably never show
-                    signInMsg = "<span style=\"color: red;\">Error " + signedInWebUser.errorMsg + "</span></br>";
+                    signInMsg = "<span style=\"color: red;\">Error " + signedInWebUser.getErrorMsg() + "</span></br>";
                 } 
                 else { // Web user signed in sucessfully
-                    String welcomeName = signedInWebUser.userName.equals("") ? signedInWebUser.userEmail : signedInWebUser.userName;
+                    String welcomeName = signedInWebUser.getUserName().equals("") ? signedInWebUser.getUserEmail() : signedInWebUser.getUserName();
                     signInMsg = "Welcome, " + welcomeName + "</br>";
                     session.setAttribute("webUser", signedInWebUser);
                     signInVisibilityClass = "signin-content-invisible";
