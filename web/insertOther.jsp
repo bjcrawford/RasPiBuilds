@@ -30,11 +30,11 @@
     if (request.getParameter("projectName") != null) {
 
         // Fill ProjectData object with form data (form data is always String)
-        pStringData.projectName = request.getParameter("projectName");
-        pStringData.projectDesc = request.getParameter("projectDesc");
-        pStringData.projectGuide = request.getParameter("projectGuide");
-        pStringData.projectImgUrl = request.getParameter("projectImgUrl");
-        pStringData.projectCost = request.getParameter("projectCost");
+        pStringData.setProjectName(request.getParameter("projectName"));
+        pStringData.setProjectDesc(request.getParameter("projectDesc"));
+        pStringData.setProjectGuide(request.getParameter("projectGuide"));
+        pStringData.setProjectImgUrl(request.getParameter("projectImgUrl"));
+        pStringData.setProjectCost(request.getParameter("projectCost"));
         
         // Validate user input, set error messages.
         pValidate = new Validate(pStringData); 
@@ -103,12 +103,12 @@
                     <form name="insertOther" method="post" action="insertOther.jsp" onsubmit="return pgTinyEditor.post();">
                         <div class="form-group <%=projectNameErrorClass%>">
                             <label class="control-label" for="projectName">Project Name:</label>
-                            <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%= pStringData.projectName%>"/>
+                            <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%= pStringData.getProjectName()%>"/>
                             <span class="control-label"><%=pValidate.getProjectNameMsg()%></span>
                         </div>
                         <div class="form-group <%=projectDescErrorClass%>">
                             <label class="control-label" for="projectDesc">Project Description:</label>
-                            <input class="form-control" type="text" id="inputProjectDesc" name="projectDesc" placeholder="Enter project description" value="<%= pStringData.projectDesc%>"/>
+                            <input class="form-control" type="text" id="inputProjectDesc" name="projectDesc" placeholder="Enter project description" value="<%= pStringData.getProjectDesc()%>"/>
                             <span class="control-label"><%=pValidate.getProjectDescMsg()%></span>
                         </div>
                         <div class="form-group <%=projectGuideErrorClass%>">
@@ -116,21 +116,21 @@
                             <input class="form-control" type="textarea" id="inputProjectGuide" name="projectGuide"/>
                             
                             <script src="js/project_guide_tinyeditor.js" type="text/javascript"></script>
-                            <script>pgTinyEditor.setEditorContent('<%=pStringData.projectGuide%>');</script>
+                            <script>pgTinyEditor.setEditorContent('<%=pStringData.getProjectGuide()%>');</script>
                             
                             
                             <span class="control-label"><%=pValidate.getProjectGuideMsg()%></span>
                         </div>
                         <div class="form-group <%=projectImgUrlErrorClass%>">
                             <label class="control-label" for="projectImgUrl">Project Image URL (optional):</label>
-                            <input class="form-control" type="text" id="inputProjectImgUrl" name="projectImgUrl" placeholder="Enter project image URL" value="<%= pStringData.projectImgUrl%>"/>
+                            <input class="form-control" type="text" id="inputProjectImgUrl" name="projectImgUrl" placeholder="Enter project image URL" value="<%= pStringData.getProjectImgUrl()%>"/>
                             <span class="control-label"><%=pValidate.getProjectImgUrlMsg()%></span>
                         </div>
                         <div class="form-group <%=projectCostErrorClass%>">
                             <label class="control-label" for="projectCost">Project Cost (optional):</label>
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
-                                <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%= pStringData.projectCost%>"/>
+                                <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%= pStringData.getProjectCost()%>"/>
                                 <div class="input-group-addon">.00</div>
                             </div>
                             <span class="control-label"><%=pValidate.getProjectCostMsg()%></span>

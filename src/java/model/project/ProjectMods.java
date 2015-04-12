@@ -98,23 +98,23 @@ public class ProjectMods {
             ps.setString(1, projectId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                foundProject.projectId = rs.getString("project_id");
-                foundProject.projectName = rs.getString("project_name");
-                foundProject.projectDesc = rs.getString("project_desc");
-                foundProject.projectGuide = rs.getString("project_guide");
-                foundProject.projectImgUrl = rs.getString("project_img_url");
-                foundProject.projectCost = rs.getString("project_cost");
+                foundProject.setProjectId(rs.getString("project_id"));
+                foundProject.setProjectName(rs.getString("project_name"));
+                foundProject.setProjectDesc(rs.getString("project_desc"));
+                foundProject.setProjectGuide(rs.getString("project_guide"));
+                foundProject.setProjectImgUrl(rs.getString("project_img_url"));
+                foundProject.setProjectCost(rs.getString("project_cost"));
             }
             else {
-                foundProject.errorMsg = "ProjectMods.find: project_id " + projectId +
-                        " was not found";
+                foundProject.setErrorMsg("ProjectMods.find: project_id " + projectId +
+                        " was not found");
             }
-                rs.close();
-                ps.close();
+            rs.close();
+            ps.close();
         } 
         catch (Exception e) {
-            foundProject.errorMsg = "ProjectMods.find: General Exception during " +
-                        "find operation: " + e.getMessage();
+            foundProject.setErrorMsg("ProjectMods.find: General Exception during " +
+                        "find operation: " + e.getMessage());
         }
         
         return foundProject;

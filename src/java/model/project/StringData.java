@@ -2,14 +2,14 @@ package model.project;
 
 public class StringData {
 
-    public String projectId = "";
-    public String projectName = "";
-    public String projectDesc = "";
-    public String projectGuide = "";
-    public String projectImgUrl = "";
-    public String projectCost = "";
-    public String recordStatus = "default"; // will be used later when doing ajax
-    public String errorMsg = "";
+    private String projectId = "";
+    private String projectName = "";
+    private String projectDesc = "";
+    private String projectGuide = "";
+    private String projectImgUrl = "";
+    private String projectCost = "";
+    private String recordStatus = "default"; // will be used later when doing ajax
+    private String errorMsg = "";
 
     /**
      * @return the projectId
@@ -21,7 +21,7 @@ public class StringData {
     /**
      * @param projectId the projectId to set
      */
-    public void setWebUserId(String projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
     
@@ -107,6 +107,20 @@ public class StringData {
      */
     public void setRecordStatus(String recordStatus) {
         this.recordStatus = recordStatus;
+    }
+    
+        /**
+     * @return the errorMsg
+     */
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    /**
+     * @param errorMsg the errorMsg to set
+     */
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     @Override

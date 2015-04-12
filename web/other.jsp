@@ -56,12 +56,12 @@
         if (request.getParameter("projectName") != null) {
 
             // Populate StringData object with posted params
-            pUpdateStringData.projectId = request.getParameter("projectId");
-            pUpdateStringData.projectName = request.getParameter("projectName");
-            pUpdateStringData.projectDesc = request.getParameter("projectDesc");
-            pUpdateStringData.projectGuide = request.getParameter("projectGuide");
-            pUpdateStringData.projectImgUrl = request.getParameter("projectImgUrl");
-            pUpdateStringData.projectCost = request.getParameter("projectCost");
+            pUpdateStringData.setProjectId(request.getParameter("projectId"));
+            pUpdateStringData.setProjectName(request.getParameter("projectName"));
+            pUpdateStringData.setProjectDesc(request.getParameter("projectDesc"));
+            pUpdateStringData.setProjectGuide(request.getParameter("projectGuide"));
+            pUpdateStringData.setProjectImgUrl(request.getParameter("projectImgUrl"));
+            pUpdateStringData.setProjectCost(request.getParameter("projectCost"));
 
             pValidate = new Validate(pUpdateStringData); 
             if (pValidate.isValidated()) {
@@ -71,7 +71,7 @@
                 updateMsg = projectMods.update(pValidate);
 
                 if (updateMsg.length() == 0) {
-                    updateMsg = "Record " + pUpdateStringData.projectName + " updated.";
+                    updateMsg = "Record " + pUpdateStringData.getProjectName() + " updated.";
                 }
             }
 
@@ -94,7 +94,7 @@
             }
 
             // Check for successful update, on success display green text, on error display red text
-            if (updateMsg.equals("Record " + pUpdateStringData.projectName + " updated.")) {
+            if (updateMsg.equals("Record " + pUpdateStringData.getProjectName() + " updated.")) {
                 submitClass = "has-success";
             }
             else if (!updateMsg.equals("")){
@@ -115,15 +115,15 @@
             
             try {
                 int projectId = Integer.decode(request.getParameter("deleteProjectId"));
-                pDeleteStringData.projectId = String.valueOf(projectId);
-                pDeleteStringData.projectName = request.getParameter("deleteProjectName");
+                pDeleteStringData.setProjectId(String.valueOf(projectId));
+                pDeleteStringData.setProjectName(request.getParameter("deleteProjectName"));
 
                 // Instantiate WebUserMods object and pass validated StringData to its delete method
                 ProjectMods projectMods = new ProjectMods(dbc);
                 deleteMsg = projectMods.delete(projectId);
                 
                 if (deleteMsg.length() == 0) { // empty string means record was sucessfully deleted
-                    deleteMsg = "Record " + pDeleteStringData.projectName + " deleted. ";
+                    deleteMsg = "Record " + pDeleteStringData.getProjectName() + " deleted. ";
                     submitDeleteClass = "has-success";
                     submitDeleteElementsHidden = "hidden";
                 }
@@ -170,15 +170,15 @@
                 </div>
                 <!-- Hidden user update popup -->    
                 <div id="projectupdate-popup" class="well raspi-popup">
-                    <h3>Update Project - ID: <span id="updateproject-id"><%= pUpdateStringData.projectId%></span></h3>        
+                    <h3>Update Project - ID: <span id="updateproject-id"><%= pUpdateStringData.getProjectId()%></span></h3>        
                     <form name="updateprojectform" method="post" action="other.jsp">
-                        <input class="hidden" type="text" id="inputProjectId" name="projectId" value="<%=pUpdateStringData.projectId%>">
+                        <input class="hidden" type="text" id="inputProjectId" name="projectId" value="<%=pUpdateStringData.getProjectId()%>">
                         <table>
                             <tr>
                                 <td>
                                     <div id="projectupdate-namegroup" class="form-group <%=projectNameErrorClass%>">
                                         <label class="control-label" for="projectName">Project Name:</label>
-                                        <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%=pUpdateStringData.projectName%>"/>
+                                        <input class="form-control" type="text" id="inputProjectName" name="projectName" placeholder="Enter project name" value="<%=pUpdateStringData.getProjectName()%>"/>
                                         <span id="projectupdate-namemsg" class="control-label"><%=pValidate.getProjectNameMsg()%></span>
                                     </div>
                                 </td>
@@ -188,7 +188,7 @@
                                 <td>
                                     <div id="projectupdate-imgurlgroup" class="form-group <%=projectImgUrlErrorClass%>">
                                         <label class="control-label" for="projectImgUrl">Project Image URL (optional):</label>
-                                        <input class="form-control" type="text" id="inputProjectImgUrl" name="projectImgUrl" placeholder="Enter project image URL" value="<%=pUpdateStringData.projectImgUrl%>"/>
+                                        <input class="form-control" type="text" id="inputProjectImgUrl" name="projectImgUrl" placeholder="Enter project image URL" value="<%=pUpdateStringData.getProjectImgUrl()%>"/>
                                         <span id="projectupdate-imgurlmsg" class="control-label"><%=pValidate.getProjectImgUrlMsg()%></span>
                                     </div>
                                 </td>
@@ -197,7 +197,7 @@
                                 <td>
                                     <div id="projectupdate-descgroup" class="form-group <%=projectDescErrorClass%>">
                                         <label class="control-label" for="projectDesc">Project Description:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input class="form-control" type="text" id="inputProjectDesc" name="projectDesc" placeholder="Enter project description" value="<%=pUpdateStringData.projectDesc%>"/>
+                                        <input class="form-control" type="text" id="inputProjectDesc" name="projectDesc" placeholder="Enter project description" value="<%=pUpdateStringData.getProjectDesc()%>"/>
                                         <span id="projectupdate-descmsg" class="control-label"><%=pValidate.getProjectDescMsg()%></span>
                                     </div>
                                 </td>
@@ -209,7 +209,7 @@
                                         <label class="control-label" for="projectCost">Project Cost (optional):</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">$</div>
-                                            <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%=pUpdateStringData.projectCost%>"/>
+                                            <input class="form-control" type="text" id="inputProjectCost" name="projectCost" placeholder="Enter project cost" value="<%=pUpdateStringData.getProjectCost()%>"/>
                                             <div class="input-group-addon">.00</div>
                                         </div>
                                         <span id="projectupdate-costmsg" class="control-label"><%=pValidate.getProjectCostMsg()%></span>
@@ -219,7 +219,7 @@
                         </table>
                         <div id="projectupdate-guidegroup" class="form-group <%=projectGuideErrorClass%>">
                             <label class="control-label" for="projectGuide">Project Guidelines:</label>
-                            <input class="form-control" type="textarea" rows="5" id="inputProjectGuide" name="projectGuide" value="<%=pUpdateStringData.projectGuide%>"/>
+                            <input class="form-control" type="textarea" rows="5" id="inputProjectGuide" name="projectGuide" value="<%=pUpdateStringData.getProjectGuide()%>"/>
                             <span id="projectupdate-guidemsg" class="control-label"><%=pValidate.getProjectGuideMsg()%></span>
                         </div>
                         <div id="projectupdate-submitgroup" class="form-group <%=submitClass%>">
@@ -235,16 +235,16 @@
                 
                 <!-- Hidden user delete popup -->    
                 <div id="projectdelete-popup" class="well raspi-popup">
-                    <h3>Delete Project - ID: <span id="deleteproject-id"><%= pDeleteStringData.projectId%></span></h3>
+                    <h3>Delete Project - ID: <span id="deleteproject-id"><%= pDeleteStringData.getProjectId()%></span></h3>
                     <span id="projectdelete-popup-confirm" class="<%=submitDeleteElementsHidden%>">
                         <p>Are you sure you wish to delete this project?</p>
                         <span><b>Project name:</b></span>
-                        <span id="deleteproject-name"><%=pDeleteStringData.projectName%></span>
+                        <span id="deleteproject-name"><%=pDeleteStringData.getProjectName()%></span>
                         </br></br>
                     </span>
                     <form name="deleteprojectform" action="other.jsp" method="post">
-                        <input class="hidden" type="text" id="inputDeleteProjectId" name="deleteProjectId" value="<%=pDeleteStringData.projectId%>">
-                        <input class="hidden" type="text" id="inputDeleteProjectName" name="deleteProjectName" value="<%=pDeleteStringData.projectName%>">
+                        <input class="hidden" type="text" id="inputDeleteProjectId" name="deleteProjectId" value="<%=pDeleteStringData.getProjectId()%>">
+                        <input class="hidden" type="text" id="inputDeleteProjectName" name="deleteProjectName" value="<%=pDeleteStringData.getProjectName()%>">
                         <span id="projectdelete-submitgroup" class="form-group <%=submitDeleteClass%>">
                             <div class="center-text"><span id="projectdelete-submitmsg" class="control-label"><%=deleteMsg%></span></div>
                             <input type="submit" id="projectdelete-submitbutton" class="btn btn-default btn-danger <%=submitDeleteElementsHidden%>" disabled="disabled" value="Delete">

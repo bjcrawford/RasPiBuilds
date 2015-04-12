@@ -10,56 +10,54 @@ import utils.*;
  */
 public class Validate { 
 
-    // validation error messages, one per field to be validated
-    private String projectNameMsg = "";
-    private String projectDescMsg = "";
-    private String projectGuideMsg = "";
-    private String projectImgUrlMsg = "";
-    private String projectCostMsg = "";
+    private String projectNameMsg;
+    private String projectDescMsg;
+    private String projectGuideMsg;
+    private String projectImgUrlMsg;
+    private String projectCostMsg;
     
-    private boolean isValidated = false; // true iff all fields validate ok.
-    private String debugMsg = "";
+    private boolean isValidated;
+    private StringData projectStringData;
+    private TypedData projectTypedData;
     
-    // Web User data fields from form (all String, pre-validation), bundled in this object
-    private StringData projectStringData = new StringData();
-    
-    // Web User data fields after validation (various data types), bundled into this object
-    private TypedData projectTypedData = new TypedData();
-    
-    // default constructor is good for first rendering 
-    //   -- all error messages are set to "" (empty string).
     public Validate() {
+        projectNameMsg = "";
+        projectDescMsg = "";
+        projectGuideMsg = "";
+        projectImgUrlMsg = "";
+        projectCostMsg = "";  
+        isValidated = false;
+        projectStringData = new StringData();
+        projectTypedData = new TypedData();
     }
 
     public Validate(StringData projectStringData) {
-        // validationUtils method validates each user input (String even if destined for other type) from WebUser object
-        // side effect of validationUtils method puts validated, converted typed value into TypedData object
+        
         this.projectStringData = projectStringData;
 
-        // this is not needed for insert, but will be needed for update.
-        if (projectStringData.projectId != null && projectStringData.projectId.length() != 0) {
-            ValidateInteger vi = new ValidateInteger(projectStringData.projectId, true);
+        if (projectStringData.getProjectId() != null && projectStringData.getProjectId().length() != 0) {
+            ValidateInteger vi = new ValidateInteger(projectStringData.getProjectId(), true);
             projectTypedData.setProjectId(vi.getConvertedInteger());
         }
 
-        ValidateString vstr = new ValidateString(projectStringData.projectName, 60, true);
+        ValidateString vstr = new ValidateString(projectStringData.getProjectName(), 60, true);
         projectTypedData.setProjectName(vstr.getConvertedString());
         this.projectNameMsg = vstr.getError();
 
-        vstr = new ValidateString(projectStringData.projectDesc, 16000000, true);
+        vstr = new ValidateString(projectStringData.getProjectDesc(), 16000000, true);
         projectTypedData.setProjectDesc(vstr.getConvertedString());
         this.projectDescMsg = vstr.getError();
         
-        vstr = new ValidateString(projectStringData.projectGuide, 16000000, true);
+        vstr = new ValidateString(projectStringData.getProjectGuide(), 16000000, true);
         projectTypedData.setProjectGuide(vstr.getConvertedString());
         this.projectGuideMsg = vstr.getError();
         
         // TODO: Change to validate URL
-        vstr = new ValidateString(projectStringData.projectImgUrl, 255, false);
+        vstr = new ValidateString(projectStringData.getProjectImgUrl(), 255, false);
         projectTypedData.setProjectImgUrl(vstr.getConvertedString());
         this.projectImgUrlMsg = vstr.getError();
 
-        ValidateDecimal vdec = new ValidateDecimal(projectStringData.projectCost, false);
+        ValidateDecimal vdec = new ValidateDecimal(projectStringData.getProjectCost(), false);
         projectTypedData.setProjectCost(vdec.getConvertedDecimal());
         this.projectCostMsg = vdec.getError();
 
@@ -106,10 +104,6 @@ public class Validate {
 
     public boolean isValidated() { 
         return this.isValidated;
-    }
-
-    public String getDebugMsg() {
-        return this.debugMsg;
     }
 
     public String getAllValidationErrors() { 

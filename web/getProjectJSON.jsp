@@ -16,9 +16,9 @@
             } 
             else {
                 pStringData = ProjectMods.find(dbc, projectId);
-                if (pStringData.errorMsg.length() != 0) {
+                if (pStringData.getErrorMsg().length() != 0) {
                     pStringData.setRecordStatus("getProjectJSON.jsp. Problem finding " +
-                            "record with id " + projectId + ": " + pStringData.errorMsg);
+                            "record with id " + projectId + ": " + pStringData.getErrorMsg());
                 } 
                 else {
                     pStringData.setRecordStatus ("Project found in database.");
