@@ -49,12 +49,13 @@ public class ProjectView {
                     + "<th style='text-align:center'>Project Guidelines</th>"
                     + "<th style='text-align:center'>Project Image URL</th>"
                     + "<th style='text-align:center'>Project Cost</th>"
+                    + "<th style='text-align:center'>Delete</th>"
                     + "</tr>";
             while (results.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
                         + "<td style='text-align:center; vertical-align: middle;'>"
                         + "<a href=\"#projectupdate-popup\" class=\"projectupdate-popup_open\" "
-                        + "onclick=\"requestProjectInfoById("
+                        + "onclick=\"requestUpdateProjectInfoById("
                         + results.getString("project_id") + ")\">"
                         + "<button type=\"button\" class=\"btn btn-default\">"
                         + "  <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>"
@@ -65,6 +66,14 @@ public class ProjectView {
                         + FormatUtils.formatStringTd(results.getObject("project_guide"))
                         + FormatUtils.formatURLtoLinkTd(results.getObject("project_img_url"), "Image")
                         + FormatUtils.formatDollarTd(results.getObject("project_cost"))
+                        + "<td style='text-align:center; vertical-align: middle;'>"
+                        + "<a href=\"#projectdelete-popup\" class=\"projectdelete-popup_open\" "
+                        + "onclick=\"requestDeleteProjectInfoById("
+                        + results.getString("project_id") + ")\">"
+                        + "<button type=\"button\" class=\"btn btn-default\">"
+                        + "  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>"
+                        + "</button>"
+                        + "</a></td>"
                         + "</tr>\n";
             }
             htmlTable += "\t\t\t\t\t\t</table>";

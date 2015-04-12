@@ -177,7 +177,7 @@ function initSelectedPage() {
         document.title = "Projects | RasPi Builds";
         document.getElementById("projects-tab-connector").className = "";
         initProjectUpdatePopup();
-        //initProjectDeletePopup();
+        initProjectDeletePopup();
     }
     else if (document.getElementById("page").className.indexOf("users") > -1) {
         document.title = "Users | RasPi Builds";
@@ -280,6 +280,16 @@ function initProjectDeletePopup() {
                 $('#deleteproject-name').html("");
                 document.deleteprojectform.deleteProjectId.value = "";
                 document.deleteprojectform.deleteProjectName.value = "";
+                
+                // Clear hidden confirmation elements
+                $('#projectdelete-popup-confirm').removeClass("hidden");
+                $('#projectdelete-submitbutton').removeClass("hidden");
+                $('#projectdelete-cancelbutton').removeClass("hidden");
+            },
+            onclose: function() {
+                
+                // Disable delete button
+                $('#projectdelete-submitbutton').attr('disabled', 'disabled');
             }
         });
     });
@@ -330,9 +340,11 @@ function initUsersDeletePopup() {
                 $('#userdelete-popup-confirm').removeClass("hidden");
                 $('#userdelete-submitbutton').removeClass("hidden");
                 $('#userdelete-cancelbutton').removeClass("hidden");
-        
-                // Clear submit button disabled attribute
-                $('#userdelete-submitbutton').removeAttr("disabled");
+            },
+            onclose: function() {
+                
+                // Disable delete button
+                $('#userdelete-submitbutton').attr('disabled', 'disabled');
             }
         });
     });
@@ -406,6 +418,19 @@ function openProjectUpdatePopup(shouldOpen) {
     
     if (shouldOpen) {
         $('#projectupdate-popup').popup('show');
+    }
+}
+
+/**
+ * Opens the project delete form on the projects page if passed true, Otherwise,
+ * does nothing.
+ * 
+ * @param {boolean} shouldOpen
+ */
+function openProjectDeletePopup(shouldOpen) {
+    
+    if (shouldOpen) {
+        $('#projectdelete-popup').popup('show');
     }
 }
 
@@ -509,9 +534,10 @@ function handleDeleteUserInfoByIdResponse() {
         // Clear error msgs
         $('#userdelete-submitmsg').html("");
         
+        // Enable delete button
+        $('#userdelete-submitbutton').removeAttr("disabled");
     }
 }
-
 
 /**
  * Sends a request to the getProjectJSON.jsp page for project information for a 
@@ -519,9 +545,9 @@ function handleDeleteUserInfoByIdResponse() {
  * 
  * @param {int} projectId
  */
-function requestProjectInfoById(projectId) {
+function requestUpdateProjectInfoById(projectId) {
     httpReq.open("post", "getProjectJSON.jsp?projectId=" + projectId);
-    httpReq.onreadystatechange = handleProjectInfoByIdResponse;
+    httpReq.onreadystatechange = handleUpdateProjectInfoByIdResponse;
     httpReq.send(null);
 }
 
@@ -530,7 +556,7 @@ function requestProjectInfoById(projectId) {
  * Populates fields on the project update form with non-null data, removes any 
  * css error classes, and clears any error messages.
  */
-function handleProjectInfoByIdResponse() {
+function handleUpdateProjectInfoByIdResponse() {
 
     if (httpReq.readyState == 4 && httpReq.status == 200) {
         
@@ -565,5 +591,44 @@ function handleProjectInfoByIdResponse() {
         $('#projectupdate-imgurlmsg').html("");
         $('#projectupdate-costmsg').html("");
         $('#projectupdate-submitmsg').html("");
+    }
+}
+
+/**
+ * Sends a request to the getProjectJSON.jsp page for project information for a 
+ * given id. Responses are sent to the handleDeleteProjectInfoByIdResponse() method.
+ * 
+ * @param {int} projectId
+ */
+function requestDeleteProjectInfoById(projectId) {
+    httpReq.open("post", "getProjectJSON.jsp?projectId=" + projectId);
+    httpReq.onreadystatechange = handleDeleteProjectInfoByIdResponse;
+    httpReq.send(null);
+}
+
+/**
+ * Handles receiving a response from a request for project information by id.
+ * Populates fields on the verify project delete form with non-null data.
+ */
+function handleDeleteProjectInfoByIdResponse() {
+
+    if (httpReq.readyState == 4 && httpReq.status == 200) {
+        
+        var projectObj = eval(httpReq.responseText);
+
+        // Populate form data
+        $('#deleteproject-id').html(projectObj.projectId);
+        $('#deleteproject-name').html(projectObj.projectName);
+        document.deleteprojectform.deleteProjectId.value = projectObj.projectId;
+        document.deleteprojectform.deleteProjectName.value = projectObj.projectName;
+        
+        // Clear css error classes
+        $('#projectdelete-submitgroup').attr("class", "form-group");
+
+        // Clear error msgs
+        $('#projectdelete-submitmsg').html("");
+        
+        // Enable delete button
+        $('#projectdelete-submitbutton').removeAttr("disabled");
     }
 }

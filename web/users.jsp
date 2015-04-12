@@ -48,9 +48,6 @@
     // Class name for error/success on delete form
     String submitDeleteClass = "";
     
-    // Class name for disabling the submit button on delete form
-    String submitDeleteButtonDisable = "";
-    
     // Class name for hiding the elements on the delete form
     // after a successful deletion
     String submitDeleteElementsHidden = "";
@@ -137,7 +134,7 @@
 
                 // Instantiate WebUserMods object and pass validated StringData to its delete method
                 WebUserMods webUserMods = new WebUserMods(dbc);
-                deleteMsg = webUserMods.delete(userId);
+                //deleteMsg = webUserMods.delete(userId);
                 
                 if (deleteMsg.length() == 0) { // empty string means record was sucessfully deleted
                     deleteMsg = "Record " + wuDeleteStringData.userEmail + " deleted. ";
@@ -146,7 +143,6 @@
                 }
                 else {
                     submitDeleteClass = "has-error";
-                    submitDeleteButtonDisable = "disabled=\"disabled\"";
                     if (deleteMsg.equals("Something related to a foreign key")) {
                         deleteMsg = "Display a more appropriate message";
                     }
@@ -154,7 +150,6 @@
             }
             catch (NumberFormatException e) {
                 submitDeleteClass = "has-error";
-                submitDeleteButtonDisable = "disabled=\"disabled\"";
                 deleteMsg = "Internal error, invalid user id format. Error: " +
                         e.getMessage();
             }
@@ -286,15 +281,15 @@
                     <span id="userdelete-popup-confirm" class="<%=submitDeleteElementsHidden%>">
                         <p>Are you sure you wish to delete this user?</p>
                         <span><b>User email:</b></span>
-                        <span id="deleteuser-email"></span>
+                        <span id="deleteuser-email"><%=wuDeleteStringData.userEmail%></span>
                         </br></br>
                     </span>
                     <form name="deleteuserform" action="users.jsp" method="post">
                         <input class="hidden" type="text" id="inputDeleteUserId" name="deleteUserId" value="<%=wuDeleteStringData.webUserId%>">
                         <input class="hidden" type="text" id="inputDeleteUserEmail" name="deleteUserEmail" value="<%=wuDeleteStringData.userEmail%>">
                         <span id="userdelete-submitgroup" class="form-group <%=submitDeleteClass%>">
-                            <div><span id="userdelete-submitmsg" class="control-label"><%=deleteMsg%></span></div>
-                            <input type="submit" id="userdelete-submitbutton" class="btn btn-default btn-danger <%=submitDeleteElementsHidden%>" <%=submitDeleteButtonDisable%> value="Delete">
+                            <div class="center-text"><span id="userdelete-submitmsg" class="control-label"><%=deleteMsg%></span></div>
+                            <input type="submit" id="userdelete-submitbutton" class="btn btn-default btn-danger <%=submitDeleteElementsHidden%>" disabled="disabled" value="Delete">
                             <button type="button" id="userdelete-cancelbutton" class="userdelete-popup_close btn btn-default btn-default <%=submitDeleteElementsHidden%>">Cancel</button>
                         </span>
                     </form>
