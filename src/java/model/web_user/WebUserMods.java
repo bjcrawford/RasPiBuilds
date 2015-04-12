@@ -94,7 +94,7 @@ public class WebUserMods {
      * @param dbc the database connection
      * @param userEmail the user email address
      * @param userPassword the user password
-     * @return a StringData (web_user) object if found, otherwise null
+     * @return a StringData (web_user) object if found
      */
     public static StringData find(DbConn dbc, String userEmail, String userPassword) {
         
@@ -153,7 +153,6 @@ public class WebUserMods {
             ps = dbc.getConn().prepareStatement(sql);
             ps.setString(1, webUserId);
             rs = ps.executeQuery();
-
             if (rs.next()) {
                 foundUser.webUserId = rs.getString("web_user_id");
                 foundUser.userEmail = rs.getString("user_email");
@@ -167,7 +166,6 @@ public class WebUserMods {
                 foundUser.errorMsg = "WebUserMods.find: web_user_id " + webUserId +
                         " was not found";
             }
-            
             rs.close();
             ps.close();
         }
@@ -216,35 +214,30 @@ public class WebUserMods {
                 ps.setInt        (7, wuTypedData.getUserRoleId());
                 ps.setInt        (8, wuTypedData.getWebUserId());
 
-                try {
-                    int numRows = ps.executeUpdate();
-                    if (numRows != 1) {
-                        errorMsg = "WebUserMods.update: " + numRows + " records were " +
-                                "updated when only 1 was expected.";
-                    }
+                int numRows = ps.executeUpdate();
+                if (numRows != 1) {
+                    errorMsg = "WebUserMods.update: " + numRows + " records were " +
+                            "updated when only 1 was expected.";
                 }
-                catch (SQLException e) {
-                    if (e.getMessage().toLowerCase().contains("duplicate entry")) {
-                        errorMsg = "WebUserMods.update: A record with that email " +
-                                "address already exists.";
-                    }
-                    else if (e.getMessage().toLowerCase().contains("foreign key")) {
-                        errorMsg = "WebUserMods.update: User role does not exist.";
-                    }
-                    else {
-                        errorMsg = "WebUserMods.update: SQL Exception while " +
-                                "attempting update. SQLState:" + e.getSQLState() +
-                                ", Error message: " + e.getMessage();
-                    }
+                ps.close();
+            }
+            catch (SQLException e) {
+                if (e.getMessage().toLowerCase().contains("duplicate entry")) {
+                    errorMsg = "WebUserMods.update: A record with that email " +
+                            "address already exists.";
                 }
-                catch (Exception e) {
-                    errorMsg = "WebUserMods.update: General Exception during " +
-                            "update operation. " + e.getMessage();
+                else if (e.getMessage().toLowerCase().contains("foreign key")) {
+                    errorMsg = "WebUserMods.update: User role does not exist.";
+                }
+                else {
+                    errorMsg = "WebUserMods.update: SQL Exception while " +
+                            "attempting update. SQLState:" + e.getSQLState() +
+                            ", Error message: " + e.getMessage();
                 }
             }
             catch (Exception e) {
-                errorMsg = "WebUserMods.update: Problem preparing statement " + 
-                        "(and/or substituting parameters). " + e.getMessage();
+                errorMsg = "WebUserMods.update: General Exception during " +
+                        "update operation. " + e.getMessage();
             }
         }
         
@@ -290,5 +283,4 @@ public class WebUserMods {
         
         return errorMsg;
     }
-    
 }
