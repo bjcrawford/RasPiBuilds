@@ -29,11 +29,11 @@ public class BuildView {
      */
     public static String makeTableFromAllBuilds(String cssClassName, DbConn dbc) {
         String htmlTable = "";
-        PreparedStatement stmt = null;
-        ResultSet results = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             String sql = "select "
-                    + "b.build_name, b.build_comm, "
+                    + "b.build_id, b.build_name, b.build_comm, "
                     + "b.build_img_url, b.build_cost, b.timestamp, "
                     + "b.web_user_id, w.user_name, b.project_id, "
                     + "p.project_name "
@@ -49,8 +49,8 @@ public class BuildView {
                     + "b.project_id = p.project_id "
                     + "order by "
                     + "b.build_name";
-            stmt = dbc.getConn().prepareStatement(sql);
-            results = stmt.executeQuery();
+            ps = dbc.getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
             htmlTable += "<table class='" + cssClassName + "'>\n"
                     + "\t\t\t\t\t\t\t<tr>"
                     + "<th style='text-align:center'>Build Name</th>"
@@ -60,21 +60,30 @@ public class BuildView {
                     + "<th style='text-align:center'>Build Cost</th>"
                     + "<th style='text-align:center'>Timestamp</th>"
                     + "<th style='text-align:center'>Web User Name</th>"
+                    + "<th style='text-align:center'>Delete</th>"
                     + "</tr>";
-            while (results.next()) {
+            while (rs.next()) {
                 htmlTable += "\t\t\t\t\t\t\t<tr>"
-                        + FormatUtils.formatStringTd(results.getObject("build_name"))
-                        + FormatUtils.formatStringTd(results.getObject("project_name"))
-                        + FormatUtils.formatStringTd(results.getObject("build_comm"))
-                        + FormatUtils.formatURLtoLinkTd(results.getObject("build_img_url"), "Image")
-                        + FormatUtils.formatDollarTd(results.getObject("build_cost"))
-                        + FormatUtils.formatTimestampTd(results.getObject("timestamp"))
-                        + FormatUtils.formatStringTd(results.getObject("user_name"))
+                        + FormatUtils.formatStringTd(rs.getObject("build_name"))
+                        + FormatUtils.formatStringTd(rs.getObject("project_name"))
+                        + FormatUtils.formatStringTd(rs.getObject("build_comm"))
+                        + FormatUtils.formatURLtoLinkTd(rs.getObject("build_img_url"), "Image")
+                        + FormatUtils.formatDollarTd(rs.getObject("build_cost"))
+                        + FormatUtils.formatTimestampTd(rs.getObject("timestamp"))
+                        + FormatUtils.formatStringTd(rs.getObject("user_name"))
+                        + "<td style='text-align:center; vertical-align: middle;'>"
+                        + "<a href=\"#builddelete-popup\" class=\"builddelete-popup_open\" "
+                        + "onclick=\"requestDeleteBuildInfoById("
+                        + rs.getString("build_id") + ")\">"
+                        + "<button type=\"button\" class=\"btn btn-default\">"
+                        + "  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>"
+                        + "</button>"
+                        + "</a></td>"
                         + "</tr>\n";
             }
             htmlTable += "\t\t\t\t\t\t</table>";
-            results.close();
-            stmt.close();
+            rs.close();
+            ps.close();
             return htmlTable;
         } catch (Exception e) {
             return "Exception thrown in BuildView.listAllBuilds(): " + e.getMessage()

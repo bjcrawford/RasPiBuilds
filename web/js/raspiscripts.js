@@ -171,7 +171,7 @@ function initSelectedPage() {
     else if (document.getElementById("page").className.indexOf("builds") > -1) {
         document.title = "Builds | RasPi Builds";
         document.getElementById("builds-tab-connector").className = "";
-        //initBuildDeletePopup();
+        initBuildDeletePopup();
     }
     else if (document.getElementById("page").className.indexOf("projects") > -1) {
         document.title = "Projects | RasPi Builds";
@@ -365,6 +365,16 @@ function initBuildDeletePopup() {
                 $('#deletebuild-name').html("");
                 document.deletebuildform.deleteBuildId.value = "";
                 document.deletebuildform.deleteBuildName.value = "";
+                
+                // Clear hidden confirmation elements
+                $('#builddelete-popup-confirm').removeClass("hidden");
+                $('#builddelete-submitbutton').removeClass("hidden");
+                $('#builddelete-cancelbutton').removeClass("hidden");
+            },
+            onclose: function() {
+                
+                // Disable delete button
+                $('#builddelete-submitbutton').attr('disabled', 'disabled');
             }
         });
     });
@@ -431,6 +441,19 @@ function openProjectDeletePopup(shouldOpen) {
     
     if (shouldOpen) {
         $('#projectdelete-popup').popup('show');
+    }
+}
+
+/**
+ * Opens the build delete form on the projects page if passed true, Otherwise,
+ * does nothing.
+ * 
+ * @param {boolean} shouldOpen
+ */
+function openBuildDeletePopup(shouldOpen) {
+    
+    if (shouldOpen) {
+        $('#builddelete-popup').popup('show');
     }
 }
 
@@ -630,5 +653,44 @@ function handleDeleteProjectInfoByIdResponse() {
         
         // Enable delete button
         $('#projectdelete-submitbutton').removeAttr("disabled");
+    }
+}
+
+/**
+ * Sends a request to the getBuildJSON.jsp page for build information for a 
+ * given id. Responses are sent to the handleDeleteBuildInfoByIdResponse() method.
+ * 
+ * @param {int} buildId
+ */
+function requestDeleteBuildInfoById(buildId) {
+    httpReq.open("post", "getBuildJSON.jsp?buildId=" + buildId);
+    httpReq.onreadystatechange = handleDeleteBuildInfoByIdResponse;
+    httpReq.send(null);
+}
+
+/**
+ * Handles receiving a response from a request for build information by id.
+ * Populates fields on the verify build delete form with non-null data.
+ */
+function handleDeleteBuildInfoByIdResponse() {
+
+    if (httpReq.readyState == 4 && httpReq.status == 200) {
+        
+        var buildObj = eval(httpReq.responseText);
+
+        // Populate form data
+        $('#deletebuild-id').html(buildObj.buildId);
+        $('#deletebuild-name').html(buildObj.buildName);
+        document.deletebuildform.deleteBuildId.value = buildObj.buildId;
+        document.deletebuildform.deleteBuildName.value = buildObj.buildName;
+        
+        // Clear css error classes
+        $('#builddelete-submitgroup').attr("class", "form-group");
+
+        // Clear error msgs
+        $('#builddelete-submitmsg').html("");
+        
+        // Enable delete button
+        $('#builddelete-submitbutton').removeAttr("disabled");
     }
 }
