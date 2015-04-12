@@ -13,8 +13,8 @@
  Light Green:   98a97f
 */
 
-#hidden {
-    display: none;
+.center-text {
+    text-align: center;
 }
 
 #pacman-canvas {
