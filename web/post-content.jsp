@@ -18,16 +18,28 @@
                 <div id="signin-popup" class="well raspi-popup">
                     <h3>Sign in to your account</h3>
                     <form method="post" action="index.jsp">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                <input type="email" class="form-control" name="signin-email" id="signin-email" placeholder="Email address" value="<%=strUserEmail%>">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-lock" aria-hidden="true"></span>
-                                <input type="password" class="form-control" name="signin-pw" id="signin-pw" placeholder="Password">
-                            </div>
-                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                            <input type="email" class="form-control" name="signin-email" id="signin-email" placeholder="Email address" value="<%=strUserEmail%>">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                            <input type="password" class="form-control" name="signin-pw" id="signin-pw" placeholder="Password">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                         <button type="submit" class="btn btn-success">Sign in</button>
                         <button type="button" class="signin-popup_close btn btn-default btn-sm close-btn">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
