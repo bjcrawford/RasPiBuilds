@@ -74,6 +74,7 @@
         <link href="http://fonts.googleapis.com/css?family=Bitter:400,700,400italic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link id="styleID" rel="stylesheet" type="text/css" href="css/default.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
         <link rel="stylesheet" href="css/tinyeditor.css" />
         <script src="js/jquery_1.11.2.min.js"></script>
         <script src="js/jquery.popupoverlay.js"></script>

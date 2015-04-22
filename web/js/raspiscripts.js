@@ -227,7 +227,9 @@ function initSignInPopup() {
     
     $(document).ready(function() {
        
-        $('#signin-popup').popup();
+        $('#signin-popup').popup({
+            transition: 'all 0.3s'
+        });
         
     });
 }
@@ -239,8 +241,12 @@ function initHomePopups() {
     
     $(document).ready(function() {
 
-        $('#rp-img1-popup').popup();
-        $('#rp-img2-popup').popup();
+        $('#rp-img1-popup').popup({
+            transition: 'all 0.3s'
+        });
+        $('#rp-img2-popup').popup({
+            transition: 'all 0.3s'
+        });
     });
 }/**
  * Initializes the project update popup. Sets an onOpen listener function
@@ -250,6 +256,7 @@ function initProjectUpdatePopup() {
     
     $(document).ready(function() {
         $('#projectupdate-popup').popup({
+            transition: 'all 0.3s',
             onopen: function() {
                 
                 // Clear previous data
@@ -273,6 +280,7 @@ function initProjectDeletePopup() {
     
     $(document).ready(function() {
         $('#projectdelete-popup').popup({
+            transition: 'all 0.3s',
             onopen: function() {
                 
                 // Clear previous data
@@ -303,6 +311,7 @@ function initUsersUpdatePopup() {
     
     $(document).ready(function() {
         $('#userupdate-popup').popup({
+            transition: 'all 0.3s',
             onopen: function() {
                 
                 // Clear previous data
@@ -328,6 +337,7 @@ function initUsersDeletePopup() {
     
     $(document).ready(function() {
         $('#userdelete-popup').popup({
+            transition: 'all 0.3s',
             onopen: function() {
                 
                 // Clear previous data
@@ -358,6 +368,7 @@ function initBuildDeletePopup() {
     
     $(document).ready(function() {
         $('#builddelete-popup').popup({
+            transition: 'all 0.3s',
             onopen: function() {
                 
                 // Clear previous data
@@ -387,7 +398,9 @@ function initLabsPopups() {
     
     $(document).ready(function() {
 
-        $('#datamodel-img-popup').popup();
+        $('#datamodel-img-popup').popup({
+            transition: 'all 0.3s'
+        });
 
     });
 }

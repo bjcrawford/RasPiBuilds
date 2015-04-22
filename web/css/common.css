@@ -1,0 +1,31 @@
+/*
+ Author: Brett Crawford <brett.crawford@temple.edu>
+ File:   common.css
+ Date:   Apr 22, 2015
+ Desc:
+*/
+
+#signin-popup, 
+#rp-img1-popup,
+#rp-img2-popup,
+#projectupdate-popup,
+#projectdelete-popup,
+#userupdate-popup,
+#userdelete-popup,
+#builddelete-popup,
+#datamodel-img-popup {
+  transform: scale(0.8);
+}
+
+.popup_visible #signin-popup, 
+.popup_visible #rp-img1-popup,
+.popup_visible #rp-img2-popup,
+.popup_visible #projectupdate-popup,
+.popup_visible #projectdelete-popup,
+.popup_visible #userupdate-popup,
+.popup_visible #userdelete-popup,
+.popup_visible #builddelete-popup,
+.popup_visible #datamodel-img-popup {
+  transform: scale(1);
+}
+
