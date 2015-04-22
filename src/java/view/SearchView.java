@@ -110,6 +110,22 @@ public class SearchView {
         }
     }
 
+    /**
+     * Returns a string containing the HTML for a table displaying the results
+     * of the search for the given criteria. Any combination of criteria may be
+     * used (use 0 or "" for criteria that are unused).
+     * 
+     * @param cssClassName the name of a CSS style that will be applied to the
+     * HTML table. This style should be defined in the JSP page (header or style
+     * sheet referenced by the page).
+     * @param dbc an open database connection.
+     * @param keyword a general keyword to search for
+     * @param userId a user id to search for
+     * @param projectId a project id to search for
+     * @param minBuildPrice a minimum build price for search results
+     * @param maxBuildPrice a maximum build price for search results
+     * @return a string containing the HTML table
+     */
     public static String makeTableFromSearchCriteria(String cssClassName, DbConn dbc,
             String keyword, int userId, int projectId,
             int minBuildPrice, int maxBuildPrice) {
