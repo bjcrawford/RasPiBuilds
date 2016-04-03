@@ -34,6 +34,7 @@ public class Validate {
     public Validate(StringData projectStringData) {
         
         this.projectStringData = projectStringData;
+        projectTypedData = new TypedData();
 
         if (projectStringData.getProjectId() != null && projectStringData.getProjectId().length() != 0) {
             ValidateInteger vi = new ValidateInteger(projectStringData.getProjectId(), true);
